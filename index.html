@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
-    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<script src="http://raw.github.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
@@ -37,6 +37,12 @@
         <a class="btn btn-large" data-edit="indent"><i class="icon-indent-right"></i></a>
       </div>
       <div class="btn-group">
+        <a class="btn btn-large" data-edit="justifyleft"><i class="icon-align-left"></i></a>
+        <a class="btn btn-large" data-edit="justifycenter"><i class="icon-align-center"></i></a>
+        <a class="btn btn-large" data-edit="justifyright"><i class="icon-align-right"></i></a>
+        <a class="btn btn-large" data-edit="justifyfull"><i class="icon-align-justify"></i></a>
+      </div>
+      <div class="btn-group">
         <a class="btn btn-large" data-edit="undo"><i class="icon-undo"></i></a>
         <a class="btn btn-large" data-edit="redo"><i class="icon-repeat"></i></a>
       </div>
@@ -50,7 +56,7 @@
     <div class="span6">
           <h2>About</h2>
           <p>
-          Tiny (5K) JQuery Bootstrap plugin turns any DIV into a WYSIWYG
+          This <a href="https://github.com/mindmup/bootstrap-wysiwyg/blob/master/bootstrap-wysiwyg.js">tiny (2KB) JQuery Bootstrap plugin</a> turns any DIV into a WYSIWYG
           rich-content editor, inspired by <a href="http://premiumsoftware.net/cleditor/">CLEditor</a> and
               <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>. 
           Here are the key features:
@@ -63,16 +69,17 @@
             <li>Does not force any styling - it's all up to you</li>
             <li>(Optionally) cleans up trailing whitespace and empty divs and spans to prevent fake updates</li> 
             <li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
-            <li>Requires a modern browser, and adjusts to browser capabilties</li>
+            <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6) and adjusts to browser capabilities</li>
           </ul>
         <h2>Why?</h2>
         <p>
           While building a content editor for <a href="http://www.mindmup.com">MindMup</a> we found plenty of good HTML5 WYSWYG editors online, but most were duplicating
-          functionality that already exists in JQuery and Bootstrap, was meanwhile added to HTML5 and supported in major btowsers, or doing too much magic, inserting IFrames with separate
-          document context and mirroring textareas. This is required to work around quirks in older browsers (which we didn't need) and 
+          functionality that already exists in JQuery and Bootstrap, implementing things that were meanwhile added to HTML5 and supported in major browsers, 
+          or doing too much magic such as inserting IFrames with backup text-areas. Most of this was to work around quirks in older browsers (which we didn't need) and 
           caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
-          bootstrap modals (a must for us).  Most good editors also build their own toolbars which turn out to be much worse than standard bootstrap buttons. So 
-          we built this tiny tiny editor that does everything we need. 
+          bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
+          turn out to be much worse than standard Bootstrap buttons. So we built this tiny tiny editor that does everything we need, does not impose
+          any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. 
         </p>
     </div>
     <div class="span6" >

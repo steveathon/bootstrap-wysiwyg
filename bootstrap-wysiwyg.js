@@ -1,14 +1,11 @@
-/*!
- * Bootstrap Wysiwyg Rich Text Editor v1.0
- * https://github.com/mindmup/bootstrap-wysiwyg
- *
- * Copyright 2013, Gojko Adzic, Damjan Vujnovic, David de Florinier 
- * Licensed under the MIT license.
- * https://github.com/mindmup/bootstrap-wysiwyg/LICENSE
- *
- */
+/* http://github.com/mindmup/bootstrap-wysiwyg */
 /*global $*/
 /*jslint browser:true*/
+$.fn.cleanHtml = function () {
+	'use strict';
+	var html = $(this).html();
+	return html && html.replace(/(<br>|\s|<div><br><\/div>|&nbsp;)*$/, '');
+};
 $.fn.wysiwyg = function (options) {
 	'use strict';
 	var editor = this,
