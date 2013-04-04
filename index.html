@@ -1,46 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-		<script src="http://raw.github.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>
-		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-		<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="http://raw.github.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+
+		<link href="bootstrap-wysiwyg.css" rel="stylesheet">
     <script src="bootstrap-wysiwyg.js"></script>
   </head>
   <body>
 
 <div class="container">
-	<div class="hero-unit">
-		<h1>bootstrap-wyswyg <small>very small wyswyg for boostrap</small></h1>
-		<hr/>
-		<div class="nav" data-role="toolbar" data-target="#editor">
-		</div>
-		<div id="#editor">
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="span6">
-	        <h2>About</h2>
-	        <p>
-			Tiny (5K) JQuery Bootstrap plugin to turn any DIV into a WYSIWYG rich-content editor, inspired by <a href="http://premiumsoftware.net/cleditor/">CLEditor<a> and <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>. Here are the key features:
-					<ul>
-						<li>Bootstrap compatible and consistent with declarative data configuration</li>
-						<li>Automatically binds standard hotkeys</li>
-						<li>Uses standard browser features, no magic</li>
-						<li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
-						<li>Requires a modern browser (HTML5 contenteditable)</li>
-					</ul>
-			</p>
-		</div>
-		<div class="span6" >
-			<h2>Usage</h2>
-				<pre>$('#editor').wyswyg();</pre>     
-			<p style="text-align:center; margin-top:20px">
+  <div class="hero-unit">
+    <h1>bootstrap-wyswyg <small>tiny wyswyg rich text editor for boostrap</small></h1>
+    <hr/>
+    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+      <div class="btn-group">
+        <a class="btn btn-large"><i class="icon-font"></i></a>
+        <a class="btn btn-large"><i class="icon-text-height"></i></a>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
+        <a class="btn btn-large" data-edit="italic"><i class="icon-italic"></i></a>
+        <a class="btn btn-large" data-edit="strikethrough"><i class="icon-strikethrough"></i></a>
+        <a class="btn btn-large" data-edit="underline"><i class="icon-underline"></i></a>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-large" data-edit="insertunorderedlist"><i class="icon-list-ol"></i></a>
+        <a class="btn btn-large" data-edit="insertorderedlist"><i class="icon-list-ul"></i></a>
+        <a class="btn btn-large" data-edit="outdent"><i class="icon-indent-left"></i></a>
+        <a class="btn btn-large" data-edit="indent"><i class="icon-indent-right"></i></a>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-large" data-edit="undo"><i class="icon-undo"></i></a>
+        <a class="btn btn-large" data-edit="redo"><i class="icon-repeat"></i></a>
+      </div>
+    </div>
+    <div id="editor">
+      Go ahead... 
+    </div>
+  </div>
+
+<div class="row">
+    <div class="span6">
+          <h2>About</h2>
+          <p>
+          Tiny (5K) JQuery Bootstrap plugin turns any DIV into a WYSIWYG
+          rich-content editor, inspired by <a href="http://premiumsoftware.net/cleditor/">CLEditor</a> and
+              <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>. 
+          Here are the key features:
+      </p>
+          <ul>
+            <li>Bootstrap compatible and consistent with declarative data configuration</li>
+            <li>Allows a custom built toolbar, no magic markup generators, enabling you to use all the goodness of bootstrap, FortAwesome and so on...</li>
+            <li>Uses standard browser features, no magic non-standard code</li>
+            <li>Automatically binds standard hotkeys, you can customise it</li>
+            <li>Does not force any styling - it's all up to you</li>
+            <li>(Optionally) cleans up trailing whitespace and empty divs and spans to prevent fake updates</li> 
+            <li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
+            <li>Requires a modern browser, and adjusts to browser capabilties</li>
+          </ul>
+        <h2>Why?</h2>
+        <p>
+          While building a content editor for <a href="http://www.mindmup.com">MindMup</a> we found plenty of good HTML5 WYSWYG editors online, but most were duplicating
+          functionality that already exists in JQuery and Bootstrap, was meanwhile added to HTML5 and supported in major btowsers, or doing too much magic, inserting IFrames with separate
+          document context and mirroring textareas. This is required to work around quirks in older browsers (which we didn't need) and 
+          caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
+          bootstrap modals (a must for us).  Most good editors also build their own toolbars which turn out to be much worse than standard bootstrap buttons. So 
+          we built this tiny tiny editor that does everything we need. 
+        </p>
+    </div>
+    <div class="span6" >
+      <h2>Usage</h2>
+      <pre class="prettyprint linenums">$('#editor').wyswyg();</pre>    
+<p>Don't forget to style your editor div:</p>
+<pre class="prettyprint linenums">
+ #editor {overflow:scroll; max-height:300px}
+</pre>
+      <p>Optionally, also create a toolbar:</p>
+<pre class="prettyprint linenums">
+&lt;div class="btn-toolbar" data-role="editor-toolbar"
+        data-target="#editor"&gt;
+  &lt;a data-edit="..."&gt;...&lt;/a&gt;
+  ...
+&lt;/div&gt; 
+</pre>
+
+<p>Use standard JQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:</p>
+<pre class="prettyprint linenums">
+ $('#editor').cleanHtml()
+</pre>
+			 <p style="text-align:center; margin-top:20px">
 				<a class="btn btn-large btn-primary jumbo" href="https://github.com/mindmup/bootstrap-wysiwyg/">View project on Github</a>
-			</p>
+			 </p>
 		</div>
 	</div>
 </div>
+<script>
+  $(function(){
+    window.prettyPrint && prettyPrint();
+    $('#editor').wysiwyg();
+  });
+</script>
 </html>
