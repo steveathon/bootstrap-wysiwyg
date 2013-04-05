@@ -91,6 +91,7 @@ $.fn.wysiwyg = function (options) {
 					element.trigger('change');
 				}
 			});
+		$(window).bind('touchend', saveSelectionRange);
 	});
 	return this;
 }
