@@ -96,28 +96,8 @@
             <li>(Optionally) cleans up trailing whitespace and empty divs and spans</li> 
             <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6)</li>
           </ul>
-      <h2>Usage</h2>
-      <pre class="prettyprint linenums">$('#editor').wysiwyg();</pre>    
-<p>Don't forget to style your editor div:</p>
-<pre class="prettyprint linenums">
- #editor {overflow:scroll; max-height:300px}
-</pre>
-      <p>Optionally, also create a toolbar (see the source of this page for an example):</p>
-<pre class="prettyprint linenums">
-&lt;div class="btn-toolbar" data-role="editor-toolbar"
-        data-target="#editor"&gt;
-  &lt;a data-edit="..."&gt;...&lt;/a&gt;
-  ...
-&lt;/div&gt; 
-</pre>
 
-<p>Use standard JQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:</p>
-<pre class="prettyprint linenums">
- $('#editor').cleanHtml()
-</pre>
 
-    </div>
-    <div class="span6" >
         <h2>Why?</h2>
 
         <a href="http://www.mindmup.com"><img class="span5" src="https://raw.github.com/mindmup/mindmup.github.com/master/promo-868x350.png"></a>
@@ -134,7 +114,38 @@
           <p>It's released under the MIT license, so fork and enjoy!  </p>
 
 
-			 <p style="text-align:center; margin-top:20px">
+
+    </div>
+    <div class="span6" >
+      <h2>Usage</h2>
+      <pre class="prettyprint linenums">$('#editor').wysiwyg();</pre>    
+<p>Don't forget to style your editor div:</p>
+<pre class="prettyprint linenums">
+ #editor {overflow:scroll; max-height:300px}
+</pre>
+      <p>Optionally, also create a toolbar (see the source of this page for an example):</p>
+<pre class="prettyprint linenums">
+&lt;div class="btn-toolbar" data-role="editor-toolbar"
+        data-target="#editor"&gt;
+  ...
+&lt;/div&gt; 
+</pre>
+<p>In the toolbar, execute simple commands by adding a data-edit attribute to a link.<p>
+<pre class="prettyprint linenums">
+  &lt;a data-edit="bold"&gt;...&lt;/a&gt;
+</pre>
+<p>execute more complex commands by adding an argument after a blank or providing an input with a data-edit command (the input value is used as an argument).<p>
+<pre class="prettyprint linenums">
+&lt;a data-edit="fontName Arial"&gt;...&lt;/a&gt;
+...
+&lt;input type="text" data-edit="createLink"/&gt;
+</pre>
+<p>Use standard JQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:</p>
+<pre class="prettyprint linenums">
+ $('#editor').cleanHtml()
+</pre>
+
+			 <p style="text-align:center; margin-top:60px">
 				<a class="btn btn-large btn-primary jumbo" href="https://github.com/mindmup/bootstrap-wysiwyg/">View project on Github</a>
       </p>
 			 <p style="text-align:center; margin-top:20px">
