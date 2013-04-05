@@ -9,7 +9,6 @@
 		<script src="http://raw.github.com/jeresig/jquery.hotkeys/master/jquery.hotkeys.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-
 		<link href="bootstrap-wysiwyg.css" rel="stylesheet">
     <script src="bootstrap-wysiwyg.js"></script>
   </head>
@@ -17,34 +16,44 @@
 
 <div class="container">
   <div class="hero-unit">
-    <h1>bootstrap-wyswyg <small>tiny wyswyg rich text editor for boostrap</small></h1>
+    <h1>bootstrap-wyswyg <small>tiny wysiwyg rich text editor for boostrap</small></h1>
     <hr/>
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
-        <a class="btn btn-large"><i class="icon-font"></i></a>
-        <a class="btn btn-large"><i class="icon-text-height"></i></a>
+        <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+          <ul class="dropdown-menu">
+          <li><a data-edit="fontName Arial" style="font-family:Arial">Arial</a></li>
+          <li><a data-edit="fontName Times" style="font-family:Times">Times</a></li>
+          <li><a data-edit="fontName Courier" style="font-family:Courier">Courier</a></li>
+          </ul>
+        <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+          <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+          <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+          <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+          </ul>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
-        <a class="btn btn-large" data-edit="italic"><i class="icon-italic"></i></a>
-        <a class="btn btn-large" data-edit="strikethrough"><i class="icon-strikethrough"></i></a>
-        <a class="btn btn-large" data-edit="underline"><i class="icon-underline"></i></a>
+        <a class="btn btn-large" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+        <a class="btn btn-large" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+        <a class="btn btn-large" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+        <a class="btn btn-large" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="insertunorderedlist"><i class="icon-list-ol"></i></a>
-        <a class="btn btn-large" data-edit="insertorderedlist"><i class="icon-list-ul"></i></a>
-        <a class="btn btn-large" data-edit="outdent"><i class="icon-indent-left"></i></a>
-        <a class="btn btn-large" data-edit="indent"><i class="icon-indent-right"></i></a>
+        <a class="btn btn-large" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ol"></i></a>
+        <a class="btn btn-large" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ul"></i></a>
+        <a class="btn btn-large" data-edit="outdent" title="Reduce indent (Ctrl/Cmd+Shift+Tab)"><i class="icon-indent-left"></i></a>
+        <a class="btn btn-large" data-edit="indent" title="Indent (Ctrl/Cmd+Tab)"><i class="icon-indent-right"></i></a>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="justifyleft"><i class="icon-align-left"></i></a>
-        <a class="btn btn-large" data-edit="justifycenter"><i class="icon-align-center"></i></a>
-        <a class="btn btn-large" data-edit="justifyright"><i class="icon-align-right"></i></a>
-        <a class="btn btn-large" data-edit="justifyfull"><i class="icon-align-justify"></i></a>
+        <a class="btn btn-large" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+        <a class="btn btn-large" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+        <a class="btn btn-large" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+        <a class="btn btn-large" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="undo"><i class="icon-undo"></i></a>
-        <a class="btn btn-large" data-edit="redo"><i class="icon-repeat"></i></a>
+        <a class="btn btn-large" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+        <a class="btn btn-large" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
       </div>
     </div>
     <div id="editor">
@@ -63,33 +72,21 @@
       </p>
           <ul>
             <li>Bootstrap compatible and consistent with declarative data configuration</li>
-            <li>Allows a custom built toolbar, no magic markup generators, enabling you to use all the goodness of bootstrap, FortAwesome and so on...</li>
-            <li>Uses standard browser features, no magic non-standard code</li>
-            <li>Automatically binds standard hotkeys, you can customise it</li>
+            <li>Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, FortAwesome and so on...</li>
+            <li>Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any <a href="https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla">supported browser command</a></li>
+            <li>Automatically binds standard hotkeys for common operations on Mac and Windows</li>
             <li>Does not force any styling - it's all up to you</li>
             <li>(Optionally) cleans up trailing whitespace and empty divs and spans to prevent fake updates</li> 
             <li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
-            <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6) and adjusts to browser capabilities</li>
+            <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6)</li>
           </ul>
-        <h2>Why?</h2>
-        <p>
-          While building a content editor for <a href="http://www.mindmup.com">MindMup</a> we found plenty of good HTML5 WYSWYG editors online, but most were duplicating
-          functionality that already exists in JQuery and Bootstrap, implementing things that were meanwhile added to HTML5 and supported in major browsers, 
-          or doing too much magic such as inserting IFrames with backup text-areas. Most of this was to work around quirks in older browsers (which we didn't need) and 
-          caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
-          bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
-          turn out to be much worse than standard Bootstrap buttons. So we built this tiny tiny editor that does everything we need, does not impose
-          any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. 
-        </p>
-    </div>
-    <div class="span6" >
       <h2>Usage</h2>
-      <pre class="prettyprint linenums">$('#editor').wyswyg();</pre>    
+      <pre class="prettyprint linenums">$('#editor').wysiwyg();</pre>    
 <p>Don't forget to style your editor div:</p>
 <pre class="prettyprint linenums">
  #editor {overflow:scroll; max-height:300px}
 </pre>
-      <p>Optionally, also create a toolbar:</p>
+      <p>Optionally, also create a toolbar (see the source of this page for an example):</p>
 <pre class="prettyprint linenums">
 &lt;div class="btn-toolbar" data-role="editor-toolbar"
         data-target="#editor"&gt;
@@ -102,9 +99,35 @@
 <pre class="prettyprint linenums">
  $('#editor').cleanHtml()
 </pre>
+
+    </div>
+    <div class="span6" >
+        <h2>Why?</h2>
+
+        <a href="http://www.mindmup.com"><img class="span5" src="https://raw.github.com/mindmup/mindmup.github.com/master/promo-868x350.png"></a>
+        <br clear="all" />
+        <p>
+          While building a content editor for <a href="http://www.mindmup.com">MindMup</a> we found plenty of good HTML5 WYSWYG editors online, but most were duplicating
+          functionality that already exists in JQuery and Bootstrap, implementing things that were meanwhile added to HTML5 and supported in major browsers, 
+          or doing too much magic such as inserting IFrames with backup text-areas. Most of this was to work around quirks in older browsers (which we didn't need) and 
+          caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
+          bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
+          turn out to be much worse than standard Bootstrap buttons. So we built this tiny tiny editor that does everything we need, does not impose
+          any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. 
+        </p>
+
+
 			 <p style="text-align:center; margin-top:20px">
 				<a class="btn btn-large btn-primary jumbo" href="https://github.com/mindmup/bootstrap-wysiwyg/">View project on Github</a>
-			 </p>
+      </p>
+			 <p style="text-align:center; margin-top:20px">
+        <a class="btn" href="mailto:contact@mindmup.com"><i class="icon-envelope"></i></a>
+          <a class="btn" href="http://facebook.com/mindmupapp"><i class="icon-facebook"></i></a>
+          <a class="btn" href="http://twitter.com/mindmup"><i class="icon-twitter"></i></a>
+          <a class="btn" href="https://plus.google.com/u/0/communities/112831595986131146219"><i class="icon-google-plus"></i></a>
+        </p>
+
+          
 		</div>
 	</div>
 </div>
@@ -112,6 +135,8 @@
   $(function(){
     window.prettyPrint && prettyPrint();
     $('#editor').wysiwyg();
+    $('a[title]').tooltip();
   });
 </script>
+<a href="https://github.com/mindmup/bootstrap-wysiwyg/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 </html>

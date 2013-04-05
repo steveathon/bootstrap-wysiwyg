@@ -29,4 +29,8 @@ For a hotkey, specify a hotkey and a command in the hotKeys option. eg
 	        }
 	});
 
-
+Dependencies
+------------
+* JQuery http://jquery.com/
+* JQuery HotKeys https://github.com/jeresig/jquery.hotkeys
+* Bootstrap http://twitter.github.com/bootstrap/
