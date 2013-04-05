@@ -27,13 +27,15 @@
     <hr/>
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
-        <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+        <a class="btn  dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
           <ul class="dropdown-menu">
           <li><a data-edit="fontName Arial" style="font-family:Arial">Arial</a></li>
           <li><a data-edit="fontName Times" style="font-family:Times">Times</a></li>
           <li><a data-edit="fontName Courier" style="font-family:Courier">Courier</a></li>
           </ul>
-        <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+        </div>
+      <div class="btn-group">
+        <a class="btn  dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
           <ul class="dropdown-menu">
           <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
           <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
@@ -41,26 +43,26 @@
           </ul>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-        <a class="btn btn-large" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-        <a class="btn btn-large" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-        <a class="btn btn-large" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+        <a class="btn " data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+        <a class="btn " data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+        <a class="btn " data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+        <a class="btn " data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ol"></i></a>
-        <a class="btn btn-large" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ul"></i></a>
-        <a class="btn btn-large" data-edit="outdent" title="Reduce indent (Ctrl/Cmd+Shift+Tab)"><i class="icon-indent-left"></i></a>
-        <a class="btn btn-large" data-edit="indent" title="Indent (Ctrl/Cmd+Tab)"><i class="icon-indent-right"></i></a>
+        <a class="btn " data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ol"></i></a>
+        <a class="btn " data-edit="insertorderedlist" title="Number list"><i class="icon-list-ul"></i></a>
+        <a class="btn " data-edit="outdent" title="Reduce indent (Ctrl/Cmd+Shift+Tab)"><i class="icon-indent-left"></i></a>
+        <a class="btn " data-edit="indent" title="Indent (Ctrl/Cmd+Tab)"><i class="icon-indent-right"></i></a>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-        <a class="btn btn-large" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-        <a class="btn btn-large" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-        <a class="btn btn-large" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+        <a class="btn " data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+        <a class="btn " data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+        <a class="btn " data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+        <a class="btn " data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
       </div>
       <div class="btn-group">
-        <a class="btn btn-large" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
-        <a class="btn btn-large" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+        <a class="btn " data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+        <a class="btn " data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
       </div>
     </div>
     <div id="editor">
@@ -72,19 +74,18 @@
     <div class="span6">
           <h2>About</h2>
           <p>
-          This <a href="https://github.com/mindmup/bootstrap-wysiwyg/blob/master/bootstrap-wysiwyg.js">tiny (2KB) JQuery Bootstrap plugin</a> turns any DIV into a WYSIWYG
+          This <a href="https://github.com/mindmup/bootstrap-wysiwyg/blob/master/bootstrap-wysiwyg.js">tiny (2.5KB, &lt; 100 lines) JQuery Bootstrap plugin</a> turns any DIV into a WYSIWYG
           rich-content editor, inspired by <a href="http://premiumsoftware.net/cleditor/">CLEditor</a> and
               <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>. 
           Here are the key features:
       </p>
           <ul>
-            <li>Bootstrap compatible and consistent with declarative data configuration</li>
-            <li>Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, FortAwesome and so on...</li>
-            <li>Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any <a href="https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla">supported browser command</a></li>
             <li>Automatically binds standard hotkeys for common operations on Mac and Windows</li>
+            <li>Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, FortAwesome and so on...</li>
             <li>Does not force any styling - it's all up to you</li>
-            <li>(Optionally) cleans up trailing whitespace and empty divs and spans to prevent fake updates</li> 
+            <li>Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any <a href="https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla">supported browser command</a></li>
             <li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
+            <li>(Optionally) cleans up trailing whitespace and empty divs and spans</li> 
             <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6)</li>
           </ul>
       <h2>Usage</h2>
@@ -119,9 +120,10 @@
           or doing too much magic such as inserting IFrames with backup text-areas. Most of this was to work around quirks in older browsers (which we didn't need) and 
           caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
           bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
-          turn out to be much worse than standard Bootstrap buttons. So we built this tiny tiny editor that does everything we need, does not impose
-          any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. 
-        </p>
+          turn out to be much worse than standard Bootstrap buttons. </p>
+          <p>It turns out, with HTML5, everything we need can fit into less than 3K. We built this tiny tiny editor that does everything we need, does not impose
+          any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. </p>
+          <p>It's released under the MIT license, so fork and enjoy!  </p>
 
 
 			 <p style="text-align:center; margin-top:20px">
