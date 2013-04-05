@@ -27,10 +27,10 @@ $.fn.wysiwyg = function (options) {
 			toolbarRole: 'editor-toolbar',
 			commandRole: 'edit'
 		},
-		execCommand = function (commandWithArgs) {
+		execCommand = function (commandWithArgs, valueArg) {
 			var commandArr = commandWithArgs.split(' '),
 				command = commandArr.shift(),
-				args = commandArr.join(' ');
+				args = commandArr.join(' ') + (valueArg || '');
 			document.execCommand(command, 0, args);
 		},
 		bindHotkeys = function (hotKeys) {
@@ -59,10 +59,18 @@ $.fn.wysiwyg = function (options) {
 			}
 		},
 		bindToolbar = function (toolbar, options) {
-			var target = $(toolbar.data('target'));
-			toolbar.find('[data-' + options.commandRole + ']').click(function () {
+			toolbar.find('a[data-' + options.commandRole + ']').click(function () {
 				restoreSelectionRange();
 				execCommand($(this).data(options.commandRole));
+				saveSelectionRange();
+			});
+			toolbar.find('input[data-' + options.commandRole + ']').change(function () {
+				var newValue = this.value; /* ugly but prevents fake double-calls due to selection restoration */
+				this.value = '';
+				restoreSelectionRange();
+				if (newValue) {
+					execCommand($(this).data(options.commandRole), newValue);
+				}
 				saveSelectionRange();
 			});
 		};
