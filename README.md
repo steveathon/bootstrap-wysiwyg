@@ -30,17 +30,17 @@ For more info on execCommand, see http://www.quirksmode.org/dom/execCommand.html
 
 To pass arguments to a command, separate a command with a space.
 
-  <a data-edit="fontName Arial">...</a>
+    <a data-edit="fontName Arial">...</a>
 
 You can also use input type='text' with a data-edit attribute. When the value
 is changed, the command from the data-edit attribute will be applied using the
 input value as the command argument
-
-  <input type="text" data-edit="createLink">
+    
+    <input type="text" data-edit="createLink">
 
 If the input type is file, when a file is selected the contents will be read in using the FileReader API and the data URL will be used as the argument
   
-  <input type="file" data-edit="insertImage">
+    <input type="file" data-edit="insertImage">
 
 
 To change hotkeys, specify the map of hotkeys to commands in the hotKeys option. For example:
