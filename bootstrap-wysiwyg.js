@@ -76,18 +76,35 @@ $(function () {
 					selection.addRange(selectedRange);
 				}
 			},
+			insertFiles = function (files) {
+				editor.focus();
+				$.each(files, function (idx, fileInfo) {
+					if (/^image\//.test(fileInfo.type)) {
+						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
+							execCommand('insertimage', dataUrl);
+						});
+					}
+				});
+			},
 			bindToolbar = function (toolbar, options) {
 				toolbar.find('a[data-' + options.commandRole + ']').click(function () {
 					restoreSelectionRange();
 					execCommand($(this).data(options.commandRole));
 					saveSelectionRange();
 				});
-				toolbar.find('input[data-' + options.commandRole + ']').change(function () {
+				toolbar.find('input[type=text][data-' + options.commandRole + ']').change(function () {
 					var newValue = this.value; /* ugly but prevents fake double-calls due to selection restoration */
 					this.value = '';
 					restoreSelectionRange();
 					if (newValue) {
 						execCommand($(this).data(options.commandRole), newValue);
+					}
+					saveSelectionRange();
+				});
+				toolbar.find('input[type=file][data-' + options.commandRole + ']').change(function () {
+					restoreSelectionRange();
+					if (this.type === 'file' && this.files && this.files.length > 0) {
+						insertFiles(this.files);
 					}
 					saveSelectionRange();
 				});
@@ -99,15 +116,7 @@ $(function () {
 						e.stopPropagation();
 						e.preventDefault();
 						if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-							editor.focus();
-							$.each(e.dataTransfer.files, function (idx, fileInfo) {
-								if (/^image\//.test(fileInfo.type)) {
-									$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
-										console.log('loaded', dataUrl);
-										execCommand('insertimage', dataUrl);
-									});
-								}
-							});
+							insertFiles(e.dataTransfer.files);
 						}
 					});
 			};
