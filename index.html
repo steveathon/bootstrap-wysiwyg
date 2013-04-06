@@ -90,13 +90,14 @@
       </p>
           <ul>
             <li>Automatically binds standard hotkeys for common operations on Mac and Windows</li>
-            <li>Drag and drop files to insert images, upload images</li>
+            <li>Drag and drop files to insert images, support image upload (also taking photos on mobile devices)</li>
             <li>Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, FortAwesome and so on...</li>
             <li>Does not force any styling - it's all up to you</li>
             <li>Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any <a href="https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla">supported browser command</a></li>
             <li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
             <li>(Optionally) cleans up trailing whitespace and empty divs and spans</li> 
             <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6)</li>
+            <li>Supports mobile devices (tested on IOS 6 Ipad/Iphone and Android 4.1.1 Chrome)</li>
           </ul>
 
 
@@ -111,7 +112,7 @@
           caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
           bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
           turn out to be much worse than standard Bootstrap buttons. </p>
-          <p>It turns out, with HTML5, everything we need can fit into less than 3K. We built this tiny tiny editor that does everything we need, does not impose
+          <p>It turns out, with HTML5, everything we need can fit into less than 5K. We built this tiny tiny editor that does everything we need, does not impose
           any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. </p>
           <p>It's released under the MIT license, so fork and enjoy!  </p>
 
@@ -136,11 +137,14 @@
 <pre class="prettyprint linenums">
   &lt;a data-edit="bold"&gt;...&lt;/a&gt;
 </pre>
-<p>execute more complex commands by adding an argument after a blank or providing an input with a data-edit command (the input value is used as an argument).<p>
+<p>execute more complex commands by adding an argument after a blank or providing an input with a data-edit command (the input value is used as an argument). In case of 
+file inputs, the file contents are read in using the FileReader API and used as the command value.<p>
 <pre class="prettyprint linenums">
 &lt;a data-edit="fontName Arial"&gt;...&lt;/a&gt;
 ...
 &lt;input type="text" data-edit="createLink"/&gt;
+...
+&lt;input type="file" data-edit="insertImage" /&gt;
 </pre>
 <p>Use standard JQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:</p>
 <pre class="prettyprint linenums">
