@@ -64,7 +64,9 @@
 			    <button class="btn" type="button">Add</button>
         </div>
         <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+
       </div>
+      
       <div class="btn-group">
         <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
         <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
@@ -73,7 +75,9 @@
         <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
         <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
       </div>
+      <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
     </div>
+
     <div id="editor">
       Go ahead... 
     </div>
@@ -91,6 +95,7 @@
           <ul>
             <li>Automatically binds standard hotkeys for common operations on Mac and Windows</li>
             <li>Drag and drop files to insert images, support image upload (also taking photos on mobile devices)</li>
+            <li>Voice dictation input (only in Chrome)</li>
             <li>Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, FortAwesome and so on...</li>
             <li>Does not force any styling - it's all up to you</li>
             <li>Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any <a href="https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla">supported browser command</a></li>
@@ -184,6 +189,12 @@ file inputs, the file contents are read in using the FileReader API and used as 
         var overlay = $(this), target = $(overlay.data('target')); 
         overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
       });
+      if ("onwebkitspeechchange"  in document.createElement("input")) {
+        var editorOffset = $('#editor').offset();
+        $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
+      } else {
+        $('#voiceBtn').hide();
+      }
     };
     initToolbarBootstrapBindings();  
     $('#editor').wysiwyg();

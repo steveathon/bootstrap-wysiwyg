@@ -92,11 +92,12 @@ $(function () {
 					execCommand($(this).data(options.commandRole));
 					saveSelectionRange();
 				});
-				toolbar.find('input[type=text][data-' + options.commandRole + ']').change(function () {
+				$('input[type=text][data-' + options.commandRole + ']', toolbar).on('webkitspeechchange change', function () {
 					var newValue = this.value; /* ugly but prevents fake double-calls due to selection restoration */
 					this.value = '';
 					restoreSelectionRange();
 					if (newValue) {
+						editor.focus();
 						execCommand($(this).data(options.commandRole), newValue);
 					}
 					saveSelectionRange();
