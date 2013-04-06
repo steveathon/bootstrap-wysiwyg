@@ -173,7 +173,7 @@ file inputs, the file contents are read in using the FileReader API and used as 
             'Times New Roman', 'Verdana'],
             fontTarget = $('[title=Font]').siblings('.dropdown-menu');
       $.each(fonts, function (idx, fontName) {
-          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:'+ fontName +'">'+fontName + '</a></li>'));
+          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
       });
       $('a[title]').tooltip();
     	$('.dropdown-menu input').click(function() {return false;})
@@ -185,8 +185,8 @@ file inputs, the file contents are read in using the FileReader API and used as 
         overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
       });
     };
-    $('#editor').wysiwyg();
     initToolbarBootstrapBindings();  
+    $('#editor').wysiwyg();
     window.prettyPrint && prettyPrint();
   });
 </script>
