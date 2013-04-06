@@ -29,9 +29,6 @@
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
           <ul class="dropdown-menu">
-          <li><a data-edit="fontName Arial" style="font-family:Arial">Arial</a></li>
-          <li><a data-edit="fontName Times" style="font-family:Times">Times</a></li>
-          <li><a data-edit="fontName Courier" style="font-family:Courier">Courier</a></li>
           </ul>
         </div>
       <div class="btn-group">
@@ -166,18 +163,27 @@
 </div>
 <script>
   $(function(){
-    window.prettyPrint && prettyPrint();
-    $('#editor').wysiwyg();
-	$('a[title]').tooltip();
-	$('.dropdown-menu input')
-		.click(function() {return false;})
-		.change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
-    .keydown('esc', function () {this.value='';$(this).change();});
+    function initToolbarBootstrapBindings() {
+      var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+            'Times New Roman', 'Verdana'],
+            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+      $.each(fonts, function (idx, fontName) {
+          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:'+ fontName +'">'+fontName + '</a></li>'));
+      });
+      $('a[title]').tooltip();
+    	$('.dropdown-menu input').click(function() {return false;})
+		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+        .keydown('esc', function () {this.value='';$(this).change();});
 
-    $('[data-role=magic-overlay]').each(function () { 
-      var overlay = $(this), target = $(overlay.data('target')); 
-      overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
-    });
+      $('[data-role=magic-overlay]').each(function () { 
+        var overlay = $(this), target = $(overlay.data('target')); 
+        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+      });
+    };
+    $('#editor').wysiwyg();
+    initToolbarBootstrapBindings();  
+    window.prettyPrint && prettyPrint();
   });
 </script>
 <a href="https://github.com/mindmup/bootstrap-wysiwyg/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
