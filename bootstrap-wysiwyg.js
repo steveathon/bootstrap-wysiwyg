@@ -35,7 +35,7 @@ jQuery(function ($) {
 					'shift+tab': 'outdent',
 					'tab': 'indent'
 	            },
-				toolbarRole: 'editor-toolbar',
+				toolbarSelector: '[data-role=editor-toolbar]',
 				commandRole: 'edit'
 			},
 			execCommand = function (commandWithArgs, valueArg) {
@@ -92,7 +92,7 @@ jQuery(function ($) {
 					execCommand($(this).data(options.commandRole));
 					saveSelectionRange();
 				});
-				$('input[type=text][data-' + options.commandRole + ']', toolbar).on('webkitspeechchange change', function () {
+				toolbar.find('input[type=text][data-' + options.commandRole + ']').on('webkitspeechchange change', function () {
 					var newValue = this.value; /* ugly but prevents fake double-calls due to selection restoration */
 					this.value = '';
 					restoreSelectionRange();
@@ -124,7 +124,7 @@ jQuery(function ($) {
 		options = $.extend({}, defaultOptions, options);
 		bindHotkeys(options.hotKeys);
 		initFileDrops();
-		$('[data-role=' + options.toolbarRole + ']').each(function () { bindToolbar($(this), options); });
+		bindToolbar($(options.toolbarSelector), options);
 		$.each(this, function () {
 			var before,
 				element = $(this);
