@@ -18,7 +18,7 @@ jQuery(function ($) {
 		var html = $(this).html();
 		return html && html.replace(/(<br>|\s|<div><br><\/div>|&nbsp;)*$/, '');
 	};
-	$.fn.wysiwyg = function (options) {
+	$.fn.wysiwyg = function (userOptions) {
 		var editor = this,
 			selectedRange,
 			defaultOptions = {
@@ -36,13 +36,28 @@ jQuery(function ($) {
 					'tab': 'indent'
 	            },
 				toolbarSelector: '[data-role=editor-toolbar]',
-				commandRole: 'edit'
+				commandRole: 'edit',
+				activeToolbarClass: 'btn-info'
+			},
+			options,
+			updateToolbar = function () {
+				if (options.activeToolbarClass) {
+					$(options.toolbarSelector).find('.btn[data-' + options.commandRole + ']').each(function () {
+						var command = $(this).data(options.commandRole);
+						if (document.queryCommandState(command)) {
+							$(this).addClass(options.activeToolbarClass);
+						} else {
+							$(this).removeClass(options.activeToolbarClass);
+						}
+					});
+				}
 			},
 			execCommand = function (commandWithArgs, valueArg) {
 				var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
 					args = commandArr.join(' ') + (valueArg || '');
 				document.execCommand(command, 0, args);
+				updateToolbar();
 			},
 			bindHotkeys = function (hotKeys) {
 				$.each(hotKeys, function (hotkey, command) {
@@ -89,6 +104,7 @@ jQuery(function ($) {
 			bindToolbar = function (toolbar, options) {
 				toolbar.find('a[data-' + options.commandRole + ']').click(function () {
 					restoreSelectionRange();
+					editor.focus();
 					execCommand($(this).data(options.commandRole));
 					saveSelectionRange();
 				});
@@ -122,7 +138,7 @@ jQuery(function ($) {
 						}
 					});
 			};
-		options = $.extend({}, defaultOptions, options);
+		options = $.extend({}, defaultOptions, userOptions);
 		bindHotkeys(options.hotKeys);
 		initFileDrops();
 		bindToolbar($(options.toolbarSelector), options);
@@ -134,6 +150,7 @@ jQuery(function ($) {
 					before = element.html();
 				})
 				.on('mouseup keyup mouseout', saveSelectionRange)
+				.on('mouseup keyup mouseout', updateToolbar)
 				.on('input blur keyup paste', function () {
 					if (before !== element.html()) {
 						before = element.html();
@@ -146,6 +163,7 @@ jQuery(function ($) {
 					clear = currentRange && (currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset);
 				if (!clear || isInside) {
 					saveSelectionRange();
+					updateToolbar();
 				}
 			});
 		});
