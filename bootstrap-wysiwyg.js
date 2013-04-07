@@ -1,5 +1,5 @@
 /* http://github.com/mindmup/bootstrap-wysiwyg */
-/*global $, FileReader*/
+/*global jQuery, $, FileReader*/
 /*jslint browser:true*/
 jQuery(function ($) {
 	'use strict';
@@ -92,6 +92,7 @@ jQuery(function ($) {
 					execCommand($(this).data(options.commandRole));
 					saveSelectionRange();
 				});
+				toolbar.find('[data-toggle=dropdown]').click(restoreSelectionRange);
 				toolbar.find('input[type=text][data-' + options.commandRole + ']').on('webkitspeechchange change', function () {
 					var newValue = this.value; /* ugly but prevents fake double-calls due to selection restoration */
 					this.value = '';
