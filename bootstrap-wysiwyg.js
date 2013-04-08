@@ -145,6 +145,7 @@ jQuery(function ($) {
 						insertFiles(this.files);
 					}
 					saveSelection();
+					this.value = '';
 				});
 			},
 			initFileDrops = function () {
