@@ -162,30 +162,19 @@ jQuery(function ($) {
 		bindHotkeys(options.hotKeys);
 		initFileDrops();
 		bindToolbar($(options.toolbarSelector), options);
-		$.each(this, function () {
-			var before,
-				element = $(this);
-			element.attr('contenteditable', true)
-				.on('focus', function () {
-					before = element.html();
-				})
-				.on('mouseup keyup mouseout', saveSelection)
-				.on('mouseup keyup mouseout', updateToolbar)
-				.on('input blur keyup paste', function () {
-					if (before !== element.html()) {
-						before = element.html();
-						element.trigger('change');
-					}
-				});
-			$(window).bind('touchend', function (e) {
-				var isInside = (e.target === element[0] || $(element).children().index($(e.target)) !== -1 || $(element).has(e.target).length > 0),
-					currentRange = getCurrentRange(),
-					clear = currentRange && (currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset);
-				if (!clear || isInside) {
-					saveSelection();
-					updateToolbar();
-				}
+		editor.attr('contenteditable', true)
+			.on('mouseup keyup mouseout', function () {
+				saveSelection();
+				updateToolbar();
 			});
+		$(window).bind('touchend', function (e) {
+			var isInside = (editor.is(e.target) || editor.has(e.target).length > 0),
+				currentRange = getCurrentRange(),
+				clear = currentRange && (currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset);
+			if (!clear || isInside) {
+				saveSelection();
+				updateToolbar();
+			}
 		});
 		return this;
 	};
