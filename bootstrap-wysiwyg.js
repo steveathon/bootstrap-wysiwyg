@@ -37,7 +37,9 @@ jQuery(function ($) {
 	            },
 				toolbarSelector: '[data-role=editor-toolbar]',
 				commandRole: 'edit',
-				activeToolbarClass: 'btn-info'
+				activeToolbarClass: 'btn-info',
+				fakeInputSelectionMarker: 'edit-focus-marker', /* data attribute to signal that we've marked a selection with color */
+				fakeInputSelectionColor: 'darkgrey' /* background color for the fake selection */
 			},
 			options,
 			updateToolbar = function () {
@@ -109,6 +111,7 @@ jQuery(function ($) {
 					saveSelectionRange();
 				});
 				toolbar.find('[data-toggle=dropdown]').click(restoreSelectionRange);
+
 				toolbar.find('input[type=text][data-' + options.commandRole + ']').on('webkitspeechchange change', function () {
 					var newValue = this.value; /* ugly but prevents fake double-calls due to selection restoration */
 					this.value = '';
@@ -118,6 +121,23 @@ jQuery(function ($) {
 						execCommand($(this).data(options.commandRole), newValue);
 					}
 					saveSelectionRange();
+				}).on('focus', function () {
+					var input = $(this);
+					if (!input.data(options.fakeInputSelectionMarker)) {
+						restoreSelectionRange();
+						document.execCommand('hiliteColor', 0, options.fakeInputSelectionColor);
+						saveSelectionRange();
+						input.data('edit-focus-marker', true);
+						input.focus();
+					}
+				}).on('blur', function () {
+					var input = $(this);
+					if (input.data(options.fakeInputSelectionMarker)) {
+						restoreSelectionRange();
+						document.execCommand('hiliteColor', 0, 'transparent');
+						saveSelectionRange();
+						input.data('edit-focus-marker', false);
+					}
 				});
 				toolbar.find('input[type=file][data-' + options.commandRole + ']').change(function () {
 					restoreSelectionRange();
