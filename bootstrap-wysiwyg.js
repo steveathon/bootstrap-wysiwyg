@@ -103,6 +103,12 @@ jQuery(function ($) {
 					}
 				});
 			},
+			markSelection = function (input, color) {
+				restoreSelection();
+				document.execCommand('hiliteColor', 0, color || 'transparent');
+				saveSelection();
+				input.data(options.selectionMarker, color);
+			},
 			bindToolbar = function (toolbar, options) {
 				toolbar.find('a[data-' + options.commandRole + ']').click(function () {
 					restoreSelection();
@@ -124,19 +130,13 @@ jQuery(function ($) {
 				}).on('focus', function () {
 					var input = $(this);
 					if (!input.data(options.selectionMarker)) {
-						restoreSelection();
-						document.execCommand('hiliteColor', 0, options.selectionColor);
-						saveSelection();
-						input.data('edit-focus-marker', true);
+						markSelection(input, options.selectionColor);
 						input.focus();
 					}
 				}).on('blur', function () {
 					var input = $(this);
 					if (input.data(options.selectionMarker)) {
-						restoreSelection();
-						document.execCommand('hiliteColor', 0, 'transparent');
-						saveSelection();
-						input.data('edit-focus-marker', false);
+						markSelection(input, false);
 					}
 				});
 				toolbar.find('input[type=file][data-' + options.commandRole + ']').change(function () {
