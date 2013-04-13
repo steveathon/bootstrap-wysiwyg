@@ -5,7 +5,7 @@
     <title>Tiny, opensource, Bootstrap WYSIWYG rich text editor from MindMup</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
-    <meta name="description" content="This tiny JQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
+    <meta name="description" content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
     <link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
     <link rel="shortcut icon" href="http://mindmup.s3.amazonaws.com/lib/img/favicon.ico" >
     <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
@@ -28,7 +28,16 @@
     <a href="https://twitter.com/mindmup" class="twitter-follow-button" data-show-count="true" data-show-screen-name="true" data-lang="en">Follow @mindmup</a> 
   </div>
 	<h1>bootstrap-wysiwyg <br/> <small>tiny wysiwyg rich text editor for Bootstrap</small></h1>
-    <hr/>
+	<hr/>
+	<!---
+	Please read this before copying the toolbar:
+
+	* One of the best things about this widget is that it does not impose any styling on you, and that it allows you 
+	* to create a custom toolbar with the options and functions that are good for your particular use. This toolbar
+	* is just an example - don't just copy it and force yourself to use the demo styling. Create your own. Read 
+	* this page to understand how to customise it:
+    * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
+	--->
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -91,7 +100,7 @@
     <div class="span6">
           <h2>About</h2>
           <p>
-          This <a href="https://github.com/mindmup/bootstrap-wysiwyg/blob/master/bootstrap-wysiwyg.js">tiny (5KB, &lt; 200 lines) JQuery Bootstrap plugin</a> turns any DIV into a WYSIWYG
+          This <a href="https://github.com/mindmup/bootstrap-wysiwyg/blob/master/bootstrap-wysiwyg.js">tiny (5KB, &lt; 200 lines) jQuery Bootstrap plugin</a> turns any DIV into a WYSIWYG
           rich-content editor, inspired by <a href="http://premiumsoftware.net/cleditor/">CLEditor</a> and
               <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>. 
           Here are the key features:
@@ -116,13 +125,13 @@
         <br clear="all" />
         <p>
           While building a content editor for <a href="http://www.mindmup.com">MindMup</a> we found plenty of good HTML5 WYSWYG editors online, but most were duplicating
-          functionality that already exists in JQuery and Bootstrap, implementing things that were meanwhile added to HTML5 and supported in major browsers, 
+          functionality that already exists in jQuery and Bootstrap, implementing things that were meanwhile added to HTML5 and supported in major browsers, 
           or doing too much magic such as inserting IFrames with backup text-areas. Most of this was to work around quirks in older browsers (which we didn't need) and 
           caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
           bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
           turn out to be much worse than standard Bootstrap buttons. </p>
           <p>It turns out, with HTML5, everything we need can fit into less than 5K. We built this tiny tiny editor that does everything we need, does not impose
-          any particular additional CSS and uses modern browser functionality without reimplementing JQuery and Bootstrap. </p>
+          any particular additional CSS and uses modern browser functionality without reimplementing jQuery and Bootstrap. </p>
           <p>It's released under the MIT license, so fork and enjoy!  </p>
 
 
@@ -159,7 +168,7 @@ file inputs, the file contents are read in using the FileReader API and used as 
 ...
 &lt;input type="file" data-edit="insertImage" /&gt;
 </pre>
-<p>Use standard JQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:</p>
+<p>Use standard jQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:</p>
 <pre class="prettyprint linenums">
  $('#editor').cleanHtml()
 </pre>
