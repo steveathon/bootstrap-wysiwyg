@@ -38,6 +38,7 @@
 	* this page to understand how to customise it:
     * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
 	--->
+	<div id="alerts"></div>
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -212,9 +213,18 @@ file inputs, the file contents are read in using the FileReader API and used as 
       } else {
         $('#voiceBtn').hide();
       }
-    };
+	};
+	function showErrorAlert (reason, detail) {
+		var msg='';
+		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+		else {
+			console.log("error uploading file", reason, detail);
+		}
+		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+	};
     initToolbarBootstrapBindings();  
-    $('#editor').wysiwyg();
+	$('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
     window.prettyPrint && prettyPrint();
   });
 </script>

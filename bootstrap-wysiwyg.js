@@ -72,8 +72,7 @@
 					try {
 						selection.removeAllRanges();
 					} catch (ex) {
-						var textRange = document.body.createTextRange();
-						textRange.select();
+						document.body.createTextRange().select();
 						document.selection.empty();
 					}
 
@@ -86,7 +85,11 @@
 					if (/^image\//.test(fileInfo.type)) {
 						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
 							execCommand('insertimage', dataUrl);
+						}).fail(function (e) {
+							options.fileUploadError("file-reader", e);
 						});
+					} else {
+						options.fileUploadError("unsupported-file-type", fileInfo.type);
 					}
 				});
 			},
@@ -184,6 +187,7 @@
 		commandRole: 'edit',
 		activeToolbarClass: 'btn-info',
 		selectionMarker: 'edit-focus-marker',
-		selectionColor: 'darkgrey'
+		selectionColor: 'darkgrey',
+		fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
 	};
 }(window.jQuery));
