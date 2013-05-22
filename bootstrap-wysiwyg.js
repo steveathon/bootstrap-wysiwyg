@@ -29,8 +29,8 @@
 						var commandArr = $(this).data(options.commandRole).split(' '),
 							command = commandArr[0];
 
-						// If the command has an argument and its value matches this button
-						if (commandArr.length > 1 && document.queryCommandEnabled(command) && document.queryCommandValue(command) === commandArr[1]) {
+						// If the command has an argument and its value matches this button. == used for string/number comparison
+						if (commandArr.length > 1 && document.queryCommandEnabled(command) && document.queryCommandValue(command) == commandArr[1]) {
 							$(this).addClass(options.activeToolbarClass);
 						// Else if the command has no arguments and it is active
 						} else if (commandArr.length === 1 && document.queryCommandEnabled(command) && document.queryCommandState(command)) {
