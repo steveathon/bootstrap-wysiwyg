@@ -56,9 +56,10 @@
 				if (options.activeToolbarClass) {
 					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 						var command = $(this).data(options.commandRole);
+						var commandNoArgs = command.slice(0, command.indexOf(' '));
 						if (document.queryCommandState(command)) {
 							$(this).addClass(options.activeToolbarClass);
-						} else if (command.split(' ')[0] + ' ' + document.queryCommandValue(command.split(' ')[0]) === command) {
+						} else if (commandNoArgs + ' ' + document.queryCommandValue(commandNoArgs) === command) {
 							$(this).addClass(options.activeToolbarClass);
 						} else {
 							$(this).removeClass(options.activeToolbarClass);
