@@ -80,6 +80,39 @@
 					selection.addRange(selectedRange);
 				}
 			},
+			                        // adding toggle Html Edit ability
+                        
+                        toggleHtmlEdit = function() {
+                            var bToSource = editor.data("wysiwyg-html-mode");
+                            var oEditor = editor[0];
+                            var oContent;
+                            if (!bToSource) {
+                                oContent = document.createTextNode(oEditor.innerHTML);
+                                oEditor.innerHTML = "";
+                                oEditor.contentEditable = false;
+                                                                
+                                var oPre = document.createElement("pre");
+                                oPre.id = "sourceText";
+                                oPre.contentEditable = true;
+                                oPre.appendChild(oContent);
+                                oEditor.appendChild(oPre);
+                                
+                                editor.data("wysiwyg-html-mode", "true");
+                                
+                            } else {
+                                if (document.all) {
+                                    oEditor.innerHTML = oEditor.innerText;
+                                } else {
+                                    oContent = document.createRange();
+                                    oContent.selectNodeContents(oEditor.firstChild);
+                                    oEditor.innerHTML = oContent.toString();
+                                }
+                                oEditor.contentEditable = true;
+                                editor.data("wysiwyg-html-mode", "false");
+                            }
+                            editor.focus();
+                        },
+
 			insertFiles = function (files) {
 				editor.focus();
 				$.each(files, function (idx, fileInfo) {
@@ -106,7 +139,16 @@
 				toolbar.find(toolbarBtnSelector).click(function () {
 					restoreSelection();
 					editor.focus();
+					
+                                        if ($(this).data(options.commandRole) === "html")
+                                        {
+                                            toggleHtmlEdit();
+                                        }
+                                        else
+                                        {
 					execCommand($(this).data(options.commandRole));
+                                        }
+										
 					saveSelection();
 				});
 				toolbar.find('[data-toggle=dropdown]').click(restoreSelection);
