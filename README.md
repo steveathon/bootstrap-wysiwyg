@@ -1,5 +1,8 @@
 Originally forked from [mindmup/bootstrap-wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg) and serious refactored to add compatibility for IE8 and IE9.
-The image upload now user the good jQuery plugin [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload) for the image upload and accept imageUploadUrl and redirectIframeUrl parameters passed as url and redirect parameter to the upload plugin.
+The image upload now user the good jQuery plugin [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload).
+Two additional parameters are added
+* imageUploadUrl passed as url parameter to jQuery-File-Upload plugin
+* redirectIframeUrl passed as redirect parameter to jQuery-File-Upload plugin
 
 
 bootstrap-wysiwyg
