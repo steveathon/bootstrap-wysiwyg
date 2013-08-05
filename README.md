@@ -1,3 +1,7 @@
+Originally forked from [mindmup/bootstrap-wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg) and serious refactored to add compatibility for IE8 and IE9.
+The image upload now user the good jQuery plugin [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload) for the image upload and accept imageUploadUrl and redirectIframeUrl parameters passed as url and redirect parameter to the upload plugin.
+
+
 bootstrap-wysiwyg
 =================
 
@@ -11,7 +15,6 @@ Tiny bootstrap-compatible WISWYG rich text editor, based on browser execCommand,
 )
 * Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV
 * (Optionally) cleans up trailing whitespace and empty divs and spans
-* Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6)
 * Supports mobile devices (tested on IOS 6 Ipad/Iphone and Android 4.1.1 Chrome)
 
 Basic Usage
@@ -82,4 +85,5 @@ Dependencies
 ------------
 * jQuery http://jquery.com/
 * jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
-* Bootstrap http://twitter.github.com/bootstrap/
+* jQuery File Upload https://github.com/blueimp/jQuery-File-Upload
+* Bootstrap 3.0 http://getbootstrap.com

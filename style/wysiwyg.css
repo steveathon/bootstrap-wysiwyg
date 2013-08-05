@@ -1,0 +1,78 @@
+/* this CSS is not part of the widget, it is here just as an example of the demo page styling.... Don't copy this one, roll your own. One
+ * of the key things about the widget is that it allows you to do your own styling!
+ */
+
+.wysiwyg {
+	min-height: 250px;
+	background-color: white;
+	border-collapse: separate; 
+	border: 1px solid rgb(204, 204, 204); 
+	padding: 4px; 
+	box-sizing: content-box; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+	box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+	border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+	overflow: auto;
+	outline: none;
+    font-weight: normal;
+}
+.wysiwyg-container{
+    position: relative;
+}
+.wysiwyg-container .btn-toolbar{
+    background-color: #000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.wysiwyg-container .btn-toolbar a{
+    color: #FFF;
+}
+.wysiwyg-container .btn-toolbar .dropdown-menu{
+    width: 300px;
+    padding: 5px;
+}
+.wysiwyg-container .btn-toolbar a.file-input{
+    position: relative;
+}
+.wysiwyg-container .btn-toolbar input.file-upload{
+    cursor: pointer;
+    direction: ltr;
+    font-size: 1px;
+    height: 30px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+}
+.wysiwyg-container .btn-toolbar .voice-btn {
+  width: 20px;
+  color: transparent;
+  background-color: transparent;
+  transform: scale(1.0, 1.0);
+  -webkit-transform: scale(1.0, 1.0);
+  -moz-transform: scale(1.0, 1.0);
+  border: transparent;
+  cursor: pointer;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.wysiwyg-container .upload-panel{
+    background-color: #000;
+    opacity: .5;
+    position: absolute;
+    display:none;
+}
+.wysiwyg-container .upload-panel ul{
+    list-style-type: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.dropdown-menu a {
+  cursor: pointer;
+}
