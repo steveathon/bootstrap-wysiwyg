@@ -21,11 +21,17 @@
     position: relative;
 }
 .wysiwyg-container .btn-toolbar{
-    background-color: #000;
+    background-color: #A5A5A5;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.wysiwyg-container .btn-toolbar .btn{
+    font-size: 12px;
+    padding: 2px 8px;
 }
 .wysiwyg-container .btn-toolbar a{
     color: #FFF;
@@ -41,13 +47,13 @@
     cursor: pointer;
     direction: ltr;
     font-size: 1px;
-    height: 30px;
+    height: 100%;
     margin: 0;
     opacity: 0;
     position: absolute;
     right: 0;
     top: 0;
-    width: 30px;
+    width: 100%;
 }
 .wysiwyg-container .btn-toolbar .voice-btn {
   width: 20px;
@@ -60,6 +66,11 @@
   cursor: pointer;
   box-shadow: none;
   -webkit-box-shadow: none;
+}
+.wysiwyg-container .btn-toolbar .close{
+    margin: 1px 5px 0 0;
+    color: #FFF;
+    opacity: 1;
 }
 .wysiwyg-container .upload-panel{
     background-color: #000;

@@ -4,19 +4,7 @@
 (function ($) {
 	'use strict';
 
-    var gettext = function(s){return s;},
-
-    readFileIntoDataUrl = function (fileInfo) {
-		var loader = $.Deferred(),
-			fReader = new FileReader();
-		fReader.onload = function (e) {
-			loader.resolve(e.target.result);
-		};
-		fReader.onerror = loader.reject;
-		fReader.onprogress = loader.notify;
-		fReader.readAsDataURL(fileInfo);
-		return loader.promise();
-    },
+    var
 
     /**
      * Defaults configurations
@@ -37,7 +25,7 @@
         },
         editorId: 'wysiwyg',
         editorClass: 'wysiwyg',
-        activeToolbarClass: 'btn-info',
+        activeToolbarClass: 'btn-primary',
         imageUploadUrl: null,
         fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
     },
@@ -58,7 +46,7 @@
     },
 
     _toolbarRenderer = function(options){
-       return $([ '<div class="btn-toolbar" data-target="', options.editorId ,'">',
+       return $(['<div class="btn-toolbar" data-target="', options.editorId ,'">',
                    '<div class="btn-group">',
                        '<a class="btn" data-action="bold" title="', gettext('Bold (Ctrl/Cmd+B)'), '"><i class="icon-bold"></i></a>',
                        '<a class="btn" data-action="italic" title="', gettext('Italic (Ctrl/Cmd+I)'), '"><i class="icon-italic"></i></a>',
@@ -99,6 +87,7 @@
                            '</a>' +
                        '</div>' : ''),
                    '<input type="text" lang="it" data-action="inserttext" class="voice-btn" x-webkit-speech="">',
+                   '<button type="button" class="close pull-right">&times;</button>',
                 '</div>',
                 (options.imageUploadUrl ? '<div class="upload-panel"><ul></ul></div>' : '')].join(''));
     },
@@ -127,9 +116,10 @@
          * Initialize the plugin, create the dom and then associate listeners
          */
         _startup: function(){
-            this.target.hide();
+            this.target.data('init-hidden', this.target.is(':hidden')).hide();
             this.container = $('<div class="wysiwyg-container"></div>');
             this.editor = $('<div id="' + this.options.editorId + '" class="' + this.options.editorClass + '" contenteditable="true"></div>').html(this.target.val());
+            this.target.val('').attr('value', '');
             this.toolbar = _toolbarRenderer(this.options);
             this.container.append(this.toolbar).append(this.editor).insertAfter(this.target);
             this.toolbarBtns = this.toolbar.find('a[data-action]');
@@ -137,16 +127,23 @@
             this.uploaderPanel = this.container.find('.upload-panel');
             this.uploaderPanelList = this.uploaderPanel.find('ul');
             this._bind();
+            this.target.trigger('wysiwyg-inited');
         },
 
-        destroy: function(){
-            this.save();
+        destroy: function(save){
+            if(save){
+                this.save();
+            }
             this.editor.remove();
             this.toolbar.remove();
             this.container.remove();
             this.toolbarBtns = null;
             this.toolbarCustomBtns = null;
-            this.target.show().removeData('wysiwyg');
+            this.target.removeData('wysiwyg');
+            if(!this.target.data('init-hidden')){
+                this.target.show();
+            }
+            this.target.trigger('wysiwyg-destroy');
         },
 
         save: function(){
@@ -163,7 +160,7 @@
             this._bindToolbar();
 
             //$('a[title]').tooltip({container:'body'});
-            this.target.parents('form').submit(function(){self.save();});
+            this.target.parents('form').submit($.proxy(this.save, this));
             this.editor.on('mouseup keyup', function () {
                 self._saveSelection();
                 self._updateToolbar();
@@ -235,6 +232,9 @@
             } else {
                 this.toolbar.find('.voice-btn').hide();
             }
+
+            // Bind closing of the editor
+            this.toolbar.find('.close').click(function(){self.destroy();});
 
             // Fix dropdown behavior
             this.toolbar.find('[data-toggle=dropdown]').click($.proxy(this._restoreSelection, this)); // Needed to maintain focus on the textarea selection
@@ -478,10 +478,10 @@
 
 };
 
-	$.fn.wysiwyg = function (options) {
+	$.fn.wysiwyg = function (options, args) {
         if(typeof options=="string" && this.data('wysiwyg')){
-            return this.data('wysiwyg')[options]();
-        } else {
+            return this.data('wysiwyg')[options](args);
+        } else if(typeof options=="object"){
             this.data('wysiwyg', new Wysiwyg(this, options));
         }
         return this;
