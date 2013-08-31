@@ -39,7 +39,16 @@
 				var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
 					args = commandArr.join(' ') + (valueArg || '');
-				document.execCommand(command, 0, args);
+				
+				var parts = commandWithArgs.split('-');
+				
+				if ( parts.length == 1 ) {
+					document.execCommand(command, 0, args);
+				} else {
+					document.execCommand('formatblock', false, parts[1] );
+					
+				}
+
 				updateToolbar();
 			},
 			bindHotkeys = function (hotKeys) {
