@@ -45,8 +45,9 @@
 				if ( parts.length == 1 ) {
 					document.execCommand(command, 0, args);
 				} else {
-					document.execCommand('formatblock', false, parts[1] );
-					
+					if ( parts[0] == 'comm' ) {
+						document.execCommand('formatblock', false, parts[1] );
+					}
 				}
 
 				updateToolbar();
