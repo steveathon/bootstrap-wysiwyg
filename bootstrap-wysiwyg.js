@@ -21,6 +21,8 @@
 	$.fn.wysiwyg = function (userOptions) {
 		var editor = this,
 			selectedRange,
+			selectionNode,
+			caretPos,
 			options,
 			toolbarBtnSelector,
 			commandCache = {},
@@ -190,6 +192,8 @@
 			saveSelection = function () {
 				updateCommandCache();
 				selectedRange = getCurrentRange();
+				selectionNode = window.getSelection().anchorNode;
+				caretPos = window.getSelection().baseOffset;
 			},
 			restoreSelection = function () {
 				var selection = window.getSelection();
@@ -201,6 +205,10 @@
 						document.selection.empty();
 					}
 
+					if (selectionNode) {
+						selectedRange.setStart(selectionNode, caretPos);
+						selectedRange.collapse(true);
+					}
 					selection.addRange(selectedRange);
 				}
 			},
