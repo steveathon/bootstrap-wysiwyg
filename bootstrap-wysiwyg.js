@@ -71,8 +71,17 @@
 				if (options.activeToolbarClass) {
 					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 						var command = $(this).data(options.commandRole);
-						var commandNoArgs = command.slice(0, command.indexOf(' '));
-						if (document.queryCommandState(command)) {
+						var commandNoArgs; // Temporarily store index, replace with command.
+
+						if ((commandNoArgs = command.indexOf(' ')) >= 0) {
+							commandNoArgs = command.slice(0, commandNoArgs);
+						} else {
+							commandNoArgs = command;
+						}
+
+            if (commandNoArgs === "fontSize" && options.setRealFontSize != null) {
+                options.setRealFontSize(selectedRange);
+            } else if (document.queryCommandState(command)) {
 							$(this).addClass(options.activeToolbarClass);
 						} else if (commandNoArgs + ' ' + document.queryCommandValue(commandNoArgs) === command) {
 							$(this).addClass(options.activeToolbarClass);
@@ -179,6 +188,7 @@
 				}
 			},
 			saveSelection = function () {
+				updateCommandCache();
 				selectedRange = getCurrentRange();
 			},
 			restoreSelection = function () {
@@ -218,7 +228,6 @@
 			},
 			bindToolbar = function (toolbar, options) {
 				toolbar.find(toolbarBtnSelector).click(function () {
-					updateCommandCache();
 					restoreSelection();
 					editor.focus();
 					restoreCommandCache();
@@ -269,7 +278,7 @@
 					});
 			};
 		options = $.extend({}, $.fn.wysiwyg.defaults, userOptions);
-		toolbarBtnSelector = 'a[data-' + options.commandRole + '],button[data-' + options.commandRole + '],input[type=button][data-' + options.commandRole + ']';
+		toolbarBtnSelector = 'a[data-' + options.commandRole + '],button[data-' + options.commandRole + '],input[type=button][data-' + options.commandRole + '],div[data-' + options.commandRole + ']';
 		bindHotkeys(options.hotKeys);
 		if (options.dragAndDropImages) {
 			initFileDrops();
@@ -295,7 +304,7 @@
 				updateToolbar();
 			}
 		});
-		return this;
+        return this;
 	};
 	$.fn.wysiwyg.defaults = {
 		hotKeys: {
