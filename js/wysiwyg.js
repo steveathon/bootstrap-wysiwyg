@@ -27,7 +27,8 @@
         editorClass: 'wysiwyg',
         activeToolbarClass: 'btn-primary',
         imageUploadUrl: null,
-        fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
+        redirectIframeUrl: null,
+        uploadData: {}
     },
 
     _filesUploadRenderer = function(files, error){
@@ -36,8 +37,8 @@
             files_txt += ['<li class="clearfix">',
                 (files[i].error || error ?
                     '<div class="alert alert-danger"><strong>' + files[i].name + '</strong>&nbsp;' + (files[i].error || error) + '</div>' :
-                    '<div class="pull-left">' + files[i].name + '</div>' +
-                        '<div class="pull-right"><button type="button" class="btn btn-danger cancel-upload"><i class="icon icon-remove"></i></button></div>' +
+                    '<div class="file-name">' + files[i].name + '</div>' +
+                        '<div class="pull-right"><button type="button" class="btn btn-sm btn-danger cancel-upload"><i class="quag-q-remove"></i></button></div>' +
                         '<div class="progress"><div class="progress-bar" style="width: 0%;"></div></div>'
                     ),
                 '</li>'].join('');
@@ -47,12 +48,12 @@
 
     _toolbarRenderer = function(options){
        return $(['<div class="btn-toolbar" data-target="', options.editorId ,'">',
-                   '<div class="btn-group">',
+                   '<div class="pull-left">',
                        '<a class="btn" data-action="bold" title="', gettext('Bold (Ctrl/Cmd+B)'), '"><i class="icon-bold"></i></a>',
                        '<a class="btn" data-action="italic" title="', gettext('Italic (Ctrl/Cmd+I)'), '"><i class="icon-italic"></i></a>',
                        '<a class="btn" data-action="underline" title="', gettext('Underline (Ctrl/Cmd+U)'), '"><i class="icon-underline"></i></a>',
                    '</div>',
-                   '<div class="btn-group">',
+                   '<div class="pull-left">',
                        '<a class="btn" data-action="insertunorderedlist" title="', gettext('Bullet list'), '"><i class="icon-list-ul"></i></a>',
                        '<a class="btn" data-action="insertorderedlist" title="', gettext('Number list'), '"><i class="icon-list-ol"></i></a>',
                        '<a class="btn" data-action="outdent" title="', gettext('Reduce indent (Shift+Tab)'), '"><i class="icon-indent-left"></i></a>',
@@ -64,13 +65,12 @@
                        '<a class="btn" data-action="justifyright" title="', gettext('Align Right (Ctrl/Cmd+R)'), '"><i class="icon-align-right"></i></a>',
                        '<a class="btn" data-action="justifyfull" title="', gettext('Justify (Ctrl/Cmd+J)'), '"><i class="icon-align-justify"></i></a>',
                    '</div>',
-                   '<div class="btn-group">',
-                       '<a class="btn dropdown-toggle" data-toggle="dropdown" data-custom="link" title="', gettext('Hyperlink'), '"><i class="icon-link"></i></a>',
+                   '<div class="pull-left">',
+                       '<a class="btn dropdown-toggle lnk" data-toggle="dropdown" data-custom="link" title="', gettext('Hyperlink'), '"><i class="icon-link"></i></a>',
                        '<div class="dropdown-menu">',
                            '<form data-action="createLink" action="javascript:;" method="get">',
                                '<div class="input-group">',
-                                   '<span class="input-group-addon input-small">http://</span>',
-                                   '<input type="text" class="form-control input-small" placeholder="www.example.com">',
+                                   '<input type="text" class="form-control input-sm" placeholder="http://www.example.com">',
                                    '<span class="input-group-btn">',
                                         '<button class="btn btn-default btn-small" type="submit">', gettext('Add'), '</button>',
                                    '</span>',
@@ -80,7 +80,7 @@
                        '<a class="btn" data-custom="unlink" data-action="unlink" title="', gettext('Remove Hyperlink'), '"><i class="icon-unlink"></i></a>',
                    '</div>',
                    (options.imageUploadUrl ?
-                       '<div class="btn-group">' +
+                       '<div class="pull-left">' +
                            '<a class="btn file-input" title="' + gettext('Insert picture (or just drag & drop)') + '" >' +
                                 '<i class="icon-picture"></i>' +
                                 '<input class="file-upload" data-action="insertImage" type="file" name="image">' +
@@ -89,7 +89,7 @@
                    '<input type="text" lang="it" data-action="inserttext" class="voice-btn" x-webkit-speech="">',
                    '<button type="button" class="close pull-right">&times;</button>',
                 '</div>',
-                (options.imageUploadUrl ? '<div class="upload-panel"><ul></ul></div>' : '')].join(''));
+                (options.imageUploadUrl ? '<div class="upload-panel"><ul class="list-unstyled"></ul></div>' : '')].join(''));
     },
 
     /**
@@ -117,8 +117,9 @@
          */
         _startup: function(){
             this.target.data('init-hidden', this.target.is(':hidden')).hide();
-            this.container = $('<div class="wysiwyg-container"></div>');
-            this.editor = $('<div id="' + this.options.editorId + '" class="' + this.options.editorClass + '" contenteditable="true"></div>').html(this.target.val());
+            this.container = $('<div class="wc"></div>');
+            this.editor = $('<div id="' + this.options.editorId + '" class="' + this.options.editorClass + '" contenteditable="true"></div>').html('<p>' + this.target.val() + '</p>');
+            this.endEl = $('<p class="end"></p>');
             this.target.val('').attr('value', '');
             this.toolbar = _toolbarRenderer(this.options);
             this.container.append(this.toolbar).append(this.editor).insertAfter(this.target);
@@ -134,6 +135,9 @@
             if(save){
                 this.save();
             }
+            if($.fn.webkitimageresize){
+                this.editor.webkitimageresize('destroy');
+            }
             this.editor.remove();
             this.toolbar.remove();
             this.container.remove();
@@ -148,7 +152,7 @@
 
         save: function(){
             var html = this.editor.html();
-            this.target.val(html && html.replace(/(<br>|\s|<div><br><\/div>|&nbsp;)*$/, ''));
+            this.target.val(html && $.trim(html).replace(/(<br>|<div><br><\/div>|&nbsp;|<p><\/p>|<p class="end"><\/p>)*/g, ''));
         },
 
         /**
@@ -159,12 +163,21 @@
             this._bindHotkeys();
             this._bindToolbar();
 
-            //$('a[title]').tooltip({container:'body'});
-            this.target.parents('form').submit($.proxy(this.save, this));
+            this.target.closest('form').submit($.proxy(this.save, this));
             this.editor.on('mouseup keyup', function () {
                 self._saveSelection();
                 self._updateToolbar();
             });
+            if($.fn.webkitimageresize){
+                this.editor.webkitimageresize().on('webkitresize-select', function(evt, img){
+                    var range = document.createRange();
+                    range.selectNodeContents(img);
+                    var sel = window.getSelection();
+                    if (sel.rangeCount > 0)
+                        sel.removeAllRanges();
+                    sel.addRange(range);
+                });
+            }
             $(window).on('touchend', function (e) {
                 var isInside = (self.editor.is(e.target) || self.editor.has(e.target).length > 0),
                     currentRange = self._getCurrentRange(),
@@ -205,11 +218,13 @@
             // Add actions to toolbar buttons
             this.toolbarBtns.click($.proxy(this._doAction, this));
             this.toolbar.find('form[data-action]').submit($.proxy(this._doAction, this));
+            this.toolbar.find('.lnk').click($.proxy(this._linkCustomClick, this));
 
             if(this.options.imageUploadUrl){
                 this.toolbar.find('.file-upload').fileupload({
                         url: this.options.imageUploadUrl,
                         redirect: this.options.redirectIframeUrl,
+                        formData: $.extend(this.options.uploadData, {cors: $.support.cors?1:0}),
                         dataType: 'json',
                         dropZone: this.editor,
                         pasteZone: this.editor,
@@ -227,8 +242,7 @@
 
             // Speek change on webkit browsers
             if ("onwebkitspeechchange" in document.createElement("input")) {
-                var editorOffset = this.editor.offset();
-                this.toolbar.find('.voice-btn').on('webkitspeechchange', $.proxy(this._doAction, this)).css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+this.editor.innerWidth()-35});
+                this.toolbar.find('.voice-btn').on('webkitspeechchange', $.proxy(this._doAction, this));
             } else {
                 this.toolbar.find('.voice-btn').hide();
             }
@@ -256,7 +270,7 @@
 
         _onFileUploadAdd: function(e, data){
             var self = this, position = this.editor.position();
-            this.uploaderPanel.css({top: position.top, left: position.left, width: this.editor.outerWidth(true), height: this.editor.outerHeight(true)}).show();
+            this.uploaderPanel.show();
 
             // This approach is needed for handle file type errors
             data.process(function () {
@@ -275,9 +289,7 @@
 
         _onFileUploadDone: function(e, data){
             if(data.result.success){
-                for(var i=0; i < data.result.files.length; i++){
-                    this._doAction(e, {url: data.result.files[i].thumbnail_url});
-                }
+                this._doAction(e, {url: data.result.file.thumbnail_url});
             } else{
                 var files = _filesUploadRenderer(data.files, data.result.message);
                 data.context.replaceWith(files);
@@ -328,13 +340,15 @@
             var commandArr = commandWithArgs.split(' '),
                 command = commandArr.shift(),
                 args = commandArr.join(' ') + (valueArg || '');
+            this.editor.append(this.endEl);
             document.execCommand(command, 0, args);
+            this.endEl.remove();
             this._updateToolbar();
         },
 
         _getCurrentRange: function () {
             var sel = this._getSelection();
-            if (sel.getRangeAt && sel.rangeCount) {
+            if (sel && sel.getRangeAt && sel.rangeCount) {
                 return sel.getRangeAt(0);
             } else {
                 return document.selection.createRange();
@@ -356,7 +370,7 @@
                 }
             }
         },
-                
+
         /**
          * Check if a node is in the selected range
          * @param {type} selection
@@ -366,7 +380,7 @@
          * @returns {Boolean|@exp;selection@call;containsNode}
          */
         _containsNode: function(selection, range, comprng, node){
-            if(typeof selection.containsNode === 'function'){
+            if(selection && typeof selection.containsNode === 'function'){
                 return selection.containsNode(node, true);
             }
             // determine if element el[i] is within the range
@@ -379,7 +393,8 @@
             }
             else { // microsoft
                 comprng.moveToElementText(node);
-                if (range.compareEndPoints("StartToEnd", comprng) < 0 &&
+                if (range.compareEndPoints != undefined &&
+                    range.compareEndPoints("StartToEnd", comprng) < 0 &&
                     range.compareEndPoints("EndToStart", comprng) > 0) {
                     return true;
                 }
@@ -400,9 +415,10 @@
             switch(action){
                 case 'createLink':
                     var input = target.find('input[type=text]');
-                    valueArg = 'http://' + input.val();
+                    valueArg = input.val();
                     doCommand = valueArg != 'http://';
                     input.val('').attr('value', '');
+                    target.blur();
                     break;
                 case 'inserttext':
                     valueArg = target.val();
@@ -427,13 +443,23 @@
             var a = nodes.filter('a');
             if(a.length > 0){
                 target.addClass(this.options.activeToolbarClass)
-                    .next().find('form[data-action=createLink] input').val(a.attr('href').replace('http://', ''));
+                    .next().find('form[data-action=createLink] input').val(a.attr('href'));
                 this.toolbarCustomBtns.filter('[data-custom=unlink]').removeClass('disabled');
             }else{
                 target.removeClass(this.options.activeToolbarClass)
                     .next().find('form[data-action=createLink] input').val('');
                 this.toolbarCustomBtns.filter('[data-custom=unlink]').addClass('disabled');
             }
+        },
+
+        /**
+         * Autofocus for link panel
+         * @private
+         */
+        _linkCustomClick: function(evt, data){
+            setTimeout(function(){
+                $(evt.currentTarget).parent().find('input').focus();
+            }, 300);
         },
 
         /**

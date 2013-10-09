@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description"
-          content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor"/>
+    <meta name="description" content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor"/>
     <link rel="stylesheet" href="./style/lib/bootstrap.min.css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link href="./style/wysiwyg.css" rel="stylesheet">
@@ -17,6 +16,9 @@
         <button type="submit">Post</button>
     </form>
 </div>
+<script type="text/javascript">
+    window.gettext = function(s){return s;}
+</script>
 <script src="./js/lib/jquery-1.10.2.js"></script>
 <script src="./js/lib/jquery.hotkeys.js"></script>
 <script src="./js/lib/bootstrap.min.js"></script>
@@ -28,7 +30,7 @@
 <script src="./js/wysiwyg.js"></script>
 <script>
     $(function () {
-        $('#editor').wysiwyg();
+        $('#editor').wysiwyg({});
     });
 </script>
 </body>
