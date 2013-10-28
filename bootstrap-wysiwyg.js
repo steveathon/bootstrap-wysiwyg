@@ -195,7 +195,7 @@
 				selectionNode = window.getSelection().anchorNode;
 				caretPos = window.getSelection().baseOffset;
 			},
-			restoreSelection = function () {
+			restoreSelection = function (restoreCaret) {
 				var selection = window.getSelection();
 				if (selectedRange) {
 					try {
@@ -205,7 +205,7 @@
 						document.selection.empty();
 					}
 
-					if (selectionNode) {
+					if (restoreCaret && selectionNode) {
 						selectedRange.setStart(selectionNode, caretPos);
 						selectedRange.collapse(true);
 					}
@@ -236,7 +236,12 @@
 			},
 			bindToolbar = function (toolbar, options) {
 				toolbar.find(toolbarBtnSelector).click(function () {
-					restoreSelection();
+					if ($.inArray($(this).data(options.commandRole), ['indent', 'outdent']) > -1) {
+						// restore caret position after certain commands
+						restoreSelection(true);
+					} else {
+						restoreSelection();
+					}
 					editor.focus();
 					restoreCommandCache();
 					execCommand($(this).data(options.commandRole));
