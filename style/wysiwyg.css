@@ -13,11 +13,12 @@
     -webkit-border-radius: 0 0 3px 3px;
     -moz-border-radius: 0 0 3px 3px;
     border-radius: 0 0 3px 3px;
-	overflow: auto;
+	overflow: hidden;
 	outline: none;
     font-weight: normal;
     width: 100%;
     position: relative;
+    font-size: 14px;
 }
 .wysiwyg img {
     height: auto;
@@ -26,6 +27,7 @@
 .wysiwyg a,.wysiwyg a:hover, .wysiwyg a:active, .wysiwyg a:focus {
     text-decoration: underline !important;
     color: #333 !important;
+    font-size: 14px  !important;
 }
 .wysiwyg p.end{
     position: absolute;
@@ -104,8 +106,9 @@
     -webkit-box-shadow: none;
     position: absolute;
     bottom: 2px;
-    left: 2px;
+    right: 2px;
     outline: none;
+    z-index: 1;
 }
 .wc .btn-toolbar .close{
     margin: 1px 5px 0 0;

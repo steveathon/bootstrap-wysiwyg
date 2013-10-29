@@ -27,7 +27,6 @@
 <script src="./js/lib/jquery.fileupload.js"></script>
 <script src="./js/lib/jquery.fileupload-process.js"></script>
 <script src="./js/lib/jquery.fileupload-validate.js"></script>
-<script src="./js/richTextUtils.js"></script>
 <script src="./js/wysiwyg.js"></script>
 <script>
     $(function () {

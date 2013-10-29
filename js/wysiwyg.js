@@ -1,6 +1,41 @@
 /* http://github.com/mindmup/bootstrap-wysiwyg */
 /*global jQuery, $, FileReader*/
 /*jslint browser:true*/
+(function($) {
+    var re = /(?:(?=(?:http|https):)([a-zA-Z][-+.a-zA-Z\d]*):(?:((?:[-_.!~*'()a-zA-Z\d;?:@&=+$,]|%[a-fA-F\d]{2})(?:[-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]|%[a-fA-F\d]{2})*)|(?:(?:\/\/(?:(?:(?:((?:[-_.!~*'()a-zA-Z\d;:&=+$,]|%[a-fA-F\d]{2})*)@)?(?:((?:(?:(?:[a-zA-Z\d](?:[-a-zA-Z\d]*[a-zA-Z\d])?)\.)*(?:[a-zA-Z](?:[-a-zA-Z\d]*[a-zA-Z\d])?)\.?|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|\[(?:(?:[a-fA-F\d]{1,4}:)*(?:[a-fA-F\d]{1,4}|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|(?:(?:[a-fA-F\d]{1,4}:)*[a-fA-F\d]{1,4})?::(?:(?:[a-fA-F\d]{1,4}:)*(?:[a-fA-F\d]{1,4}|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}))?)\]))(?::(\d*))?))?|((?:[-_.!~*'()a-zA-Z\d$,;:@&=+]|%[a-fA-F\d]{2})+))|(?!\/\/))(\/(?:[-_.!~*'()a-zA-Z\d:@&=+$,]|%[a-fA-F\d]{2})*(?:;(?:[-_.!~*'()a-zA-Z\d:@&=+$,]|%[a-fA-F\d]{2})*)*(?:\/(?:[-_.!~*'()a-zA-Z\d:@&=+$,]|%[a-fA-F\d]{2})*(?:;(?:[-_.!~*'()a-zA-Z\d:@&=+$,]|%[a-fA-F\d]{2})*)*)*)?)(?:\?((?:[-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]|%[a-fA-F\d]{2})*))?)(?:\#((?:[-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]|%[a-fA-F\d]{2})*))?)/img,
+
+        makeHTML = function(textNode) {
+            var source = textNode.data;
+            return source.replace(re, function() {
+                var url = arguments[0],
+                    a = $('<a></a>').attr({'href': url}).text(url);
+                return url.match(/^https?:\/\/$/) ? url : $('<div></div>').append(a).html();
+            });
+        },
+
+        eachText = function(node, callback) {
+            $.each(node.childNodes, function() {
+                if (this.nodeType != 8 && this.nodeName != 'A') {
+                    this.nodeType != 1 ? callback(this) : eachText(this, callback);
+                }
+            });
+        };
+
+    $.fn.autolink = function() {
+        return this.each(function() {
+            var queue = [];
+            eachText(this, function(e) {
+                var html = makeHTML(e);
+                if (html != e.data) {
+                    queue.push([e, html]);
+                }
+            });
+            $.each(queue, function(i, x) {
+                $(x[0]).replaceWith(x[1]);
+            });
+        });
+    };
+}(window.jQuery));
 (function ($) {
 	'use strict';
 
@@ -47,7 +82,7 @@
     },
 
     _toolbarRenderer = function(options){
-       return $(['<div class="btn-toolbar" data-target="', options.editorId ,'">',
+       return $(['<div class="btn-toolbar" data-target="' + options.editorId + '">',
                    '<div class="pull-left">',
                        '<a class="btn" data-action="bold" title="', gettext('Bold (Ctrl/Cmd+B)'), '"><i class="icon-bold"></i></a>',
                        '<a class="btn" data-action="italic" title="', gettext('Italic (Ctrl/Cmd+I)'), '"><i class="icon-italic"></i></a>',
@@ -59,7 +94,7 @@
                        '<a class="btn" data-action="outdent" title="', gettext('Reduce indent (Shift+Tab)'), '"><i class="icon-indent-left"></i></a>',
                        '<a class="btn" data-action="indent" title="', gettext('Indent (Tab)'), '"><i class="icon-indent-right"></i></a>',
                    '</div>',
-                   '<div class="btn-group">',
+                   '<div class="pull-left">',
                        '<a class="btn" data-action="justifyleft" title="', gettext('Align Left (Ctrl/Cmd+L)'), '"><i class="icon-align-left"></i></a>',
                        '<a class="btn" data-action="justifycenter" title="', gettext('Center (Ctrl/Cmd+E)'), '"><i class="icon-align-center"></i></a>',
                        '<a class="btn" data-action="justifyright" title="', gettext('Align Right (Ctrl/Cmd+R)'), '"><i class="icon-align-right"></i></a>',
@@ -118,7 +153,7 @@
         _startup: function(){
             this.target.data('init-hidden', this.target.is(':hidden')).hide();
             this.container = $('<div class="wc"></div>');
-            this.editor = $('<div id="' + this.options.editorId + '" class="' + this.options.editorClass + '" contenteditable="true"></div>').html('<p>' + this.target.val() + '</p>');
+            this.editor = $('<div id="' + this.options.editorId + '" class="' + this.options.editorClass + '" contenteditable="true" aria-multiline="true" role="textbox" spellcheck="true"></div>').html(this.target.val());
             this.endEl = $('<p class="end"></p>');
             this.target.val('').attr('value', '');
             this.toolbar = _toolbarRenderer(this.options);
@@ -128,6 +163,7 @@
             this.uploaderPanel = this.container.find('.upload-panel');
             this.uploaderPanelList = this.uploaderPanel.find('ul');
             this._bind();
+            this.editor.focus();
             this.target.trigger('wysiwyg-inited');
         },
 
@@ -152,7 +188,7 @@
 
         save: function(){
             var html = this.editor.html();
-            this.target.val(html && $.trim(html).replace(/(<br>|<div><br><\/div>|&nbsp;|<p><\/p>|<p class="end"><\/p>)*/g, ''));
+            this.target.val(html && $.trim(html).replace(/(<p><br><\/p>|<p><\/br><\/p>|<div><br><\/div>|<div><\/br><\/div>)/g, '</br>').replace(/(<\/br>|<br>){2,}/g, '</br></br>').replace(/(<p class="end"><\/p>|<p><\/p>)*/g, ''));
         },
 
         /**
@@ -167,20 +203,39 @@
             this.editor.on('mouseup keyup', function () {
                 self._saveSelection();
                 self._updateToolbar();
+            }).on('blur keyup paste', function(){
+                self.editor.find('font').contents().unwrap(); // IE9 fix for font tag inserted
+            }).on('keypress', function(evt){
+                switch(evt.which){
+                    case 13:
+                        self._execCommand('formatBlock', "p");
+                        setTimeout(function(){self.editor.autolink();}, 0);
+                        break;
+                    case 32:
+                        setTimeout(function(){
+                            var offset = window.RTU.getCaretOffset(self.editor[0]);
+                            self.editor.autolink();
+                            window.RTU.setCaretAt(self.editor[0], offset);
+                        }, 0);
+                        break;
+                }
             });
+
             if($.fn.webkitimageresize){
                 this.editor.webkitimageresize().on('webkitresize-select', function(evt, img){
                     var range = document.createRange();
                     range.selectNodeContents(img);
-                    var sel = window.getSelection();
-                    if (sel.rangeCount > 0)
+                    var sel = window.RTU.getSelection();
+                    if (sel.rangeCount > 0){
                         sel.removeAllRanges();
+                    }
                     sel.addRange(range);
                 });
             }
+
             $(window).on('touchend', function (e) {
                 var isInside = (self.editor.is(e.target) || self.editor.has(e.target).length > 0),
-                    currentRange = self._getCurrentRange(),
+                    currentRange = window.RTU.getCurrentRange(),
                     clear = currentRange && (currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset);
                 if (!clear || isInside) {
                     self._saveSelection();
@@ -251,7 +306,7 @@
             this.toolbar.find('.close').click(function(){self.destroy();});
 
             // Fix dropdown behavior
-            this.toolbar.find('[data-toggle=dropdown]').click($.proxy(this._restoreSelection, this)); // Needed to maintain focus on the textarea selection
+            this.toolbar.find('[data-toggle=dropdown]').click(function(){window.RTU.restoreSelection(self.currSelection);}); // Needed to maintain focus on the textarea selection
             this.toolbar.find('.dropdown-menu input').click(function() {return false;});
         },
 
@@ -323,14 +378,6 @@
 
         // EDITOR METHODS
 
-        _getSelection: function(){
-            if (typeof window.getSelection === 'function') {
-                return window.getSelection();
-            } else if (document.selection) {
-                return document.selection.createRange().htmlText  //IE6 7 8
-            }
-        },
-
         /**
          * Execute command into the editor
          * @param commandWithArgs
@@ -346,60 +393,8 @@
             this._updateToolbar();
         },
 
-        _getCurrentRange: function () {
-            var sel = this._getSelection();
-            if (sel && sel.getRangeAt && sel.rangeCount) {
-                return sel.getRangeAt(0);
-            } else {
-                return document.selection.createRange();
-            }
-        },
-
         _saveSelection: function () {
-            this.currSelection = this._getCurrentRange();
-        },
-
-        _restoreSelection: function () {
-            var selection = this._getSelection();
-            if (this.currSelection) {
-                try {
-                    selection.removeAllRanges();
-                    selection.addRange(this.currSelection);
-                } catch (ex) {
-                    this.currSelection.select();
-                }
-            }
-        },
-
-        /**
-         * Check if a node is in the selected range
-         * @param {type} selection
-         * @param {type} range
-         * @param {type} comprng
-         * @param {type} node
-         * @returns {Boolean|@exp;selection@call;containsNode}
-         */
-        _containsNode: function(selection, range, comprng, node){
-            if(selection && typeof selection.containsNode === 'function'){
-                return selection.containsNode(node, true);
-            }
-            // determine if element el[i] is within the range
-            if (document.createRange) { // w3c
-                comprng.selectNodeContents(node);
-                if (range.compareBoundaryPoints(Range.END_TO_START, comprng) < 0 &&
-                    range.compareBoundaryPoints(Range.START_TO_END, comprng) > 0) {
-                    return true;
-                }
-            }
-            else { // microsoft
-                comprng.moveToElementText(node);
-                if (range.compareEndPoints != undefined &&
-                    range.compareEndPoints("StartToEnd", comprng) < 0 &&
-                    range.compareEndPoints("EndToStart", comprng) > 0) {
-                    return true;
-                }
-            }
-            return false;
+            this.currSelection = window.RTU.getCurrentRange();
         },
 
         /**
@@ -427,12 +422,31 @@
                     valueArg = data.url;
                     break;
             }
-            this._restoreSelection();
+            window.RTU.restoreSelection(this.currSelection);
             if (doCommand) {
                 this.editor.focus();
                 this._execCommand(action, valueArg);
+                this._fixEditorElementsFor(action);
             }
             this._saveSelection();
+        },
+
+        /**
+         * Fix editor elements and do some actions based on the current action
+         * @private
+         */
+        _fixEditorElementsFor: function(action){
+            var self = this;
+            switch(action){
+                case 'insertImage':
+                    this.editor.find('img').each(function(){
+                        var target = $(this);
+                        if(!target.parent().is('p')){
+                            self._execCommand('formatBlock', "p");
+                        }
+                    });
+                    break;
+            }
         },
 
         /**
@@ -468,10 +482,10 @@
          */
         _updateToolbarCustomButtons: function(){
             var self = this,
-                selection = this._getSelection(),
-                range = this._getCurrentRange(),
+                selection = window.RTU.getSelection(),
+                range = window.RTU.getCurrentRange(),
                 comprng = document.createRange ? document.createRange() : document.body.createTextRange(),
-                nodes = this.editor.find('*').filter(function(){return this.nodeType == 1 && self._containsNode(selection, range, comprng, this);});
+                nodes = this.editor.find('*').filter(function(){return this.nodeType == 1 && window.RTU.containsNode(selection, range, comprng, this);});
             this.toolbarCustomBtns.each(function(){
                 var target = $(this);
                 if(self['_' + target.data('custom') + 'CustomUpdate']){
