@@ -236,12 +236,9 @@
 			},
 			bindToolbar = function (toolbar, options) {
 				toolbar.find(toolbarBtnSelector).click(function () {
-					if ($.inArray($(this).data(options.commandRole), ['indent', 'outdent']) > -1) {
-						// restore caret position after certain commands
-						restoreSelection(true);
-					} else {
-						restoreSelection();
-					}
+					// restore caret position after certain commands
+					var restoreCaret = ['indent', 'outdent'].indexOf($(this).data(options.commandRole)) > -1
+					restoreSelection(restoreCaret);
 					editor.focus();
 					restoreCommandCache();
 					execCommand($(this).data(options.commandRole));
