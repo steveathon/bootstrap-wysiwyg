@@ -66,13 +66,15 @@
         uploadData: {}
     },
 
+    _escapeDiv = $('<div></div>'),
+
     _filesUploadRenderer = function(files, error){
         var files_txt = '';
         for(var i = 0; i < files.length; i++){
             files_txt += ['<li class="clearfix">',
                 (files[i].error || error ?
-                    '<div class="alert alert-danger"><strong>' + files[i].name + '</strong>&nbsp;' + (files[i].error || error) + '</div>' :
-                    '<div class="file-name">' + files[i].name + '</div>' +
+                    '<div class="alert alert-danger"><strong>' + _escapeDiv.text(files[i].name).html() + '</strong>&nbsp;' + (files[i].error || error) + '</div>' :
+                    '<div class="file-name">' + _escapeDiv.text(files[i].name).html() + '</div>' +
                         '<div class="pull-right"><button type="button" class="btn btn-sm btn-danger cancel-upload"><i class="quag-q-remove"></i></button></div>' +
                         '<div class="progress"><div class="progress-bar" style="width: 0%;"></div></div>'
                     ),
@@ -187,6 +189,7 @@
         },
 
         save: function(){
+            this.editor.autolink();
             var html = this.editor.html();
             this.target.val(html && $.trim(html).replace(/(<p><br><\/p>|<p><\/br><\/p>|<div><br><\/div>|<div><\/br><\/div>)/g, '</br>').replace(/(<\/br>|<br>){2,}/g, '</br></br>').replace(/(<p class="end"><\/p>|<p><\/p>)*/g, ''));
         },
@@ -442,7 +445,7 @@
                     this.editor.find('img').each(function(){
                         var target = $(this);
                         if(!target.parent().is('p')){
-                            self._execCommand('formatBlock', "p");
+                            target.load(function(){self._execCommand('formatBlock', "p")});
                         }
                     });
                     break;
