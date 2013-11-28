@@ -69,7 +69,7 @@
 				}
 
 			},
-			updateToolbar = function () {
+			updateToolbar = function (e) {
 				if (options.activeToolbarClass) {
 					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 						var command = $(this).data(options.commandRole);
@@ -82,7 +82,7 @@
 						}
 
             if (commandNoArgs === "fontSize" && options.setRealFontSize != null) {
-                options.setRealFontSize(selectedRange);
+                options.setRealFontSize(selectedRange, e);
             } else if (document.queryCommandState(command)) {
 							$(this).addClass(options.activeToolbarClass);
 						} else if (commandNoArgs + ' ' + document.queryCommandValue(commandNoArgs) === command) {
@@ -295,9 +295,11 @@
 		}
 		bindToolbar($(options.toolbarSelector), options);
 		editor.attr('contenteditable', true)
-			.on(namespaceEvents('mouseup keyup mouseout'), function () {
-				saveSelection();
-				updateToolbar();
+			.on(namespaceEvents('mouseup keyup mouseout'), function (e) {
+				setTimeout(function() {
+					saveSelection();
+					updateToolbar(e);
+				}, 0);
 			});
 
 		$(toolbarBtnSelector).each(function () {
