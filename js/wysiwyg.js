@@ -188,6 +188,12 @@
             this.target.trigger('wysiwyg-destroy');
         },
 
+        update: function(html){
+            this.target.val('').attr('value', '');
+            this.editor.html(html).focus();
+            this.target.trigger('wysiwyg-updated');
+        },
+
         save: function(){
             this.editor.autolink();
             var html = this.editor.html();
