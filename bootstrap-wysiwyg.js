@@ -69,7 +69,7 @@
 				}
 
 			},
-			updateToolbar = function (e) {
+			updateToolbar = function () {
 				if (options.activeToolbarClass) {
 					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 						var command = $(this).data(options.commandRole);
@@ -80,10 +80,9 @@
 						} else {
 							commandNoArgs = command;
 						}
-
-            if (commandNoArgs === "fontSize" && options.setRealFontSize != null) {
-                options.setRealFontSize(selectedRange, e);
-            } else if (document.queryCommandState(command)) {
+						if (commandNoArgs === "fontSize" && options.setRealFontSize != null) {
+							options.setRealFontSize(selectedRange);
+						} else if (document.queryCommandState(command)) {
 							$(this).addClass(options.activeToolbarClass);
 						} else if (commandNoArgs + ' ' + document.queryCommandValue(commandNoArgs) === command) {
 							$(this).addClass(options.activeToolbarClass);
@@ -155,6 +154,12 @@
 				}
 
 				var eventNamespace = options.eventNamespace + '-' + 'bindKeys';
+
+				editor.on(namespaceEvents('focus'), function(e) {
+                			setTimeout(function() {
+                			restoreCommandCache();
+                			}, 0);
+                		});
 
 				editor.on(namespaceEvents('keydown'), hotKeys, function (e) {
 					var command = '';
@@ -295,10 +300,10 @@
 		}
 		bindToolbar($(options.toolbarSelector), options);
 		editor.attr('contenteditable', true)
-			.on(namespaceEvents('mouseup keyup mouseout'), function (e) {
+			.on(namespaceEvents('mouseup keyup mouseout'), function () {
 				setTimeout(function() {
 					saveSelection();
-					updateToolbar(e);
+					updateToolbar();
 				}, 0);
 			});
 
