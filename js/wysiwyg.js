@@ -63,7 +63,11 @@
         activeToolbarClass: 'btn-primary',
         imageUploadUrl: null,
         redirectIframeUrl: null,
-        uploadData: {}
+        uploadData: {},
+        acceptedHtmlTags: ['a', 'b', 'blockquote', 'br', 'code', 'div', 'em', 'i', 'img', 'li', 'ol', 'p', 'pre', 'span', 'strong', 'u', 'ul'],
+        acceptedHtmlAttrs: ['abbr', 'align', 'alt', 'axis', 'border', 'cellpadding', 'cellspacing', 'char', 'charoff', 'charset', 'cite',
+            'cols', 'colspan', 'data', 'datetime', 'dir', 'frame', 'headers', 'height', 'href', 'hreflang', 'hspace', 'lang', 'longdesc', 'name', 'nohref',
+            'noshade', 'nowrap', 'rel', 'rev', 'rows', 'rowspan', 'rules', 'scope', 'src', 'start', 'summary', 'title', 'type', 'valign', 'vspace', 'width']
     },
 
     _escapeDiv = $('<div></div>'),
@@ -191,13 +195,15 @@
         update: function(html){
             this.target.val('').attr('value', '');
             this.editor.html(html).focus();
+            window.RTU.setCaretAt(this.editor[0], this.editor.text().length);
             this.target.trigger('wysiwyg-updated');
         },
 
         save: function(){
             this.editor.autolink();
+            this._sanitizeHtml();
             var html = this.editor.html();
-            this.target.val(html && $.trim(html).replace(/(<p><br><\/p>|<p><\/br><\/p>|<div><br><\/div>|<div><\/br><\/div>)/g, '</br>').replace(/(<\/br>|<br>){2,}/g, '</br></br>').replace(/(<p class="end"><\/p>|<p><\/p>)*/g, ''));
+            this.target.val(html && $.trim(html).replace(/(<p><br><\/p>|<p><br\/><\/p>|<div><br><\/div>|<div><br\/><\/div>)/g, '<br/>').replace(/(<br\/>|<br>){2,}/g, '<br/><br/>').replace(/(<p class="end"><\/p>|<p><\/p>)*/g, ''));
         },
 
         /**
@@ -212,12 +218,21 @@
             this.editor.on('mouseup keyup', function () {
                 self._saveSelection();
                 self._updateToolbar();
-            }).on('blur keyup paste', function(){
-                self.editor.find('font').contents().unwrap(); // IE9 fix for font tag inserted
+            }).on('blur keyup paste', function(evt){
+                switch(evt.type){
+                    case 'paste':
+                        setTimeout($.proxy(self._sanitizeHtml, self), 0);
+                        break;
+                    default:
+                        self.editor.find('font').contents().unwrap(); // IE9 fix for font tag inserted
+                }
             }).on('keypress', function(evt){
                 switch(evt.which){
                     case 13:
-                        self._execCommand('formatBlock', "p");
+                        var boundaryEl = window.RTU.getSelectionBoundaryElement(true);
+                        if(boundaryEl && boundaryEl.nodeName.toLowerCase() != 'li'){
+                            self._execCommand('formatBlock', "p");
+                        }
                         setTimeout(function(){self.editor.autolink();}, 0);
                         break;
                     case 32:
@@ -400,6 +415,7 @@
             document.execCommand(command, 0, args);
             this.endEl.remove();
             this._updateToolbar();
+            this._fixEditorElementsFor(command);
         },
 
         _saveSelection: function () {
@@ -435,9 +451,28 @@
             if (doCommand) {
                 this.editor.focus();
                 this._execCommand(action, valueArg);
-                this._fixEditorElementsFor(action);
             }
             this._saveSelection();
+        },
+
+        /**
+         * Sanitize the html code into the editor instance
+         * @private
+         */
+        _sanitizeHtml: function(){
+            var self = this;
+            this.editor.find('li p').contents().unwrap();
+            this.editor.find(':not(' + this.options.acceptedHtmlTags.join(',') + ')').contents().unwrap();
+            this.editor.find(':not(' + this.options.acceptedHtmlAttrs.join(',') + ')').each(function(){
+                var el = $(this);
+                for(var i in this.attributes){
+                    if(this.attributes.hasOwnProperty(i)){
+                        if(self.options.acceptedHtmlAttrs.indexOf(this.attributes[i].name) == -1){
+                            el.removeAttr(this.attributes[i].name);
+                        }
+                    }
+                }
+            });
         },
 
         /**
