@@ -1,3 +1,5 @@
+This is a fork of [bootstrap-wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg), updated for Bootstrap 3.0. 
+
 bootstrap-wysiwyg
 =================
 
