@@ -1,0 +1,7 @@
+{
+  "name": "bootstrap-wysiwyg",
+  "dependencies": {
+    "jquery": "~1.9.1",
+    "jquery.hotkeys": "git://github.com/gl-works/jquery.hotkeys"
+  }
+}
