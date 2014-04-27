@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Tiny, opensource, Bootstrap WYSIWYG rich text editor from MindMup</title>
+    <title>Tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
     <meta name="description" content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
@@ -12,39 +12,28 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    
 	<script src="external/jquery.hotkeys.js"></script>
-   
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="external/google-code-prettify/prettify.js"></script>
 	<link href="index.css" rel="stylesheet">
     <script src="bootstrap-wysiwyg.js"></script>
+  
+	<style type="text/css">
+	.btn-toolbar {
+		padding: 10px 0px 10px 0px;
+	}
+	</style>
   </head>
   <body>
-  
-  <style type="text/css">
-  	.btn-toolbar {
-  		padding: 10px 0px 10px 0px;
-  	}
-  </style>
 
 <div class="container">
   <div class="hero-unit">
-  <div class="pull-right">
-	<div class="fb-like" data-href="http://facebook.com/mindmupapp" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div><br/>
-    <a href="https://twitter.com/mindmup" class="twitter-follow-button" data-show-count="true" data-show-screen-name="true" data-lang="en">Follow @mindmup</a> 
+  <div class="pull-right"> 
   </div>
 	<h1>bootstrap-wysiwyg <br/> <small>tiny wysiwyg rich text editor for Bootstrap</small></h1>
 	<hr/>
-	<!---
-	Please read this before copying the toolbar:
 
-	* One of the best things about this widget is that it does not impose any styling on you, and that it allows you 
-	* to create a custom toolbar with the options and functions that are good for your particular use. This toolbar
-	* is just an example - don't just copy it and force yourself to use the demo styling. Create your own. Read 
-	* this page to understand how to customise it:
-    * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
-	--->
-	
 	<div id="alerts"></div>
     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
@@ -98,7 +87,7 @@
         <a class="btn btn-default" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
         <a class="btn btn-default" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
       </div>
-      <input class="pull-right" type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+      <input class="pull-right" type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" />
     </div>
 
     <div id="editor" class="lead">
@@ -110,42 +99,24 @@
     <div class="span6">
           <h2>About</h2>
           <p>
-          This <a href="https://github.com/mindmup/bootstrap-wysiwyg/blob/master/bootstrap-wysiwyg.js">tiny (5KB, &lt; 200 lines) jQuery Bootstrap plugin</a> turns any DIV into a WYSIWYG
+          This tiny (8KB, &lt; 250 lines) jQuery Bootstrap plugin turns any DIV into a WYSIWYG
           rich-content editor, inspired by <a href="http://premiumsoftware.net/cleditor/">CLEditor</a> and
-              <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>. 
-          Here are the key features:
+              <a href="http://jhollingworth.github.com/bootstrap-wysihtml5/">bootstrap-wysihtml5</a>.
       </p>
-          <ul>
-            <li>Automatically binds standard hotkeys for common operations on Mac and Windows</li>
-            <li>Drag and drop files to insert images, support image upload (also taking photos on mobile devices)</li>
-            <li>Voice dictation input (only in Chrome)</li>
-            <li>Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, Font Awesome and so on...</li>
-            <li>Does not force any styling - it's all up to you</li>
-            <li>Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any <a href="https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla">supported browser command</a></li>
-            <li>Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV</li>
-            <li>(Optionally) cleans up trailing whitespace and empty divs and spans</li> 
-            <li>Requires a modern browser (tested in Chrome 26, Firefox 19, Safari 6, reported by users to work in IE10)</li>
-            <li>Supports mobile devices (tested on IOS 6 Ipad/Iphone and Android 4.1.1 Chrome)</li>
-          </ul>
-
-
-        <h2>Why?</h2>
-
-        <a href="http://www.mindmup.com"><img class="span5" src="promo-868x350.png"></a>
-        <br clear="all" />
-        <p>
-          While building a content editor for <a href="http://www.mindmup.com">MindMup</a> we found plenty of good HTML5 WYSWYG editors online, but most were duplicating
-          functionality that already exists in jQuery and Bootstrap, implementing things that were meanwhile added to HTML5 and supported in major browsers, 
-          or doing too much magic such as inserting IFrames with backup text-areas. Most of this was to work around quirks in older browsers (which we didn't need) and 
-          caused focus problems on touch devices (which was an issue for us). Too much magic caused problems with 
-          bootstrap modals (a must for us). Most editors also build their own toolbars, which embed additional CSS and images and always 
-          turn out to be much worse than standard Bootstrap buttons. </p>
-          <p>It turns out, with HTML5, everything we need can fit into less than 5K. We built this tiny tiny editor that does everything we need, does not impose
-          any particular additional CSS and uses modern browser functionality without reimplementing jQuery and Bootstrap. </p>
-          <p>It's released under the MIT license, so fork and enjoy!  </p>
-
-
-
+      <p>This code is a fork which is currently 16+ commits behind. I've forked it and updated it with the changes
+      that were in the pull request queue and found a few more around the place too.</p>
+      <p>This project does not intend to replace the original, but it is more up to date.</p>
+      
+      <ul>
+      	<li>Thanks to</li>
+      	<li><a href='https://github.com/jordanh'>@jordanh</a></li>
+			<li><a href='https://github.com/beatnbite'>@beatnbite</a></li>
+			<li><a href='https://github.com/brutuscat'>@brutuscat</a>			</li>
+			<li><a href='https://github.com/VictorBjelkholm'>@VictorBjelkholm</a></li>
+			<li><a href='https://github.com/mrmrs'>@mrmrs</a></li>
+			<li><a href='https://github.com/tilleryd'>@tilleryd</a></li>
+			<li><a href='https://github.com/pnevels'>@pnevels</a></li>
+      	</ul>
     </div>
     <div class="span6" >
       <h2>Usage</h2>
@@ -184,14 +155,8 @@ file inputs, the file contents are read in using the FileReader API and used as 
 </pre>
 
 			 <p style="text-align:center;">
-				<a class="btn btn-large btn-default jumbo" href="https://github.com/mindmup/bootstrap-wysiwyg/">View project on Github</a>
-      </p>
-			 <p style="text-align:center; margin-top:20px">
-        <a class="btn" href="mailto:contact@mindmup.com"><i class="icon-envelope"></i></a>
-          <a class="btn" href="http://facebook.com/mindmupapp"><i class="icon-facebook"></i></a>
-          <a class="btn" href="http://twitter.com/mindmup"><i class="icon-twitter"></i></a>
-          <a class="btn" href="https://plus.google.com/u/0/communities/112831595986131146219"><i class="icon-google-plus"></i></a>
-        </p>
+				<a class="btn btn-large btn-default jumbo" href="https://github.com/steveathon/bootstrap-wysiwyg/">View project on Github</a></p>
+			 <p style="text-align:center; margin-top:20px"></p>
 
           
 		</div>
@@ -237,25 +202,5 @@ file inputs, the file contents are read in using the FileReader API and used as 
     window.prettyPrint && prettyPrint();
   });
 </script>
-<a href="https://github.com/mindmup/bootstrap-wysiwyg/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-<div id="fb-root"></div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-37452180-6', 'github.io');
-  ga('send', 'pageview');
-</script>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "http://connect.facebook.net/en_GB/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
- </script>
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+<a href="https://github.com/steveathon/bootstrap-wysiwyg/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 </html>
