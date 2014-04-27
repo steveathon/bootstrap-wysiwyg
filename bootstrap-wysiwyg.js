@@ -20,12 +20,13 @@
 	};
 	$.fn.wysiwyg = function (userOptions) {
 		var editor = this,
+			wrapper = $(editor).parent(),
 			selectedRange,
 			options,
 			toolbarBtnSelector,
 			updateToolbar = function () {
 				if (options.activeToolbarClass) {
-					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
+					$(options.toolbarSelector,wrapper).find(toolbarBtnSelector).each(function () {
 						var commandArr = $(this).data(options.commandRole).split(' '),
 							command = commandArr[0];
 
@@ -110,7 +111,7 @@
 				input.data(options.selectionMarker, color);
 			},
 			bindToolbar = function (toolbar, options) {
-				toolbar.find(toolbarBtnSelector).click(function () {
+				toolbar.find(toolbarBtnSelector, wrapper).click(function () {
 					restoreSelection();
 					editor.focus();
 					execCommand($(this).data(options.commandRole));
