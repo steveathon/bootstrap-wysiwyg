@@ -3,6 +3,31 @@
 /*jslint browser:true*/
 (function ($) {
 	'use strict';
+	/* Throttle from underscore http://underscorejs.org/docs/underscore.html */
+	var underscoreThrottle = function(func, wait) {
+		var context, args, timeout, result;
+		var previous = 0;
+		var later = function() {
+			previous = new Date;
+			timeout = null;
+			result = func.apply(context, args);
+		};
+		return function() {
+			var now = new Date;
+			var remaining = wait - (now - previous);
+			context = this;
+			args = arguments;
+			if (remaining <= 0) {
+				clearTimeout(timeout);
+				timeout = null;
+				previous = now;
+				result = func.apply(context, args);
+			} else if (!timeout) {
+				timeout = setTimeout(later, remaining);
+			}
+			return result;
+		};
+	}
 	var readFileIntoDataUrl = function (fileInfo) {
 		var loader = $.Deferred(),
 			fReader = new FileReader();
@@ -26,7 +51,7 @@
 			toolbarBtnSelector,
 			updateToolbar = function () {
 				if (options.activeToolbarClass) {
-					$(options.toolbarSelector,wrapper).find(toolbarBtnSelector).each(function () {
+					$(options.toolbarSelector,wrapper).find(toolbarBtnSelector).each(UnderscoreThrottle(function () {
 						var commandArr = $(this).data(options.commandRole).split(' '),
 							command = commandArr[0];
 
@@ -40,7 +65,7 @@
 						} else {
 							$(this).removeClass(options.activeToolbarClass);
 						}
-					});
+					}, options.keypressTimeout));
 				}
 			},
 			execCommand = function (commandWithArgs, valueArg) {
@@ -216,6 +241,7 @@
 		selectionMarker: 'edit-focus-marker',
 		selectionColor: 'darkgrey',
 		dragAndDropImages: true,
+		keypressTimeout: 200,
 		fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
 	};
 }(window.jQuery));
