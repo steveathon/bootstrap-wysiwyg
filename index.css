@@ -43,3 +43,6 @@ div[data-role="editor-toolbar"] {
 .btn-toolbar {
 	padding: 10px 0px 10px 0px;
 }
+.placeholderText {
+	color: #777;
+}

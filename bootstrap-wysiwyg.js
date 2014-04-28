@@ -206,6 +206,25 @@
 		options = $.extend(true, {}, $.fn.wysiwyg.defaults, userOptions);
 		toolbarBtnSelector = 'a[data-' + options.commandRole + '],button[data-' + options.commandRole + '],input[type=button][data-' + options.commandRole + ']';
 		bindHotkeys(options.hotKeys);
+		
+		// Support placeholder attribute on the DIV
+		if ($(this).attr('placeholder') != '') {
+			$(this).addClass('placeholderText');
+			$(this).html($(this).attr('placeholder'));
+			$(this).bind('focus',function(e) {
+				if ( $(this).attr('placeholder') != '' && $(this).text() == $(this).attr('placeholder') ) {
+					$(this).removeClass('placeholderText');
+					$(this).html('');
+				}
+			});
+			$(this).bind('blur',function(e) {
+				if ( $(this).attr('placeholder') != '' && $(this).text() == '' ) {
+					$(this).addClass('placeholderText');
+					$(this).html($(this).attr('placeholder'));
+				}
+			})
+		}
+		
 		if (options.dragAndDropImages) {
 			initFileDrops();
 		}
@@ -228,16 +247,16 @@
 	};
 	$.fn.wysiwyg.defaults = {
 		hotKeys: {
-			'ctrl+b meta+b': 'bold',
-			'ctrl+i meta+i': 'italic',
-			'ctrl+u meta+u': 'underline',
-			'ctrl+z meta+z': 'undo',
-			'ctrl+y meta+y meta+shift+z': 'redo',
-			'ctrl+l meta+l': 'justifyleft',
-			'ctrl+r meta+r': 'justifyright',
-			'ctrl+e meta+e': 'justifycenter',
-			'ctrl+j meta+j': 'justifyfull',
-			'shift+tab': 'outdent',
+			'Ctrl+b meta+b': 'bold',
+			'Ctrl+i meta+i': 'italic',
+			'Ctrl+u meta+u': 'underline',
+			'Ctrl+z': 'undo',
+			'Ctrl+y meta+y meta+shift+z': 'redo',
+			'Ctrl+l meta+l': 'justifyleft',
+			'Ctrl+r meta+r': 'justifyright',
+			'Ctrl+e meta+e': 'justifycenter',
+			'Ctrl+j meta+j': 'justifyfull',
+			'Shift+tab': 'outdent',
 			'tab': 'indent'
 		},
 		toolbarSelector: '[data-role=editor-toolbar]',
