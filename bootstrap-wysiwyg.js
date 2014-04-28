@@ -1,9 +1,16 @@
-/* http://github.com/mindmup/bootstrap-wysiwyg */
-/*global jQuery, $, FileReader*/
-/*jslint browser:true*/
+/* @fileoverview 
+ * Provides full bootstrap based, multi-instance WYSIWYG editor.
+ * 
+ * "Name"    = 'bootstrap-wysiwyg'
+ * "Author"  = 'Various, see LICENCE'
+ * "Version" = '1.0.1'
+ * "About"   = 'Tiny Bootstrap and JQuery Based WISWYG rich text editor.' 
+ */
 (function ($) {
 	'use strict';
-	/* Throttle from underscore http://underscorejs.org/docs/underscore.html */
+	/** underscoreThrottle() 
+	 * 	From underscore http://underscorejs.org/docs/underscore.html 
+	 */
 	var underscoreThrottle = function(func, wait) {
 		var context, args, timeout, result;
 		var previous = 0;
