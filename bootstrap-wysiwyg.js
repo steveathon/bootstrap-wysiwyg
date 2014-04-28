@@ -100,8 +100,7 @@
 				    }
                 } else if (document.selection) {
                     range = document.selection.createRange();
-                }
-                return range;
+                } return range;
 			},
 			saveSelection = function () {
 				selectedRange = getCurrentRange();
@@ -117,13 +116,11 @@
                             document.body.createTextRange().select();
                             document.selection.empty();
                         }
-
                         selection.addRange(selectedRange);
                     }
-                } else if (document.selection) {
-                    if (selectedRange) {
-                        selectedRange.select()
-                    }
+                } 
+                else if (document.selection && selectedRange) {
+                	selectedRange.select()
                 }
 			},
 			insertFiles = function (files) {
@@ -132,6 +129,7 @@
 					if (/^image\//.test(fileInfo.type)) {
 						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
 							execCommand('insertimage', dataUrl);
+							editor.trigger('image-inserted');
 						}).fail(function (e) {
 							options.fileUploadError("file-reader", e);
 						});
