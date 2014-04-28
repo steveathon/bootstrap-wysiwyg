@@ -1,27 +1,24 @@
+Originally forked from [mindmup/bootstrap-wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg) and serious refactored to add compatibility for IE8 and IE9.
+The image upload now user the good jQuery plugin [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload).
+Two additional parameters are added
+* imageUploadUrl passed as url parameter to jQuery-File-Upload plugin
+* redirectIframeUrl passed as redirect parameter to jQuery-File-Upload plugin
+
+
 bootstrap-wysiwyg
 =================
 
-Tiny Bootstrap and JQuery Based WISWYG rich text editor based on browser execCommand.
-
-Originally built for [MindMup](http://www.mindmup.com).
-
-Features
------------
+Tiny bootstrap-compatible WISWYG rich text editor, based on browser execCommand, built originally for [MindMup](http://www.mindmup.com). Here are the key features:
 
 * Automatically binds standard hotkeys for common operations on Mac and Windows
-* Allows a custom built toolbar with no magic markup generators enabling the web site to use all the goodness of Bootstrap
+* Drag and drop files to insert images, support image upload (also taking photos on mobile devices)
+* Allows a custom built toolbar, no magic markup generators, enabling the web site to use all the goodness of Bootstrap, Font Awesome and so on...
 * Does not force any styling - it's all up to you
 * Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any supported [browser command](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
 )
 * Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV
 * (Optionally) cleans up trailing whitespace and empty divs and spans
-* Requires a modern browser (See SUPPORTED)
-* Supports mobile devices (See SUPPORTED)
-* Supports multiple instances
-* HTML Sanitization
-* Drag and drop files to insert images
-* Supports image upload
-* Supports image capture on mobile devices
+* Supports mobile devices (tested on IOS 6 Ipad/Iphone and Android 4.1.1 Chrome)
 
 Basic Usage
 -----------
@@ -91,50 +88,5 @@ Dependencies
 ------------
 * jQuery http://jquery.com/
 * jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
-* Bootstrap http://twitter.github.com/bootstrap/
-
-Thanks to
-------------
-@gojko 					@mindmup			@jordanh
-@beatnbite				@brutuscat			@VictorBjelkholm
-@mrmrs 					@tilleryd 			@pnevels
-
-History
-------------
-
-The original version of this code (below) appeared to be no longer maintained. There
-were a number of outstanding changes which needed to be merged in and a few which 
-included performance and feature improvements. These have now been included in this
-master branch.
-
-I'll keep an eye out for future changes/improvements and pull them in as required.
-
-- Steve
-
-Original Licence
-------------
-
-The original version of this tool can be found here:
-[bootstrap-wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg)
-
-The MIT License
-
-Copyright (c) 2013 Damjan Vujnovic, David de Florinier, Gojko Adzic
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+* jQuery File Upload https://github.com/blueimp/jQuery-File-Upload
+* Bootstrap 3.0 http://getbootstrap.com
