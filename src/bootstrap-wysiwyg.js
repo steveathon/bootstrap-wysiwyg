@@ -79,7 +79,16 @@
 				var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
 					args = commandArr.join(' ') + (valueArg || '');
-				document.execCommand(command, 0, args);
+				
+				var parts = commandWithArgs.split('-');
+				
+				if ( parts.length == 1 ) {
+					document.execCommand(command, 0, args);
+				} 
+				else if ( parts[0] == 'format' && parts.length == 2) {
+					document.execCommand('formatBlock', false, parts[1] );
+				}
+
 				updateToolbar();
 			},
 			bindHotkeys = function (hotKeys) {
