@@ -47,7 +47,13 @@
 		return loader.promise();
 	};
 	$.fn.cleanHtml = function () {
+		if ( $(this).data("wysiwyg-html-mode") === true ) {
+			$(this).html($(this).text());
+        	$(this).attr('contenteditable',true);
+        	$(this).data('wysiwyg-html-mode',false);
+		} 
 		var html = $(this).html();
+		
 		return html && html.replace(/(<br>|\s|<div><br><\/div>|&nbsp;)*$/, '');
 	};
 	$.fn.wysiwyg = function (userOptions) {
@@ -141,7 +147,7 @@
 			},
 			
 			// Adding Toggle HTML based on the work by @jd0000, but cleaned up a little to work in this context.            
-            toggleHtmlEdit = function() {
+            toggleHtmlEdit = function(a) {
 				if ( $(editor).data("wysiwyg-html-mode") !== true ) {
 					var oContent = $(editor).html();
 					var editorPre = $( "<pre />" )
