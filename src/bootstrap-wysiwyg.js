@@ -130,6 +130,28 @@
                 	selectedRange.select()
                 }
 			},
+			
+			// Adding Toggle HTML based on the work by @jd0000, but cleaned up a little to work in this context.            
+            toggleHtmlEdit = function() {
+				if ( $(editor).data("wysiwyg-html-mode") !== true ) {
+					var oContent = $(editor).html();
+					var editorPre = $( "<pre />" )
+                	$(editorPre).append( document.createTextNode( oContent ) );
+                	$(editorPre).attr('contenteditable',true);
+                	$(editor).html(' ');
+                	$(editor).append($(editorPre));
+                    $(editor).attr('contenteditable', false);
+                    $(editor).data("wysiwyg-html-mode", true);
+                    $(editorPre).focus();
+                }
+                else {
+                	$(editor).html($(editor).text());
+                	$(editor).attr('contenteditable',true);
+                	$(editor).data('wysiwyg-html-mode',false);
+                    $(editor).focus();
+                }
+            },
+
 			insertFiles = function (files) {
 				editor.focus();
 				$.each(files, function (idx, fileInfo) {
@@ -157,7 +179,13 @@
 				toolbar.find(toolbarBtnSelector, wrapper).click(function () {
 					restoreSelection();
 					editor.focus();
-					execCommand($(this).data(options.commandRole));
+					
+                    if ($(this).data(options.commandRole) === 'html') {
+                        toggleHtmlEdit();
+                    }
+                    else {
+                    	execCommand($(this).data(options.commandRole));
+                    }				
 					saveSelection();
 				});
 				toolbar.find('[data-toggle=dropdown]').click(restoreSelection);
