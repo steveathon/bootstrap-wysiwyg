@@ -46,14 +46,29 @@
 		fReader.readAsDataURL(fileInfo);
 		return loader.promise();
 	};
-	$.fn.cleanHtml = function () {
+	$.fn.cleanHtml = function (o) {
 		if ( $(this).data("wysiwyg-html-mode") === true ) {
 			$(this).html($(this).text());
         	$(this).attr('contenteditable',true);
         	$(this).data('wysiwyg-html-mode',false);
 		} 
-		var html = $(this).html();
 		
+		// Strip the images with src="data:image/.." out;
+		if ( o === true && $(this).parent().is("form") ) {
+			var gGal = $(this).html;
+			if ( $(gGal).has( "img" ).length ) {
+				var gImages = $( "img", $(gGal));
+				var gResults = [];
+				var gEditor = $(this).parent();
+				$.each(gImages, function(i,v) {
+					if ( $(v).attr('src').match(/^data:image\/.*$/) ) {
+						gResults.push(gImages[i]);
+						$(gEditor).prepend("<input value='"+$(v).attr('src')+"' type='hidden' name='postedimage/"+i+"' />");
+						$(v).attr('src', 'postedimage/'+i);
+				}});
+			}
+		}
+		var html = $(this).html();
 		return html && html.replace(/(<br>|\s|<div><br><\/div>|&nbsp;)*$/, '');
 	};
 	$.fn.wysiwyg = function (userOptions) {
