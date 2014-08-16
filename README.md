@@ -22,6 +22,7 @@ Features
 * Drag and drop files to insert images
 * Supports image upload
 * Supports image capture on mobile devices
+* Events
 
 Basic Usage
 -----------
@@ -72,6 +73,17 @@ $('#editor').wysiwyg({
 });
 ```
 
+Events
+------
+
+#### Change
+Fired whenever anything changes. See this example [events.html](examples/events.html)
+```javascript
+$('#editor').wysiwyg().on('change', function(){
+	alert('something has been changed on the editor');
+});
+```
+
 Styling for mobile devices
 --------------------------
 
@@ -103,7 +115,7 @@ History
 ------------
 
 The original version of this code (below) appeared to be no longer maintained. There
-were a number of outstanding changes which needed to be merged in and a few which 
+were a number of outstanding changes which needed to be merged in and a few which
 included performance and feature improvements. These have now been included in this
 master branch.
 
