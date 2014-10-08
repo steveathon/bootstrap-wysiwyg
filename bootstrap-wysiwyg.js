@@ -21,8 +21,6 @@
 	$.fn.wysiwyg = function (userOptions) {
 		var editor = this,
 			selectedRange,
-			selectionNode,
-			caretPos,
 			options,
 			toolbarBtnSelector,
 			commandCache = {},
@@ -197,10 +195,8 @@
 			saveSelection = function () {
 				updateCommandCache();
 				selectedRange = getCurrentRange();
-				selectionNode = window.getSelection().anchorNode;
-				caretPos = window.getSelection().baseOffset;
 			},
-			restoreSelection = function (restoreCaret) {
+			restoreSelection = function () {
 				var selection = window.getSelection();
 				if (selectedRange) {
 					try {
@@ -210,10 +206,6 @@
 						document.selection.empty();
 					}
 
-					if (restoreCaret && selectionNode) {
-						selectedRange.setStart(selectionNode, caretPos);
-						selectedRange.collapse(true);
-					}
 					selection.addRange(selectedRange);
 				}
 			},
@@ -241,9 +233,7 @@
 			},
 			bindToolbar = function (toolbar, options) {
 				toolbar.find(toolbarBtnSelector).click(function () {
-					// restore caret position after certain commands
-					var restoreCaret = ['indent', 'outdent'].indexOf($(this).data(options.commandRole)) > -1
-					restoreSelection(restoreCaret);
+					restoreSelection();
 					editor.focus();
 					restoreCommandCache();
 					execCommand($(this).data(options.commandRole));
