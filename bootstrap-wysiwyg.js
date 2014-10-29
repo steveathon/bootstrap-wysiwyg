@@ -67,7 +67,28 @@
 				}
 
 			},
-			updateToolbar = function () {
+			throttle = function(handler, threshold, scope) {
+				var last, deferTimer;
+				return function() {
+					var context = scope || this;
+					var now = new Date().getTime();
+					var args = arguments;
+
+					if (last && now < last + threshold) {
+						// wait for it...
+						clearTimeout(deferTimer);
+						deferTimer = setTimeout(function() {
+							last = now;
+							handler.apply(context, args);
+						}, threshold);
+
+					} else {
+						last = now;
+						handler.apply(context, args);
+					}
+				};
+			},
+			updateToolbar = throttle(function () {
 				if (options.activeToolbarClass) {
 					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 						var command = $(this).data(options.commandRole);
@@ -78,9 +99,7 @@
 						} else {
 							commandNoArgs = command;
 						}
-						if (commandNoArgs === "fontSize" && options.setRealFontSize != null) {
-							options.setRealFontSize(selectedRange);
-						} else if (document.queryCommandState(command)) {
+						if (document.queryCommandState(command)) {
 							$(this).addClass(options.activeToolbarClass);
 						} else if (commandNoArgs + ' ' + document.queryCommandValue(commandNoArgs) === command) {
 							$(this).addClass(options.activeToolbarClass);
@@ -88,8 +107,11 @@
 							$(this).removeClass(options.activeToolbarClass);
 						}
 					});
+					if (options.setRealFontSize !== null) {
+						options.setRealFontSize(selectedRange);
+					}
 				}
-			},
+			}, 500),
 			execCommand = function (commandWithArgs, valueArg) {
 				var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
@@ -154,10 +176,10 @@
 				var eventNamespace = options.eventNamespace + '-' + 'bindKeys';
 
 				editor.on(namespaceEvents('focus'), function(e) {
-                			setTimeout(function() {
-                			restoreCommandCache();
-                			}, 0);
-                		});
+					setTimeout(function() {
+						restoreCommandCache();
+					}, 0);
+				});
 
 				editor.on(namespaceEvents('keydown'), hotKeys, function (e) {
 					var command = '';
@@ -302,7 +324,7 @@
 			commandCache[btnAttr.split(' ')[0]] = false;
 		});
 
-		$(window).bind('touchend', function (e) {
+		$(window).bind(namespaceEvents('touchend'), function (e) {
 			var isInside = (editor.is(e.target) || editor.has(e.target).length > 0),
 				currentRange = getCurrentRange(),
 				clear = currentRange && (currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset);
@@ -311,7 +333,7 @@
 				updateToolbar();
 			}
 		});
-        return this;
+		return this;
 	};
 	$.fn.wysiwyg.defaults = {
 		hotKeys: {
