@@ -116,12 +116,16 @@
 				var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
 					args = commandArr.join(' ') + (valueArg || '');
+				if (command.indexOf('justify') === 0) {
+					['left', 'center', 'right'].forEach(function(val) { commandCache['justify' + val] = false; });
+				}
 				document.execCommand(command, 0, args);
 				if (args.length > 0) {
 					commandCache[command] = document.queryCommandValue(command);
 				} else {
 					commandCache[command] = document.queryCommandState(command);
 				}
+				restoreCommandCache();
 				updateToolbar();
 			},
 			mapHotKeyToCommand = function (event, hotKeys) {
