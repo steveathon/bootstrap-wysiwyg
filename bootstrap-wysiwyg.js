@@ -24,6 +24,7 @@
 			options,
 			toolbarBtnSelector,
 			commandCache = {},
+			beforeUserCommandCacheRestore = true,
 			updateCommandCache = function () {
 				var key;
 				for (key in commandCache) {
@@ -44,7 +45,7 @@
 				for (key in commandCache) {
 					var val = commandCache[key];
 					if (typeof(val) === 'boolean') {
-						if (val !== document.queryCommandState(key)) {
+						if (val !== document.queryCommandState(key) && (!beforeUserCommandCacheRestore && key.indexOf('justify') === 0 )) {
 							document.execCommand(key, 0, null);
 						}
 					} else if (val !== document.queryCommandValue(key)) {
@@ -317,6 +318,7 @@
 		bindToolbar($(options.toolbarSelector), options);
 		editor.attr('contenteditable', true)
 			.on(namespaceEvents('mouseup keyup mouseout'), function () {
+				beforeUserCommandCacheRestore = false;
 				setTimeout(function() {
 					saveSelection();
 					updateToolbar();
