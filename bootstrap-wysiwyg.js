@@ -45,7 +45,7 @@
 				for (key in commandCache) {
 					var val = commandCache[key];
 					if (typeof(val) === 'boolean') {
-						if (val !== document.queryCommandState(key) && (!beforeUserCommandCacheRestore && key.indexOf('justify') === 0 )) {
+						if (val !== document.queryCommandState(key) && (!(beforeUserCommandCacheRestore && key.indexOf('justify') === 0 ))) {
 							document.execCommand(key, 0, null);
 						}
 					} else if (val !== document.queryCommandValue(key)) {
