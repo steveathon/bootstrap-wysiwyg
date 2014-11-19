@@ -1,3 +1,5 @@
+* Add change event callback
+
 1.0.2 - Merged some extras
 
 * Added support for placeholder attribute as requested in issue #143 and #136

@@ -1,15 +1,15 @@
-/* @fileoverview 
+/* @fileoverview
  * Provides full bootstrap based, multi-instance WYSIWYG editor.
- * 
+ *
  * "Name"    = 'bootstrap-wysiwyg'
  * "Author"  = 'Various, see LICENCE'
  * "Version" = '1.0.1'
- * "About"   = 'Tiny Bootstrap and JQuery Based WISWYG rich text editor.' 
+ * "About"   = 'Tiny Bootstrap and JQuery Based WISWYG rich text editor.'
  */
 (function ($) {
 	'use strict';
-	/** underscoreThrottle() 
-	 * 	From underscore http://underscorejs.org/docs/underscore.html 
+	/** underscoreThrottle()
+	 * 	From underscore http://underscorejs.org/docs/underscore.html
 	 */
 	var underscoreThrottle = function(func, wait) {
 		var context, args, timeout, result;
@@ -51,8 +51,8 @@
 			$(this).html($(this).text());
         	$(this).attr('contenteditable',true);
         	$(this).data('wysiwyg-html-mode',false);
-		} 
-		
+		}
+
 		// Strip the images with src="data:image/.." out;
 		if ( o === true && $(this).parent().is("form") ) {
 			var gGal = $(this).html;
@@ -100,16 +100,17 @@
 				var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
 					args = commandArr.join(' ') + (valueArg || '');
-				
+
 				var parts = commandWithArgs.split('-');
-				
+
 				if ( parts.length == 1 ) {
 					document.execCommand(command, 0, args);
-				} 
+				}
 				else if ( parts[0] == 'format' && parts.length == 2) {
 					document.execCommand('formatBlock', false, parts[1] );
 				}
 
+				editor.trigger('change');
 				updateToolbar();
 			},
 			bindHotkeys = function (hotKeys) {
@@ -127,6 +128,8 @@
 						}
 					});
 				});
+
+				editor.keyup(function(){ editor.trigger('change'); });
 			},
 			getCurrentRange = function () {
                 var sel, range;
@@ -155,13 +158,13 @@
                         }
                         selection.addRange(selectedRange);
                     }
-                } 
+                }
                 else if (document.selection && selectedRange) {
                 	selectedRange.select()
                 }
 			},
-			
-			// Adding Toggle HTML based on the work by @jd0000, but cleaned up a little to work in this context.            
+
+			// Adding Toggle HTML based on the work by @jd0000, but cleaned up a little to work in this context.
             toggleHtmlEdit = function(a) {
 				if ( $(editor).data("wysiwyg-html-mode") !== true ) {
 					var oContent = $(editor).html();
@@ -209,13 +212,13 @@
 				toolbar.find(toolbarBtnSelector, wrapper).click(function () {
 					restoreSelection();
 					editor.focus();
-					
+
                     if ($(this).data(options.commandRole) === 'html') {
                         toggleHtmlEdit();
                     }
                     else {
                     	execCommand($(this).data(options.commandRole));
-                    }				
+                    }
 					saveSelection();
 				});
 				toolbar.find('[data-toggle=dropdown]').click(restoreSelection);
@@ -264,7 +267,7 @@
 		options = $.extend(true, {}, $.fn.wysiwyg.defaults, userOptions);
 		toolbarBtnSelector = 'a[data-' + options.commandRole + '],button[data-' + options.commandRole + '],input[type=button][data-' + options.commandRole + ']';
 		bindHotkeys(options.hotKeys);
-		
+
 		// Support placeholder attribute on the DIV
 		if ($(this).attr('placeholder') != '') {
 			$(this).addClass('placeholderText');
@@ -282,7 +285,7 @@
 				}
 			})
 		}
-		
+
 		if (options.dragAndDropImages) {
 			initFileDrops();
 		}
