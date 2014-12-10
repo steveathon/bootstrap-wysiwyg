@@ -13,9 +13,7 @@
   ],
   "homepage": "https://github.com/steveathon/bootstrap-wysiwyg",
   "main": [
-    "bootstrap-wysiwyg.js",
-    "bootstrap-wysiwyg.min.js",
-    "bootstrap-wysiwyg.min.js"
+    "js/bootstrap-wysiwyg.min.js"
   ],
   "ignore": [
     ".*",
