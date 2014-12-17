@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-wysiwyg",
   "description": "Tiny Bootstrap and JQuery Based WISWYG rich text editor based on browser execCommand.",
-  "version": "1.0.2",
+  "version": "1.0.8",
   "keywords": [
     "css",
     "js",
@@ -13,7 +13,7 @@
   ],
   "homepage": "https://github.com/steveathon/bootstrap-wysiwyg",
   "main": [
-    "js/bootstrap-wysiwyg.min.js"
+    "src/bootstrap-wysiwyg.js"
   ],
   "ignore": [
     ".*",

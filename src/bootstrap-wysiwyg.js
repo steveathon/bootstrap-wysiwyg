@@ -114,7 +114,7 @@
 				updateToolbar();
 			},
 			bindHotkeys = function (hotKeys) {
-				$.each(hotKeys, function (hotkey, command) {
+				/*$.each(hotKeys, function (hotkey, command) {
 					editor.keydown(hotkey, function (e) {
 						if (editor.attr('contenteditable') && editor.is(':visible')) {
 							e.preventDefault();
@@ -129,7 +129,7 @@
 					});
 				});
 
-				editor.keyup(function(){ editor.trigger('change'); });
+				editor.keyup(function(){ editor.trigger('change'); });*/
 			},
 			getCurrentRange = function () {
                 var sel, range;
