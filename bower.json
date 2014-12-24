@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-wysiwyg",
   "description": "Tiny Bootstrap and JQuery Based WISWYG rich text editor based on browser execCommand.",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "keywords": [
     "css",
     "js",

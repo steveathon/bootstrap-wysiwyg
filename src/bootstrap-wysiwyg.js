@@ -285,9 +285,10 @@
 			$(this).bind('blur',function(e) {
 				if ( $(this).attr('placeholder') != '' && $(this).text() == '' ) {
 					$(this).addClass('placeholderText');
+                    $(this).trigger('change');
 					$(this).html($(this).attr('placeholder'));
 				}
-			})
+			});
 		}
 
 		if (options.dragAndDropImages) {
