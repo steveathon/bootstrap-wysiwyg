@@ -126,8 +126,11 @@
 				} else {
 					commandCache[command] = document.queryCommandState(command);
 				}
-				restoreCommandCache();
-				updateToolbar();
+				var editorCommandsWithoutState = ['undo', 'redo'];
+				if (editorCommandsWithoutState.indexOf(command) === -1) {
+					restoreCommandCache();
+					updateToolbar();
+				}
 			},
 			mapHotKeyToCommand = function (event, hotKeys) {
 				var hotKey = '';
