@@ -326,6 +326,11 @@
 					saveSelection();
 					updateToolbar();
 				}, 0);
+			})
+                        // Forces global saved selection to update. Is triggered
+                        // by spellcheck after it updates the DOM and selection
+                        .on(namespaceEvents('forceUpdateRange'), function () {
+				saveSelection();
 			});
 
 		$(toolbarBtnSelector).each(function () {
