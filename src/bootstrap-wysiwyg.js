@@ -1,5 +1,5 @@
 /* @fileoverview
- * Provides full bootstrap based, multi-instance WYSIWYG editor.
+ * Provides full vanilla CSS based, multi-instance WYSIWYG editor.
  *
  * "Name"    = 'bootstrap-wysiwyg'
  * "Author"  = 'Various, see LICENCE'
