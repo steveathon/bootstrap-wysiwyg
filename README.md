@@ -1,103 +1,60 @@
-bootstrap-wysiwyg
-=================
-
+# jQuery wysiwyg-core
 Core jQuery WISWYG rich text editor based on browser execCommand. Includes NO styling or iconography.
 Use a wrapper library like [bootstrap-wysiwyg]() or [foundation-wysiwyg]() for quckstart packages.
 
-Originally built for [MindMup](http://www.mindmup.com).
+## Features:
+  * Very easy to build implementations for front end frameworks like foundation and bootstrap
+  * Easy to add custom CSS styling.
+  * Automatically binds standard hotkeys for common operations on Mac and Windows
+  * Allows a custom built toolbar with no magic markup generators
+  * Does not force any styling - it's all up to you
+  * Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any supported [browser command](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla)
+  * Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV
+  * (Optionally) cleans up trailing whitespace and empty divs and spans
+  * Requires a modern browser (See SUPPORTED)
+  * Supports mobile devices (See SUPPORTED)
+  * Supports multiple instances
+  * HTML Sanitization
+  * Drag and drop files to insert images
+  * Supports image upload
+  * Supports image capture on mobile devices
+  * Events
 
-Features
------------
+## Getting Started
+This is the core library. The only thing it depends on is jQuery and uses absolutely NO styling.
+It is actually, not recommended you use this file unless you want to create every bit of CSS styling.
+Instead, check out implimentations or wrappers for libraries like Bootstrap, Foundation, and Angular.
 
-* Automatically binds standard hotkeys for common operations on Mac and Windows
-* Allows a custom built toolbar with no magic markup generators
-* Does not force any styling - it's all up to you
-* Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any supported [browser command](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
-)
-* Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV
-* (Optionally) cleans up trailing whitespace and empty divs and spans
-* Requires a modern browser (See SUPPORTED)
-* Supports mobile devices (See SUPPORTED)
-* Supports multiple instances
-* HTML Sanitization
-* Drag and drop files to insert images
-* Supports image upload
-* Supports image capture on mobile devices
-* Events
-
-Basic Usage
------------
-See http://mindmup.github.com/bootstrap-wysiwyg/
-
-Customising
------------
-You can assign commands to hotkeys and toolbar links. For a toolbar link, just put the execCommand command name into a data-edit attribute.
-For more info on execCommand, see http://www.quirksmode.org/dom/execCommand.html and https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
-
-```html
-<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-  <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
-</div>
+#### Get Via Bower (recommended)
+Add 
+```
+"dependencies": {
+    "jquery-wysiwyg-core": "http://github.com/chrismichaels84/wysiwyg-core.js.git#master"
+  },
 ```
 
-To pass arguments to a command, separate a command with a space.
+#### Or Download Zip File
+You may also download the latest release or the master branch from http://github.com/chrismichaels84/wysiwyg-core.js
 
-```html
-  <a data-edit="fontName Arial">...</a>
-```
+#### Installation and Dependencies
+Simplest way is to add `<script src="dist/full.wysiwyg-core.min.js"></script>` to your `<head>`
 
-You can also use input type='text' with a data-edit attribute. When the value
-is changed, the command from the data-edit attribute will be applied using the
-input value as the command argument
+This library depends on [``](http://github.com/phoenix-labs/common.js). If you use bower, this will be downloaded for you. If not, be sure to download this library as well.
+There are two different files you can include in the `<head>` of your HTML file.
+ * `phoenix.http.min.js` is only the HTTP library. You need to include the dependencies yourself *before* the library file.
+ * `phoenix.full.http.min.js` is the library and all dependencies minified into one file.
 
-```html
-<input type="text" data-edit="createLink">
-```
-If the input type is file, when a file is selected the contents will be read in using the FileReader API and the data URL will be used as the argument
+Use the full version if this is the only phoenix library on the page. If not, we'd recommend using something like [gulp](http://gulpjs.com) to concat your files.
+By default, all methods are contained in `window.px` or just `px`. Just by including the script in your header (or footer) gives you access to `px.http`.
 
-```html
-<input type="file" data-edit="insertImage">
-```
+## Basic Usage
 
-To change hotkeys, specify the map of hotkeys to commands in the hotKeys option. For example:
+### Creating Wrappers
+HTTP was designed to be lightweight and useable with other libraries. Well, just about every library has ajax functionality. So, what if you are using something that depends on phoenix-http (like [forms-extender](http://github.com/phoenix-labs/forms-extender.js)), but also use jQuery? Why have two libraries for ajax?
 
-```javascript
-$('#editor').wysiwyg({
-  hotKeys: {
-    'ctrl+b meta+b': 'bold',
-    'ctrl+i meta+i': 'italic',
-    'ctrl+u meta+u': 'underline',
-    'ctrl+z meta+z': 'undo',
-    'ctrl+y meta+y meta+shift+z': 'redo'
-  }
-});
-```
+Adapters solve this problem. Using a jquery adatper, forces phoenix-http to use jQuery's ajax methods. phoenix-http's ajax library doesn't even get loaded!
 
-Events
-------
-
-#### Change
-Fired whenever anything changes. See this example [events.html](examples/events.html)
-```javascript
-$('#editor').wysiwyg().on('change', function(){
-	alert('something has been changed on the editor');
-});
-```
-
-Styling for mobile devices
---------------------------
-
-This editor should work pretty well with mobile devices, but you'll need to consider the following things when styling it:
-- keyboards on mobile devices take a huge part of the screen
-- having to scroll the screen to touch the toolbar can cause the editing component to lose focus, and the mobile device keyboard might go away
-- mobile devices tend to move the screen viewport around to ensure that the focused element is shown, so it's best that the edit box is glued to the top
-
-For the content attachment editor on MindMup, we apply the following rules to mobile device styling:
-- edit box is glued to the top, so the focus doesn't jump around
-- toolbar is below the edit box
-- on portrait screens, edit box size is 50% of the screen
-- on landscape screens, edit box size is 30% of the screen
-- as the screen gets smaller, non-critical toolbar buttons get hidden into a "other" menu
+For more info on creating and using adapters see docs/adapters.md or look at our [jquery.http.js](http://github.com/phoenix-labs/jquery.http.js).
 
 Dependencies
 ------------
@@ -121,6 +78,24 @@ master branch.
 I'll keep an eye out for future changes/improvements and pull them in as required.
 
 - Steve
+
+
+## Contributing
+[Phoenix Labs](http://phoenixlabstech.org) is a non-profit organization developing community-driven experiments in collaboration and content. "Community Driven" is more than just a slogan. It's a core value. Everything we do is for the community and by the community. Collaboration on any of the projects is welcome.
+
+To contribute to this project (one of the [Backstage](http://phoenixlabstech.org/projects/backstage) packages):
+  * **Fork or clone** this repository. All work is done in the development branch which may have many feature branches. The master is always the latest, production ready release.
+  * **Build** the library on your local machine.
+    1. Make sure that node, gulp, and bower are installed.
+    2. Run `gulp install` in the terminal. This will install all dependencies and build library files.
+    3. If this didn't work, just run `bower install` and `npm install` and `gulp build`
+  * **Commit** your changes. All active files are in the /src/ directory.
+  * **Build** again with `gulp build`
+  * **Test** as needed. Write tests and add them to one of the test suites in /tests/. Please write new tests as needed and make sure you didn't break another test.
+  * **Issue a Pull Request** on this repository.
+  
+Be sure to be active. All discussion takes place in issue.
+Phoenix Common.js is licenced under the MIT open source licence.
 
 Original Licence
 ------------
