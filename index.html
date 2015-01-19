@@ -2,27 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
+	<title>Tiny, opensource, vanilla WYSIWYG rich text editor</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="keywords"
-		content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
+		content="opensource rich wysiwyg text editor jquery execCommand html5" />
 	<meta name="description"
-		content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
-	<link href="external/google-code-prettify/prettify.css" rel="stylesheet" />
-	<link rel="stylesheet"
-		href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-	<link
-		href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
-		rel="stylesheet" />
+		content="This tiny jQuery WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
 	<script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="external/jquery.hotkeys.js"></script>
-	<script
-		src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	<script src="external/google-code-prettify/prettify.js"></script>
-	<link href="css/style.css" rel="stylesheet" />
 	<script src="src/bootstrap-wysiwyg.js"></script>
+
+	<style>
+
+	</style>
 </head>
 <body>
 
@@ -35,10 +29,10 @@
 			</h1>
 			<hr />
 			<div id="alerts"></div>
-			<div class="btn-toolbar" data-role="editor-toolbar"
+			<div data-role="editor-toolbar"
 				data-target="#editor">
-				<div class="btn-group">
-					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+				<div>
+					<a data-toggle="dropdown"
 						title="Font"><i class="icon-font"></i><b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
@@ -229,7 +223,7 @@
       $.each(fonts, function (idx, fontName) {
           fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
       });
-      $('a[title]').tooltip({container:'body'});
+//      $('a[title]').tooltip({container:'body'});
     	$('.dropdown-menu input').click(function() {return false;})
 		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
         .keydown('esc', function () {this.value='';$(this).change();});
