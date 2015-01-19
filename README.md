@@ -1,7 +1,8 @@
 bootstrap-wysiwyg
 =================
 
-Tiny Bootstrap and JQuery Based WISWYG rich text editor based on browser execCommand.
+Core jQuery WISWYG rich text editor based on browser execCommand. Includes NO styling or iconography.
+Use a wrapper library like [bootstrap-wysiwyg]() or [foundation-wysiwyg]() for quckstart packages.
 
 Originally built for [MindMup](http://www.mindmup.com).
 
@@ -9,7 +10,7 @@ Features
 -----------
 
 * Automatically binds standard hotkeys for common operations on Mac and Windows
-* Allows a custom built toolbar with no magic markup generators enabling the web site to use all the goodness of Bootstrap
+* Allows a custom built toolbar with no magic markup generators
 * Does not force any styling - it's all up to you
 * Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any supported [browser command](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
 )
@@ -26,7 +27,6 @@ Features
 
 Basic Usage
 -----------
-
 See http://mindmup.github.com/bootstrap-wysiwyg/
 
 Customising
@@ -103,7 +103,6 @@ Dependencies
 ------------
 * jQuery http://jquery.com/
 * jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
-* Bootstrap http://twitter.github.com/bootstrap/
 
 Thanks to
 ------------

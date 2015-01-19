@@ -26,9 +26,6 @@
   ],
   "dependencies": {
     "jquery": ">= 1.9.1",
-    "jquery.hotkeys": "*",
-    "fontawesome": ">= 3.0.0",
-    "bootstrap": ">= 2.0",
-    "google-code-prettify": ">= 1.0.1"
+    "jquery.hotkeys": "*"
   }
 }
