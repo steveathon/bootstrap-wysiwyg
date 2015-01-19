@@ -13,10 +13,11 @@ gulp.task('build_full', function() {
     var concat = require('gulp-concat');
     var insert = require('gulp-insert');
 
-    var depSrc = ['bower_components/phoenix-common/dist/phoenix.common.min.js'];
-    var fullSrc = depSrc.concat(srcFiles);
-    gulp.src(fullSrc)
-        .pipe(concat('phoenix.full.http.min.js'))
+    gulp.src([
+        'bower_components/jquery.hotkeys/jquery.hotkeys.js',
+        'bower_components/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js'
+    ])
+        .pipe(concat('full.wysiwyg-core.min.js'))
         .pipe(uglify())
         .pipe(insert.prepend(copyright))
         .pipe(gulp.dest('dist'));
@@ -28,8 +29,8 @@ gulp.task('build_lib', function() {
     var concat = require('gulp-concat');
     var insert = require('gulp-insert');
 
-    gulp.src(srcFiles)
-        .pipe(concat('phoenix.http.min.js'))
+    gulp.src('bower_components/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js')
+        .pipe(concat('wysiwyg-core.min.js'))
         .pipe(uglify())
         .pipe(insert.prepend(copyright))
         .pipe(gulp.dest('dist'));
