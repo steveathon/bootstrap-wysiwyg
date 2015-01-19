@@ -33,14 +33,14 @@
 			<div data-role="editor-toolbar" data-target="#editor" style="float: left; border-right: 2px solid black; padding: 5px;">
 				<!-- Font Face -->
 				<div style="float: left">
-					Font:
+					<strong>Font</strong>:
 					<ul id="fonts">
 					</ul>
 				</div>
 
 				<!-- Font Size -->
 				<div style="float: left">
-					Font Size:
+					<strong>Font Size:</strong>
 					<ul>
 						<li><a data-edit="fontSize 5"><font size="5">Huge</font>
 						</a>
@@ -54,75 +54,74 @@
 					</ul>
 				</div>
 
-				<div style="float:left">
+				<div style="float:left; margin-left: 10px;">
 					<!-- Basic Formatting -->
 					<div>
-						Basic Formatting: <br>
-						<a data-edit="bold"
-							title="Bold (Ctrl/Cmd+B)">Bold
-						</a> <a data-edit="italic"
-							title="Italic (Ctrl/Cmd+I)">Italic
-						</a> <a data-edit="strikethrough"
-							title="Strikethrough">Strikethrough
-						</a> <a data-edit="underline"
-							title="Underline (Ctrl/Cmd+U)">Underline
-						</a>
+						<strong>Basic Formatting: </strong><br>
+						<button data-edit="bold"
+							title="Bold (Ctrl/Cmd+B)">Bold</button>
+						<button data-edit="italic"
+							title="Italic (Ctrl/Cmd+I)">Italic</button>
+						<button data-edit="strikethrough"
+							title="Strikethrough">Strikethrough</button>
+						<button data-edit="underline"
+							title="Underline (Ctrl/Cmd+U)">Underline</button>
 					</div>
 
 					<!-- Lists -->
 					<div>
-						Lists<br>
-						<a data-edit="insertunorderedlist"
-							title="Bullet list">Bullet List
-						</a> <a data-edit="insertorderedlist"
-							title="Number list">Number list
-						</a> <a data-edit="outdent"
-							title="Reduce indent (Shift+Tab)">Reduce indent
-						</a> <a data-edit="indent" title="Indent (Tab)">Indent
-						</a>
+						<br><strong>Lists</strong><br>
+						<button data-edit="insertunorderedlist"
+							title="Bullet list">Bullet List</button>
+						<button data-edit="insertorderedlist"
+							title="Number list">Number list</button>
+						<button data-edit="outdent"
+							title="Reduce indent (Shift+Tab)">Reduce indent">
+						<button data-edit="indent" title="Indent (Tab)">Indent</button>
 					</div>
 
 					<!-- Alignment -->
 					<div>
-						Alignment<br>
-						<a data-edit="justifyleft"
-							title="Align Left (Ctrl/Cmd+L)">Align Left
-						</a> <a data-edit="justifycenter"
-							title="Center (Ctrl/Cmd+E)">Align Center
-						</a> <a data-edit="justifyright"
-							title="Align Right (Ctrl/Cmd+R)">Align Right
-						</a> <a data-edit="justifyfull"
-							title="Justify (Ctrl/Cmd+J)">Justify
-						</a>
+						<br><strong>Alignment</strong><br>
+						<button data-edit="justifyleft"
+							title="Align Left (Ctrl/Cmd+L)">Align Left</button>
+						<button data-edit="justifycenter"
+							title="Center (Ctrl/Cmd+E)">Align Center</button>
+						<button data-edit="justifyright"
+							title="Align Right (Ctrl/Cmd+R)">Align Right</button>
+						<button data-edit="justifyfull"
+							title="Justify (Ctrl/Cmd+J)">Justify</button>
 					</div>
 
 					<!-- Hyperlink -->
 					<div>
-						<a title="Hyperlink">Link</a>
+						<br><strong>Link</strong>
 						<div>
 							<input placeholder="URL" type="text"
 								data-edit="createLink" />
 							<button type="button">Add Link</button>
+							<button data-edit="unlink"
+							   title="Remove Hyperlink">Remove Hyperlink</button>
 						</div>
 					</div>
 
 					<!-- Images -->
 					<div>
-						<a data-edit="unlink"
-							title="Remove Hyperlink">Remove Hyperlink
-						</a> <a	title="Insert picture (or just drag & drop)" id="pictureBtn">
-							Insert picture (or just drag & drop) <input type="file"
+						<br><button id="pictureBtn">
+							Insert picture </button>
+						<input type="file"
 							data-role="magic-overlay" data-target="#pictureBtn"
-							data-edit="insertImage" /> </a>
+							data-edit="insertImage" />
+						(Or just drag and drop)
 					</div>
 
 					<!-- Actions -->
 					<div>
-						<a data-edit="undo"
-							title="Undo (Ctrl/Cmd+Z)">Undo
-						</a> <a data-edit="redo"
-							title="Redo (Ctrl/Cmd+Y)">Redo
-						</a>
+						<br><strong>Actions: </strong>
+						<button data-edit="undo"
+							title="Undo (Ctrl/Cmd+Z)">Undo</button>
+						<button data-edit="redo"
+							title="Redo (Ctrl/Cmd+Y)">Redo</button>
 					</div>
 				</div>
 				<div style="clear: both;"></div>
