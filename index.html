@@ -24,28 +24,26 @@
 		<div class="hero-unit">
 			<div class="pull-right"></div>
 			<h1>
-				bootstrap-wysiwyg <br /> <small>tiny wysiwyg rich text
-					editor for Bootstrap</small>
+				wysiwyg-core <br /> <small>tiny wysiwyg rich text
+					editor with no styling</small>
 			</h1>
 			<hr />
 			<div id="alerts"></div>
+
+			<!-- Toolbar -->
+			<!-- The Toolbar and the Editor contain no styling from bootstrap. -->
 			<div data-role="editor-toolbar"
 				data-target="#editor">
 
 				<!-- Font Face -->
 				<div>
-					<a data-toggle="dropdown"
-						title="Font">Font
-					</a>
-					<ul class="dropdown-menu">
+					<ul id="fonts">
 					</ul>
 				</div>
 
 				<!-- Font Size -->
 				<div>
-					<a data-toggle="dropdown"
-						title="Font Size">Font Size
-					</a>
+					Font Size
 					<ul>
 						<li><a data-edit="fontSize 5"><font size="5">Huge</font>
 						</a>
@@ -227,16 +225,23 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
+
 	<script>
   $(function(){
     function initToolbarBootstrapBindings() {
       var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
             'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
             'Times New Roman', 'Verdana'],
-            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+            fontTarget = $('#fonts');
       $.each(fonts, function (idx, fontName) {
           fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
       });
+
+
 //      $('a[title]').tooltip({container:'body'});
     	$('.dropdown-menu input').click(function() {return false;})
 		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
