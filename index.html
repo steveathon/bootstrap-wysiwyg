@@ -12,7 +12,7 @@
 	<script
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="external/jquery.hotkeys.js"></script>
-	<script src="src/bootstrap-wysiwyg.js"></script>
+	<script src="src/wysiwyg-core.js"></script>
 
 	<style>
 
@@ -21,29 +21,30 @@
 <body>
 
 	<div class="container">
-		<div class="hero-unit">
-			<div class="pull-right"></div>
-			<h1>
-				wysiwyg-core <br /> <small>tiny wysiwyg rich text
-					editor with no styling</small>
-			</h1>
-			<hr />
-			<div id="alerts"></div>
+		<div class="pull-right"></div>
+		<h1>
+			wysiwyg-core <br /> <small>tiny wysiwyg rich text
+			editor with no styling</small>
+		</h1>
+		<hr />
+		<div id="alerts"></div>
+
+
+		<div id="example" style="padding: 5px;">
 
 			<!-- Toolbar -->
-			<!-- The Toolbar and the Editor contain no styling from bootstrap. -->
-			<div data-role="editor-toolbar"
-				data-target="#editor">
-
+			<!-- The Toolbar and the Editor contain no styling from bootstrap. Only inline CSS for layout -->
+			<div data-role="editor-toolbar" data-target="#editor" style="float: left; border-right: 2px solid black; padding: 5px;">
 				<!-- Font Face -->
-				<div>
+				<div style="float: left">
+					Font:
 					<ul id="fonts">
 					</ul>
 				</div>
 
 				<!-- Font Size -->
-				<div>
-					Font Size
+				<div style="float: left">
+					Font Size:
 					<ul>
 						<li><a data-edit="fontSize 5"><font size="5">Huge</font>
 						</a>
@@ -57,72 +58,78 @@
 					</ul>
 				</div>
 
-				<!-- Basic Formatting -->
-				<div>
-					<a data-edit="bold"
-						title="Bold (Ctrl/Cmd+B)">Bold
-					</a> <a data-edit="italic"
-						title="Italic (Ctrl/Cmd+I)">Italic
-					</a> <a data-edit="strikethrough"
-						title="Strikethrough">Strikethrough
-					</a> <a data-edit="underline"
-						title="Underline (Ctrl/Cmd+U)">Underline
-					</a>
-				</div>
-
-				<!-- Lists -->
-				<div>
-					<a data-edit="insertunorderedlist"
-						title="Bullet list">Bullet List
-					</a> <a data-edit="insertorderedlist"
-						title="Number list">Number list
-					</a> <a data-edit="outdent"
-						title="Reduce indent (Shift+Tab)">Reduce indent
-					</a> <a data-edit="indent" title="Indent (Tab)">Indent
-					</a>
-				</div>
-
-				<!-- Alignment -->
-				<div>
-					<a data-edit="justifyleft"
-						title="Align Left (Ctrl/Cmd+L)">Align Left
-					</a> <a data-edit="justifycenter"
-						title="Center (Ctrl/Cmd+E)">Align Center
-					</a> <a data-edit="justifyright"
-						title="Align Right (Ctrl/Cmd+R)">Align Right
-					</a> <a data-edit="justifyfull"
-						title="Justify (Ctrl/Cmd+J)">Justify
-					</a>
-				</div>
-
-				<!-- Hyperlink -->
-				<div>
-					<a title="Hyperlink">Link</a>
+				<div style="float:left">
+					<!-- Basic Formatting -->
 					<div>
-						<input placeholder="URL" type="text"
-							data-edit="createLink" />
-						<button type="button">Add Link</button>
+						Basic Formatting: <br>
+						<a data-edit="bold"
+							title="Bold (Ctrl/Cmd+B)">Bold
+						</a> <a data-edit="italic"
+							title="Italic (Ctrl/Cmd+I)">Italic
+						</a> <a data-edit="strikethrough"
+							title="Strikethrough">Strikethrough
+						</a> <a data-edit="underline"
+							title="Underline (Ctrl/Cmd+U)">Underline
+						</a>
+					</div>
+
+					<!-- Lists -->
+					<div>
+						Lists<br>
+						<a data-edit="insertunorderedlist"
+							title="Bullet list">Bullet List
+						</a> <a data-edit="insertorderedlist"
+							title="Number list">Number list
+						</a> <a data-edit="outdent"
+							title="Reduce indent (Shift+Tab)">Reduce indent
+						</a> <a data-edit="indent" title="Indent (Tab)">Indent
+						</a>
+					</div>
+
+					<!-- Alignment -->
+					<div>
+						Alignment<br>
+						<a data-edit="justifyleft"
+							title="Align Left (Ctrl/Cmd+L)">Align Left
+						</a> <a data-edit="justifycenter"
+							title="Center (Ctrl/Cmd+E)">Align Center
+						</a> <a data-edit="justifyright"
+							title="Align Right (Ctrl/Cmd+R)">Align Right
+						</a> <a data-edit="justifyfull"
+							title="Justify (Ctrl/Cmd+J)">Justify
+						</a>
+					</div>
+
+					<!-- Hyperlink -->
+					<div>
+						<a title="Hyperlink">Link</a>
+						<div>
+							<input placeholder="URL" type="text"
+								data-edit="createLink" />
+							<button type="button">Add Link</button>
+						</div>
+					</div>
+
+					<!-- Images -->
+					<div>
+						<a data-edit="unlink"
+							title="Remove Hyperlink">Remove Hyperlink
+						</a> <a	title="Insert picture (or just drag & drop)" id="pictureBtn">
+							Insert picture (or just drag & drop) <input type="file"
+							data-role="magic-overlay" data-target="#pictureBtn"
+							data-edit="insertImage" /> </a>
+					</div>
+
+					<!-- Actions -->
+					<div>
+						<a data-edit="undo"
+							title="Undo (Ctrl/Cmd+Z)">Undo
+						</a> <a data-edit="redo"
+							title="Redo (Ctrl/Cmd+Y)">Redo
+						</a>
 					</div>
 				</div>
-
-				<!-- Images -->
-				<div>
-					<a data-edit="unlink"
-						title="Remove Hyperlink">Remove Hyperlink
-					</a> <a	title="Insert picture (or just drag & drop)" id="pictureBtn">
-					    Insert picture (or just drag & drop) <input type="file"
-						data-role="magic-overlay" data-target="#pictureBtn"
-						data-edit="insertImage" /> </a>
-				</div>
-
-				<!-- Actions -->
-				<div>
-					<a data-edit="undo"
-						title="Undo (Ctrl/Cmd+Z)">Undo
-					</a> <a data-edit="redo"
-						title="Redo (Ctrl/Cmd+Y)">Redo
-					</a>
-				</div>
+				<div style="clear: both;"></div>
 
 				<!-- Voice to Text -->
 				<input type="text" data-edit="inserttext"
@@ -130,7 +137,10 @@
 			</div> <!-- / Toolbar -->
 
 			<!-- Editor -->
-			<div id="editor" placeholder="Go ahead&hellip;"></div>
+			<div style="float: left; min-width: 50%; height: 100%; padding: 5px;">
+				<div id="editor" style="width: 100%" placeholder="Go ahead. Edit me&hellip;"></div>
+			</div>
+			<div style="clear: both;"></div>
 		</div>
 
 		<!-- Documentation -->
