@@ -31,7 +31,6 @@ gulp.task('build_lib', function() {
 
     gulp.src('bower_components/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js')
         .pipe(concat('wysiwyg-core.min.js'))
-        .pipe(uglify())
         .pipe(insert.prepend(copyright))
         .pipe(gulp.dest('dist'));
 });
