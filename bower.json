@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "jquery": ">= 1.9.1",
-    "jquery.hotkeys": "https://github.com/tzuryby/jquery.hotkeys.git#master",
+    "jquery.hotkeys": "https://github.com/jeresig/jquery.hotkeys.git#master",
     "bootstrap-wysiwyg": "https://github.com/chrismichaels84/wysiwyg-core.js.git#dep-update"
   }
 }
