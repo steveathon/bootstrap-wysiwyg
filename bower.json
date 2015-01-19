@@ -19,13 +19,12 @@
   ],
   "ignore": [
     ".*",
-    "external/",
-    "index.css",
     "index.html",
     "CONTRIBUTING"
   ],
   "dependencies": {
     "jquery": ">= 1.9.1",
-    "jquery.hotkeys": "*"
+    "jquery.hotkeys": "https://github.com/tzuryby/jquery.hotkeys.git#master",
+    "bootstrap-wysiwyg": "https://github.com/chrismichaels84/wysiwyg-core.js.git#dep-update"
   }
 }
