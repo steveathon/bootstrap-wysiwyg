@@ -39,27 +39,39 @@ You may also download the latest release or the master branch from http://github
 #### Installation and Dependencies
 Simplest way is to add `<script src="dist/full.wysiwyg-core.min.js"></script>` to your `<head>`
 
-This library depends on [``](http://github.com/phoenix-labs/common.js). If you use bower, this will be downloaded for you. If not, be sure to download this library as well.
+This library depends on jQuery. Be sure to download a copy, use a CDN, or if you use bower, one will be installed for you.
+
+The library also depends on [`jquery.hotkeys`](https://github.com/jeresig/jquery.hotkeys). If you use bower, this will be downloaded for you. If not, be sure to download this library as well.
+
 There are two different files you can include in the `<head>` of your HTML file.
- * `phoenix.http.min.js` is only the HTTP library. You need to include the dependencies yourself *before* the library file.
- * `phoenix.full.http.min.js` is the library and all dependencies minified into one file.
+ * `wysiwyg-core.min.js` is only wysiwyg library. You must include jquery.hotkeys **before** this file yourself.
+ * `full.wysiwyg-core.min.js` is the library and all dependencies (except jQuery) minified into one file.
 
-Use the full version if this is the only phoenix library on the page. If not, we'd recommend using something like [gulp](http://gulpjs.com) to concat your files.
-By default, all methods are contained in `window.px` or just `px`. Just by including the script in your header (or footer) gives you access to `px.http`.
+In both cases, you must include jQuery yourself. I assume you are already doing this.
 
-## Basic Usage
-
-### Creating Wrappers
-HTTP was designed to be lightweight and useable with other libraries. Well, just about every library has ajax functionality. So, what if you are using something that depends on phoenix-http (like [forms-extender](http://github.com/phoenix-labs/forms-extender.js)), but also use jQuery? Why have two libraries for ajax?
-
-Adapters solve this problem. Using a jquery adatper, forces phoenix-http to use jQuery's ajax methods. phoenix-http's ajax library doesn't even get loaded!
-
-For more info on creating and using adapters see docs/adapters.md or look at our [jquery.http.js](http://github.com/phoenix-labs/jquery.http.js).
-
-Dependencies
-------------
 * jQuery http://jquery.com/
 * jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
+
+## Basic Usage
+See index.html for usage or check out https://github.com/steveathon/bootstrap-wysiwyg for the basics (this uses bootstrap styling)
+
+### Creating Wrappers
+This library by itself is useful, but ugly out of the box. This was intentional. It makes absolutely no styling decisions for you.
+
+You can also use and create wrappers that extend this library seemlessly into any front-end framework, template, theme, or styling you like. For example, check out
+[bootstrap-wysiwyg]() and [foundation-wysiwyg]() which turn this library into a plugin.
+
+You can create your own wrappers easily.
+  1. Lay down the boilerplate and include wysiwyg-core. You have a couple options for this.
+     * Fork or Clone [boiler-wysiwyg]() which uses bower for all dependencies. (Recommended)
+     * Create your own repository from scratch and just download jQuery, jQuery Hotkeys, and wysiwys-core. Then, copy index.html and the examples directory from wysiwyg-core to the root of your repo.
+  1. Use the css from whichever framework you like to style the toolbar and enditor to your hearts content.
+     * It is recommended that you start with the index.html and examples
+     * Be sure to run `gulp build`
+  1. Publish the repo to the world (if you like)
+     * We like the naming convention framework-wysiwyg
+     * Update the readme from the boiler plate
+     * Let me know about your awesome port!
 
 Thanks to
 ------------
@@ -69,7 +81,6 @@ Thanks to
 
 History
 ------------
-
 The original version of this code (below) appeared to be no longer maintained. There
 were a number of outstanding changes which needed to be merged in and a few which
 included performance and feature improvements. These have now been included in this
@@ -79,11 +90,8 @@ I'll keep an eye out for future changes/improvements and pull them in as require
 
 - Steve
 
-
 ## Contributing
-[Phoenix Labs](http://phoenixlabstech.org) is a non-profit organization developing community-driven experiments in collaboration and content. "Community Driven" is more than just a slogan. It's a core value. Everything we do is for the community and by the community. Collaboration on any of the projects is welcome.
-
-To contribute to this project (one of the [Backstage](http://phoenixlabstech.org/projects/backstage) packages):
+To contribute to this project:
   * **Fork or clone** this repository. All work is done in the development branch which may have many feature branches. The master is always the latest, production ready release.
   * **Build** the library on your local machine.
     1. Make sure that node, gulp, and bower are installed.
@@ -91,11 +99,9 @@ To contribute to this project (one of the [Backstage](http://phoenixlabstech.org
     3. If this didn't work, just run `bower install` and `npm install` and `gulp build`
   * **Commit** your changes. All active files are in the /src/ directory.
   * **Build** again with `gulp build`
-  * **Test** as needed. Write tests and add them to one of the test suites in /tests/. Please write new tests as needed and make sure you didn't break another test.
   * **Issue a Pull Request** on this repository.
   
 Be sure to be active. All discussion takes place in issue.
-Phoenix Common.js is licenced under the MIT open source licence.
 
 Original Licence
 ------------
