@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="../bower_components/jquery.hotkeys/jquery.hotkeys.js"></script>
+		<script src="../src/wysiwyg-core.js"></script>
+	</head>
+	
+	<body>
+		<div class="container">
+		
+			<h1>Simple HTML Editor</h1>
+			<div id="example" style="padding: 5px;">
+				<!-- Toolbar -->
+				<!-- The Toolbar and the Editor contain no styling from bootstrap. Only inline CSS for layout -->
+				<div data-role="editor-toolbar" data-target="#editor" style="float: left; border-right: 2px solid black; padding: 5px;">
+					<!-- Font Size -->
+					<div style="float: left">
+						<strong>Font Size:</strong>
+						<ul>
+							<li><a data-edit="fontSize 5"><font size="5">Huge</font>
+							</a>
+							</li>
+							<li><a data-edit="fontSize 3"><font size="3">Normal</font>
+							</a>
+							</li>
+							<li><a data-edit="fontSize 1"><font size="1">Small</font>
+							</a>
+							</li>
+						</ul>
+					</div>
+
+					<div style="float:left; margin-left: 10px;">
+						<!-- Basic Formatting -->
+						<div>
+							<strong>Basic Formatting: </strong><br>
+							<button data-edit="bold"
+									title="Bold (Ctrl/Cmd+B)">Bold</button>
+							<button data-edit="italic"
+									title="Italic (Ctrl/Cmd+I)">Italic</button>
+							<button data-edit="strikethrough"
+									title="Strikethrough">Strikethrough</button>
+							<button data-edit="underline"
+									title="Underline (Ctrl/Cmd+U)">Underline</button>
+						</div>
+
+						<!-- Lists -->
+						<div>
+							<br><strong>Lists</strong><br>
+							<button data-edit="insertunorderedlist"
+									title="Bullet list">Bullet List</button>
+							<button data-edit="insertorderedlist"
+									title="Number list">Number list</button>
+							<button data-edit="outdent"
+									title="Reduce indent (Shift+Tab)">Reduce indent</button>
+							<button data-edit="indent" title="Indent (Tab)">Indent</button>
+						</div>
+
+						<!-- Alignment -->
+						<div>
+							<br><strong>Alignment</strong><br>
+							<button data-edit="justifyleft"
+									title="Align Left (Ctrl/Cmd+L)">Align Left</button>
+							<button data-edit="justifycenter"
+									title="Center (Ctrl/Cmd+E)">Align Center</button>
+							<button data-edit="justifyright"
+									title="Align Right (Ctrl/Cmd+R)">Align Right</button>
+							<button data-edit="justifyfull"
+									title="Justify (Ctrl/Cmd+J)">Justify</button>
+						</div>
+
+						<!-- Hyperlink -->
+						<div>
+							<br><strong>Link</strong>
+							<div>
+								<input placeholder="URL" type="text"
+									   data-edit="createLink" />
+								<button type="button">Add Link</button>
+								<button data-edit="unlink"
+										title="Remove Hyperlink">Remove Hyperlink</button>
+							</div>
+						</div>
+
+						<!-- Images -->
+						<div>
+							<br><button id="pictureBtn">
+							Insert picture </button>
+							<input type="file"
+								   data-role="magic-overlay" data-target="#pictureBtn"
+								   data-edit="insertImage" />
+							(Or just drag and drop)
+						</div>
+
+						<!-- Actions -->
+						<div>
+							<br><strong>Actions: </strong>
+							<button data-edit="undo"
+									title="Undo (Ctrl/Cmd+Z)">Undo</button>
+							<button data-edit="redo"
+									title="Redo (Ctrl/Cmd+Y)">Redo</button>
+							<button data-edit="clearformat"
+									title="Clear Formatting" onClick="$('#editor').html($('#editor').text());">Clear Formatting</button>
+						</div>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+				<div id="editor" class="lead" placeholder="This is a basic example with a simple toolbar."></div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		
+		<form action="php/upload.php" method="post"
+					enctype="multipart/form-data" id='submitForm'>
+					<p style="text-align: center;">
+					
+					<button onClick="$('#mySubmission').val($('#editor').cleanHtml(true));$('#submitForm').submit();">Submit</button>
+			<input type='hidden' name='formSubmission' id='mySubmission'/>
+		</form>
+		<script type='text/javascript'>$('#editor').wysiwyg({
+			'form': {
+				'text-field': 'mySubmission',
+				'seperate-binary': false
+			}
+		});</script>
+	</body>
+</html>

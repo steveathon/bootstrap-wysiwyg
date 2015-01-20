@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="../bower_components/jquery.hotkeys/jquery.hotkeys.js"></script>
+		<script src="../src/wysiwyg-core.js"></script>
+	</head>
+	
+	<body>
+		<div class="container">
+			<h1>Basic editor, no fancy bits.</h1>
+			<div id="editor" class="lead" placeholder="This is a basic example with no toolbars."></div>
+			<p style="text-align: center;">
+				<button onClick="$('#editorPreview').html($('#editor').html());">Submit</button>
+			</p>
+		</div>
+		<b>Preview:</b>
+		<div id="editorPreview"></div>
+		<script type='text/javascript'>$('#editor').wysiwyg();</script>
+	</body>
+</html>
