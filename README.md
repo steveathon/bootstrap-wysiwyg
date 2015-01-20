@@ -67,7 +67,9 @@ You can create your own wrappers easily.
      * Create your own repository from scratch and just download jQuery, jQuery Hotkeys, and wysiwys-core. Then, copy index.html and the examples directory from wysiwyg-core to the root of your repo.
   1. Use the css from whichever framework you like to style the toolbar and enditor to your hearts content.
      * It is recommended that you start with the index.html and examples
-     * Be sure to run `gulp build`
+  1. Build your library
+     * The boilerplate repo includes a gulpfile that will build you library with and without dependecies
+     * Be sure to edit the gulpfile. Inline comments will help you out.
   1. Publish the repo to the world (if you like)
      * We like the naming convention framework-wysiwyg
      * Update the readme from the boiler plate
