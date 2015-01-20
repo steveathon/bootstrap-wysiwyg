@@ -58,7 +58,7 @@ See index.html for usage or check out https://github.com/steveathon/bootstrap-wy
 ### Creating Wrappers
 This library by itself is useful, but ugly out of the box. This was intentional. It makes absolutely no styling decisions for you.
 
-You can also use and create wrappers that extend this library seemlessly into any front-end framework, template, theme, or styling you like. For example, check out
+You can also use and create wrappers that extend this library seamlessly into any front-end framework, template, theme, or styling you like. For example, check out
 [bootstrap-wysiwyg]() and [foundation-wysiwyg]() which turn this library into a plugin.
 
 You can create your own wrappers easily.
