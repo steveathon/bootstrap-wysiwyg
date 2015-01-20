@@ -15,7 +15,7 @@ gulp.task('build_full', function() {
 
     gulp.src([
         'bower_components/jquery.hotkeys/jquery.hotkeys.js',
-        'bower_components/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js'
+        'src/wysiwyg-core.js'
     ])
         .pipe(concat('full.wysiwyg-core.min.js'))
         .pipe(uglify())
@@ -29,7 +29,7 @@ gulp.task('build_lib', function() {
     var concat = require('gulp-concat');
     var insert = require('gulp-insert');
 
-    gulp.src('bower_components/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js')
+    gulp.src('src/wysiwyg-core.js')
         .pipe(concat('wysiwyg-core.min.js'))
         .pipe(insert.prepend(copyright))
         .pipe(gulp.dest('dist'));
