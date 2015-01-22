@@ -21,7 +21,6 @@
     "CONTRIBUTING"
   ],
   "dependencies": {
-    "jquery": ">= 1.9.1",
     "jquery.hotkeys": "https://github.com/jeresig/jquery.hotkeys.git#master"
   }
 }
