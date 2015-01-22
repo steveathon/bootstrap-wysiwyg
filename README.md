@@ -1,6 +1,6 @@
 # jQuery wysiwyg-core
 Core jQuery WISWYG rich text editor based on browser execCommand. Includes NO styling or iconography.
-Use a wrapper library like [bootstrap-wysiwyg]() or [foundation-wysiwyg]() for quckstart packages.
+Use a wrapper library like [bootstrap-wysiwyg](https://github.com/chrismichaels84/bootstrap-wysiwyg) or [foundation-wysiwyg](http://github.com/chrismichaels84/foundation-wysiwyg) for quickstart packages.
 
 ## Features:
   * Very easy to build implementations for front end frameworks like foundation and bootstrap
