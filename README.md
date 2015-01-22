@@ -1,109 +1,79 @@
-bootstrap-wysiwyg
-=================
+# jQuery wysiwyg-core
+Core jQuery WISWYG rich text editor based on browser execCommand. Includes NO styling or iconography.
+Use a wrapper library like [bootstrap-wysiwyg](https://github.com/chrismichaels84/bootstrap-wysiwyg) or [foundation-wysiwyg](http://github.com/chrismichaels84/foundation-wysiwyg) for quickstart packages.
 
-Tiny Bootstrap and JQuery Based WISWYG rich text editor based on browser execCommand.
+## Features:
+  * Very easy to build implementations for front end frameworks like foundation and bootstrap
+  * Easy to add custom CSS styling.
+  * Automatically binds standard hotkeys for common operations on Mac and Windows
+  * Allows a custom built toolbar with no magic markup generators
+  * Does not force any styling - it's all up to you
+  * Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any supported [browser command](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla)
+  * Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV
+  * (Optionally) cleans up trailing whitespace and empty divs and spans
+  * Requires a modern browser (See SUPPORTED)
+  * Supports mobile devices (See SUPPORTED)
+  * Supports multiple instances
+  * HTML Sanitization
+  * Drag and drop files to insert images
+  * Supports image upload
+  * Supports image capture on mobile devices
+  * Events
 
-Originally built for [MindMup](http://www.mindmup.com).
+## Getting Started
+This is the core library. The only thing it depends on is jQuery and uses absolutely NO styling.
+It is actually, not recommended you use this file unless you want to create every bit of CSS styling.
+Instead, check out implimentations or wrappers for libraries like Bootstrap, Foundation, and Angular.
 
-Features
------------
-
-* Automatically binds standard hotkeys for common operations on Mac and Windows
-* Allows a custom built toolbar with no magic markup generators enabling the web site to use all the goodness of Bootstrap
-* Does not force any styling - it's all up to you
-* Uses standard browser features, no magic non-standard code, toolbar and keyboard configurable to execute any supported [browser command](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
-)
-* Does not create a separate frame, backup text areas etc - instead keeps it simple and runs everything inline in a DIV
-* (Optionally) cleans up trailing whitespace and empty divs and spans
-* Requires a modern browser (See SUPPORTED)
-* Supports mobile devices (See SUPPORTED)
-* Supports multiple instances
-* HTML Sanitization
-* Drag and drop files to insert images
-* Supports image upload
-* Supports image capture on mobile devices
-* Events
-
-Basic Usage
------------
-
-See http://mindmup.github.com/bootstrap-wysiwyg/
-
-Customising
------------
-You can assign commands to hotkeys and toolbar links. For a toolbar link, just put the execCommand command name into a data-edit attribute.
-For more info on execCommand, see http://www.quirksmode.org/dom/execCommand.html and https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
-
-```html
-<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-  <a class="btn btn-large" data-edit="bold"><i class="icon-bold"></i></a>
-</div>
+#### Get Via Bower (recommended)
+Add 
+```
+"dependencies": {
+    "jquery-wysiwyg-core": "http://github.com/chrismichaels84/wysiwyg-core.js.git#master"
+  },
 ```
 
-To pass arguments to a command, separate a command with a space.
+#### Or Download Zip File
+You may also download the latest release or the master branch from http://github.com/chrismichaels84/wysiwyg-core.js
 
-```html
-  <a data-edit="fontName Arial">...</a>
-```
+#### Installation and Dependencies
+Simplest way is to add `<script src="dist/full.wysiwyg-core.min.js"></script>` to your `<head>`
 
-You can also use input type='text' with a data-edit attribute. When the value
-is changed, the command from the data-edit attribute will be applied using the
-input value as the command argument
+This library depends on jQuery. Be sure to download a copy, use a CDN, or if you use bower, one will be installed for you.
 
-```html
-<input type="text" data-edit="createLink">
-```
-If the input type is file, when a file is selected the contents will be read in using the FileReader API and the data URL will be used as the argument
+The library also depends on [`jquery.hotkeys`](https://github.com/jeresig/jquery.hotkeys). If you use bower, this will be downloaded for you. If not, be sure to download this library as well.
 
-```html
-<input type="file" data-edit="insertImage">
-```
+There are two different files you can include in the `<head>` of your HTML file.
+ * `wysiwyg-core.min.js` is only wysiwyg library. You must include jquery.hotkeys **before** this file yourself.
+ * `full.wysiwyg-core.min.js` is the library and all dependencies (except jQuery) minified into one file.
 
-To change hotkeys, specify the map of hotkeys to commands in the hotKeys option. For example:
+In both cases, you must include jQuery yourself. I assume you are already doing this.
 
-```javascript
-$('#editor').wysiwyg({
-  hotKeys: {
-    'ctrl+b meta+b': 'bold',
-    'ctrl+i meta+i': 'italic',
-    'ctrl+u meta+u': 'underline',
-    'ctrl+z meta+z': 'undo',
-    'ctrl+y meta+y meta+shift+z': 'redo'
-  }
-});
-```
-
-Events
-------
-
-#### Change
-Fired whenever anything changes. See this example [events.html](examples/events.html)
-```javascript
-$('#editor').wysiwyg().on('change', function(){
-	alert('something has been changed on the editor');
-});
-```
-
-Styling for mobile devices
---------------------------
-
-This editor should work pretty well with mobile devices, but you'll need to consider the following things when styling it:
-- keyboards on mobile devices take a huge part of the screen
-- having to scroll the screen to touch the toolbar can cause the editing component to lose focus, and the mobile device keyboard might go away
-- mobile devices tend to move the screen viewport around to ensure that the focused element is shown, so it's best that the edit box is glued to the top
-
-For the content attachment editor on MindMup, we apply the following rules to mobile device styling:
-- edit box is glued to the top, so the focus doesn't jump around
-- toolbar is below the edit box
-- on portrait screens, edit box size is 50% of the screen
-- on landscape screens, edit box size is 30% of the screen
-- as the screen gets smaller, non-critical toolbar buttons get hidden into a "other" menu
-
-Dependencies
-------------
 * jQuery http://jquery.com/
 * jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
-* Bootstrap http://twitter.github.com/bootstrap/
+
+## Basic Usage
+See index.html for usage or check out https://github.com/steveathon/bootstrap-wysiwyg for the basics (this uses bootstrap styling)
+
+### Creating Wrappers
+This library by itself is useful, but ugly out of the box. This was intentional. It makes absolutely no styling decisions for you.
+
+You can also use and create wrappers that extend this library seamlessly into any front-end framework, template, theme, or styling you like. For example, check out
+[bootstrap-wysiwyg]() and [foundation-wysiwyg]() which turn this library into a plugin.
+
+You can create your own wrappers easily.
+  1. Lay down the boilerplate and include wysiwyg-core. You have a couple options for this.
+     * Fork or Clone [boiler-wysiwyg]() which uses bower for all dependencies. (Recommended)
+     * Create your own repository from scratch and just download jQuery, jQuery Hotkeys, and wysiwys-core. Then, copy index.html and the examples directory from wysiwyg-core to the root of your repo.
+  1. Use the css from whichever framework you like to style the toolbar and enditor to your hearts content.
+     * It is recommended that you start with the index.html and examples
+  1. Build your library
+     * The boilerplate repo includes a gulpfile that will build you library with and without dependecies
+     * Be sure to edit the gulpfile. Inline comments will help you out.
+  1. Publish the repo to the world (if you like)
+     * We like the naming convention framework-wysiwyg
+     * Update the readme from the boiler plate
+     * Let me know about your awesome port!
 
 Thanks to
 ------------
@@ -113,7 +83,6 @@ Thanks to
 
 History
 ------------
-
 The original version of this code (below) appeared to be no longer maintained. There
 were a number of outstanding changes which needed to be merged in and a few which
 included performance and feature improvements. These have now been included in this
@@ -122,6 +91,19 @@ master branch.
 I'll keep an eye out for future changes/improvements and pull them in as required.
 
 - Steve
+
+## Contributing
+To contribute to this project:
+  * **Fork or clone** this repository. All work is done in the development branch which may have many feature branches. The master is always the latest, production ready release.
+  * **Build** the library on your local machine.
+    1. Make sure that node, gulp, and bower are installed.
+    2. Run `gulp install` in the terminal. This will install all dependencies and build library files.
+    3. If this didn't work, just run `bower install` and `npm install` and `gulp build`
+  * **Commit** your changes. All active files are in the /src/ directory.
+  * **Build** again with `gulp build`
+  * **Issue a Pull Request** on this repository.
+  
+Be sure to be active. All discussion takes place in issue.
 
 Original Licence
 ------------

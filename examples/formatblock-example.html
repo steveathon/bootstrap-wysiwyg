@@ -1,137 +1,117 @@
+<!-- START HERE -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
+		<title>Tiny, opensource WYSIWYG rich text editor</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		
-		<link href="../external/google-code-prettify/prettify.css" rel="stylesheet" />
-		<link rel="stylesheet"
-			href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
-		<link
-			href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
-			rel="stylesheet" />
-		<script
-			src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="../external/jquery.hotkeys.js"></script>
-		<script
-			src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<script src="../external/google-code-prettify/prettify.js"></script>
-		
-		<link href="../css/style.css" rel="stylesheet" />
-		<script src="../src/bootstrap-wysiwyg.js"></script>
+
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="../bower_components/jquery.hotkeys/jquery.hotkeys.js"></script>
+		<script src="../src/wysiwyg-core.js"></script>
 	</head>
 	
 	<body>
-		<div class="container">
-		
 			<h1>Simple HTML Editor</h1>
-			<div class="btn-toolbar" data-role="editor-toolbar"
-				data-target="#editor">
-				<div class="btn-group">
-					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-						title="Font Size"><i class="icon-text-height"></i>&nbsp;<b
-						class="caret"></b>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a data-edit="fontSize 5"><font size="5">Huge</font>
-						</a>
-						</li>
-						<li><a data-edit="fontSize 3"><font size="3">Normal</font>
-						</a>
-						</li>
-						<li><a data-edit="fontSize 1"><font size="1">Small</font>
-						</a>
-						</li>
-					</ul>
-				</div>
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="bold"
-						title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i>
-					</a> <a class="btn btn-default" data-edit="italic"
-						title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i>
-					</a> <a class="btn btn-default" data-edit="strikethrough"
-						title="Strikethrough"><i class="icon-strikethrough"></i>
-					</a> <a class="btn btn-default" data-edit="underline"
-						title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i>
-					</a>
-				</div>
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="insertunorderedlist"
-						title="Bullet list"><i class="icon-list-ul"></i>
-					</a> <a class="btn btn-default" data-edit="insertorderedlist"
-						title="Number list"><i class="icon-list-ol"></i>
-					</a> <a class="btn btn-default" data-edit="outdent"
-						title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i>
-					</a> <a class="btn btn-default" data-edit="indent" title="Indent (Tab)"><i
-						class="icon-indent-right"></i>
-					</a>
-				</div>
-				
-				<div class="btn-group">
-					<a class="btn btn-large" data-edit="format-pre">pre</a>
-					<a class="btn btn-large" data-edit="format-address">address</a>
-					<a class="btn btn-large" data-edit="format-h1">h1</a>
-					<a class="btn btn-large" data-edit="format-h2">h2</a>
-					<a class="btn btn-large" data-edit="format-h3">h3</a>
-					<a class="btn btn-large" data-edit="format-h4">h4</a>
-					<a class="btn btn-large" data-edit="format-h5">h5</a>
-					<a class="btn btn-large" data-edit="format-p">p</a>
-					<a class="btn btn-large" data-edit="format-blockquote">block</a>
-					<a class="btn btn-large" data-edit="format-div">div</a>
-				</div>
-				
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="justifyleft"
-						title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i>
-					</a> <a class="btn btn-default" data-edit="justifycenter"
-						title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i>
-					</a> <a class="btn btn-default" data-edit="justifyright"
-						title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i>
-					</a> <a class="btn btn-default" data-edit="justifyfull"
-						title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i>
-					</a>
-				</div>
-				<div class="btn-group">
-					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-						title="Hyperlink"><i class="icon-link"></i>
-					</a>
-					<div class="dropdown-menu input-append">
-						<input class="span2" placeholder="URL" type="text"
-							data-edit="createLink" />
-						<button class="btn" type="button">Add</button>
-					</div>
-				</div>
+			<div id="example" style="padding: 5px;">
+				<!-- Toolbar -->
+				<!-- The Toolbar and the Editor contain no styling from bootstrap. Only inline CSS for layout -->
+				<div data-role="editor-toolbar" data-target="#editor" style="float: left; border-right: 2px solid black; padding: 5px;">
+					<div style="float:left; margin-left: 10px;">
+						<!-- Basic Formatting -->
+						<div>
+							<strong>Format:</strong>
+								<button data-edit="format-pre">pre</button>
+								<button data-edit="format-address">address</button>
+								<button data-edit="format-h1">h1</button>
+								<button data-edit="format-h2">h2</button>
+								<button data-edit="format-h3">h3</button>
+								<button data-edit="format-h4">h4</button>
+								<button data-edit="format-h5">h5</button>
+								<button data-edit="format-p">p</button>
+								<button data-edit="format-blockquote">block</button>
+								<button data-edit="format-div">div</button>
 
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="unlink"
-						title="Remove Hyperlink"><i class="icon-cut"></i>
-					</a> <a class="btn btn-default"
-						title="Insert picture (or just drag & drop)" id="pictureBtn">
-						<i class="icon-picture"></i> <input type="file"
-						data-role="magic-overlay" data-target="#pictureBtn"
-						data-edit="insertImage" /> </a>
+							<br><br><strong>Basic Formatting: </strong><br>
+							<button data-edit="bold"
+									title="Bold (Ctrl/Cmd+B)">Bold</button>
+							<button data-edit="italic"
+									title="Italic (Ctrl/Cmd+I)">Italic</button>
+							<button data-edit="strikethrough"
+									title="Strikethrough">Strikethrough</button>
+							<button data-edit="underline"
+									title="Underline (Ctrl/Cmd+U)">Underline</button>
+						</div>
+
+						<!-- Lists -->
+						<div>
+							<br><strong>Lists</strong><br>
+							<button data-edit="insertunorderedlist"
+									title="Bullet list">Bullet List</button>
+							<button data-edit="insertorderedlist"
+									title="Number list">Number list</button>
+							<button data-edit="outdent"
+									title="Reduce indent (Shift+Tab)">Reduce indent</button>
+							<button data-edit="indent" title="Indent (Tab)">Indent</button>
+						</div>
+
+						<!-- Alignment -->
+						<div>
+							<br><strong>Alignment</strong><br>
+							<button data-edit="justifyleft"
+									title="Align Left (Ctrl/Cmd+L)">Align Left</button>
+							<button data-edit="justifycenter"
+									title="Center (Ctrl/Cmd+E)">Align Center</button>
+							<button data-edit="justifyright"
+									title="Align Right (Ctrl/Cmd+R)">Align Right</button>
+							<button data-edit="justifyfull"
+									title="Justify (Ctrl/Cmd+J)">Justify</button>
+						</div>
+
+						<!-- Hyperlink -->
+						<div>
+							<br><strong>Link</strong>
+							<div>
+								<input placeholder="URL" type="text"
+									   data-edit="createLink" />
+								<button type="button">Add Link</button>
+								<button data-edit="unlink"
+										title="Remove Hyperlink">Remove Hyperlink</button>
+							</div>
+						</div>
+
+						<!-- Images -->
+						<div>
+							<br><button id="pictureBtn">
+							Insert picture </button>
+							<input type="file"
+								   data-role="magic-overlay" data-target="#pictureBtn"
+								   data-edit="insertImage" />
+							(Or just drag and drop)
+						</div>
+
+						<!-- Actions -->
+						<div>
+							<br><strong>Actions: </strong>
+							<button data-edit="undo"
+									title="Undo (Ctrl/Cmd+Z)">Undo</button>
+							<button data-edit="redo"
+									title="Redo (Ctrl/Cmd+Y)">Redo</button>
+							<button data-edit="clearformat"
+									title="Clear Formatting" onClick="$('#editor').html($('#editor').text());">Clear Formatting</button>
+						</div>
+					</div>
+					<div style="clear: both;"></div>
 				</div>
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="undo"
-						title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i>
-					</a> <a class="btn btn-default" data-edit="redo"
-						title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i>
-					</a>
-					
-					<a class="btn btn-default" data-edit="html"
-						title="Clear Formatting"><i class='glyphicon glyphicon-pencil'></i>
-					</a>
-				</div>
+				<div id="editor" class="lead" placeholder="This is a basic example with a simple toolbar."></div>
 			</div>
-			<div id="editor" class="lead" placeholder="This is a basic example with a simple toolbar."></div>
-			<div id="editorPreview"></div>
+			<div style="clear:both"></div>
 			<p style="text-align: center;">
-					<a class="btn btn-large btn-default jumbo"
-						href="#!" onClick="$('#editorPreview').html($('#editor').html());">Submit</a>
-				</p>
-		</div>
-		<script type='text/javascript'>$('#editor').wysiwyg();</script>
+				<button onClick="$('#editorPreview').html($('#editor').html());">Submit</button>
+			</p>
+			<b>Preview:</b>
+			<div id="editorPreview"></div>
+			<script type='text/javascript'>$('#editor').wysiwyg();</script>
 	</body>
 </html>
