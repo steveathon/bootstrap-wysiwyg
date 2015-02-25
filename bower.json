@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "jquery": ">= 1.9.1",
-    "jquery.hotkeys": "*",
+    "jquery.hotkeys": "https://github.com/jeresig/jquery.hotkeys.git#master",
     "fontawesome": ">= 3.0.0",
     "bootstrap": ">= 2.0",
     "google-code-prettify": ">= 1.0.1"
