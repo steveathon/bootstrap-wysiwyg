@@ -3,7 +3,9 @@ bootstrap-wysiwyg
 
 Tiny Bootstrap and JQuery Based WISWYG rich text editor based on browser execCommand.
 
-Originally built for [MindMup](http://www.mindmup.com).
+This project was originally built for [MindMup](http://www.mindmup.com) and has now been adapted and modified to suit a wide range of projects.
+
+Development is active, and ongoing.
 
 Features
 -----------
@@ -27,7 +29,7 @@ Features
 Basic Usage
 -----------
 
-See http://mindmup.github.com/bootstrap-wysiwyg/
+See https://steveathon.github.com/bootstrap-wysiwyg
 
 Customising
 -----------
