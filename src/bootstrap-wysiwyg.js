@@ -3,7 +3,7 @@
  *
  * "Name"    = 'bootstrap-wysiwyg'
  * "Author"  = 'Various, see LICENCE'
- * "Version" = '1.0.1'
+ * "Version" = '1.0.3-beta'
  * "About"   = 'Tiny Bootstrap and JQuery Based WISWYG rich text editor.'
  */
 (function ($) {
