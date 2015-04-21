@@ -1,6 +1,26 @@
 bootstrap-wysiwyg
 =================
 
+Important information for Github requests/issues
+------------------------------------------------
+
+Please do not submit issues/comments to this repo. Instead, submit it to
+
+https://github.com/steveathon/bootstrap-wysiwyg
+
+Although this is the original repository, we need the project to be tiny and
+focused on the needs of the MindMup tool, which means that we do not want to
+complicate it with all the various bits and pieces needed for other usages and
+older browsers.
+
+Meanwhile, Steve was kind enough to create a fork, backport it to older
+browsers, extend and integrate all kinds of changes. Steve's fork does not need
+to stay small, slim and focused, so please use his repo for all your needs if
+this plugin does provide out of the box
+
+About the editor
+----------------
+
 Tiny bootstrap-compatible WISWYG rich text editor, based on browser execCommand, built originally for [MindMup](http://www.mindmup.com). Here are the key features:
 
 * Automatically binds standard hotkeys for common operations on Mac and Windows
