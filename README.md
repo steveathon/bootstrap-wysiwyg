@@ -1,7 +1,7 @@
 bootstrap-wysiwyg
 =================
 
-Tiny Bootstrap and JQuery Based WYSIWYG rich text editor based on browser execCommand.
+A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.
 
 This project was originally built for [MindMup](http://www.mindmup.com) and has now been adapted and modified to suit a wide range of projects.
 

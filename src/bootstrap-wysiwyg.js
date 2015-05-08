@@ -4,7 +4,7 @@
  * "Name"    = 'bootstrap-wysiwyg'
  * "Author"  = 'Various, see LICENCE'
  * "Version" = '1.0.3-beta'
- * "About"   = 'Tiny Bootstrap and JQuery Based WISWYG rich text editor.'
+ * "About"   = 'A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.'
  */
 (function ($) {
 	'use strict';
