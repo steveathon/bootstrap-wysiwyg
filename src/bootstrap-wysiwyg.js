@@ -15,12 +15,12 @@
 		var context, args, timeout, result;
 		var previous = 0;
 		var later = function() {
-			previous = new Date;
+			previous = new Date();
 			timeout = null;
 			result = func.apply(context, args);
 		};
 		return function() {
-			var now = new Date;
+			var now = new Date();
 			var remaining = wait - (now - previous);
 			context = this;
 			args = arguments;
@@ -34,7 +34,7 @@
 			}
 			return result;
 		};
-	}
+	};
 	var readFileIntoDataUrl = function (fileInfo) {
 		var loader = $.Deferred(),
 			fReader = new FileReader();
@@ -160,7 +160,7 @@
                     }
                 }
                 else if (document.selection && selectedRange) {
-                	selectedRange.select()
+                	selectedRange.select();
                 }
 			},
 
@@ -168,7 +168,7 @@
             toggleHtmlEdit = function(a) {
 				if ( $(editor).data("wysiwyg-html-mode") !== true ) {
 					var oContent = $(editor).html();
-					var editorPre = $( "<pre />" )
+					var editorPre = $( "<pre />" );
                 	$(editorPre).append( document.createTextNode( oContent ) );
                 	$(editorPre).attr('contenteditable',true);
                 	$(editor).html(' ');
@@ -269,21 +269,21 @@
 		bindHotkeys(options.hotKeys);
 
 		// Support placeholder attribute on the DIV
-		if ($(this).attr('placeholder') != '') {
+		if ($(this).attr('placeholder') !== '') {
 			$(this).addClass('placeholderText');
 			$(this).html($(this).attr('placeholder'));
 			$(this).bind('focus',function(e) {
-				if ( $(this).attr('placeholder') != '' && $(this).text() == $(this).attr('placeholder') ) {
+				if ( $(this).attr('placeholder') !== '' && $(this).text() == $(this).attr('placeholder') ) {
 					$(this).removeClass('placeholderText');
 					$(this).html('');
 				}
 			});
 			$(this).bind('blur',function(e) {
-				if ( $(this).attr('placeholder') != '' && $(this).text() == '' ) {
+				if ( $(this).attr('placeholder') !== '' && $(this).text() === '' ) {
 					$(this).addClass('placeholderText');
 					$(this).html($(this).attr('placeholder'));
 				}
-			})
+			});
 		}
 
 		if (options.dragAndDropImages) {
