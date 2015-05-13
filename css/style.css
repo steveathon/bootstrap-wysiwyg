@@ -3,7 +3,7 @@
  */
 
 
-#editor {
+#editor, #first-editor, #second-editor {
 	max-height: 250px;
 	height: 250px;
 	background-color: white;
