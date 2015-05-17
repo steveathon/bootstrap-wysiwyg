@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />	
+  	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>A tiny, opensource, Bootstrap WYSIWYG rich text editor</title>	
 		<link href="../external/google-code-prettify/prettify.css" rel="stylesheet" />
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" />
@@ -16,7 +17,7 @@
 			<div class="btn-toolbar" data-role="editor-toolbar"
 				data-target="#editor">
 				<div class="btn-group">
-					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+					<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
 						<li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
@@ -49,7 +50,7 @@
 					</div>
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+					<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-unlink"></i></a>
 					<a class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn">
 						<i class="fa fa-picture-o"></i> <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
 					</a>

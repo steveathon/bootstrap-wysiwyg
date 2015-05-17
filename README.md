@@ -1,7 +1,9 @@
 bootstrap-wysiwyg
 =================
+[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/steveathon/bootstrap-wysiwyg)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/steveathon/bootstrap-wysiwyg)
 
-Tiny Bootstrap and JQuery Based WYSIWYG rich text editor based on browser execCommand.
+A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.
 
 This project was originally built for [MindMup](http://www.mindmup.com) and has now been adapted and modified to suit a wide range of projects.
 
