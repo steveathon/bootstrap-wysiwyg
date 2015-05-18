@@ -29,4 +29,3 @@ gulp.task('minify', function() {
 gulp.task('watch', function() {
     gulp.watch('src/*.js', ['lint', 'minify']);
 });
-
