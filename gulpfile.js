@@ -3,6 +3,7 @@ var gulp = require('gulp');
 
 // Include our plugins
 var jshint = require('gulp-jshint');
+var bootlint = require('gulp-bootlint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -14,31 +15,24 @@ var checkPages = require('check-pages');
 // Default task
 gulp.task('default', ['js', 'html', 'bootstrap', 'links', 'minify']);
 
-// Lint our code
+// Lint our JavaScript files
 gulp.task('js', function() {
-	return gulp.src('src/*js')
+	return gulp.src('src/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });
 
 gulp.task('html', function() {
-	return gulp.src(['index.html', 'examples/*.html'])
+	return gulp.src(['*.html', 'examples/*.html'])
 	.pipe(html5lint());
 	//.pipe(validator())
 	//.pipe(gulp.dest('validation/'));
 });
 
+// Lint our Bootstrap files
 gulp.task('bootstrap', function() {
-	gulp.src(['index.html', 'examples/*.html'])
+	return gulp.src(['*.html', 'examples/*.html'])
 	.pipe(bootlint());
-});
-
-// Minify our JS
-gulp.task('minify', function() {
-    return gulp.src('src/*.js')
-    	.pipe(uglify())
-        .pipe(rename('bootstrap-wysiwyg.min.js'))
-        .pipe(gulp.dest('js'));
 });
 
 // Check for broken and invalid links in the web pages
@@ -53,6 +47,14 @@ gulp.task('links', function(callback) {
 	};
 
 	checkPages(console, options, callback);
+});
+
+// Minify our JS
+gulp.task('minify', function() {
+    return gulp.src('src/*.js')
+    	.pipe(uglify())
+        .pipe(rename('bootstrap-wysiwyg.min.js'))
+        .pipe(gulp.dest('js'));
 });
 
 
