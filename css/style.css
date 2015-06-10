@@ -56,3 +56,21 @@ div[data-role="editor-toolbar"] {
 .placeholderText {
 	color: #777;
 }
+
+/*
+	Font Sizes 
+	fs represents the font-size attribute; therefore,
+	fs-five would be the equivalent to font-size: 5;	
+*/
+
+.fs-One {
+	font-size: x-small;
+}
+
+.fs-Three {
+	font-size: medium;
+}
+
+.fs-Five {
+	font-size: x-large;
+}
