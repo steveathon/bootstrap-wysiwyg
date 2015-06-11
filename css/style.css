@@ -53,6 +53,11 @@ div[data-role="editor-toolbar"] {
 .btn-toolbar {
 	padding: 10px 0px 10px 0px;
 }
+
+[contentEditable=true]:empty:not(:focus):before {
+	content:attr(data-placeholder)
+}
+
 .placeholderText {
 	color: #777;
 }

@@ -50,12 +50,12 @@
 						<button class="btn" type="button">Add</button>
 					</div>
 				</div>
-
 				<div class="btn-group">
 					<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-unlink"></i></a>
-					<a class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn">
-						<i class="fa fa-picture-o"></i> <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-					</a>
+					<span class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn">
+						<i class="fa fa-picture-o"></i>
+						<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+					</span>
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
@@ -66,11 +66,8 @@
 			<div id="editorPreview"></div>
 			
 			<form action="php/upload.php" method="post" enctype="multipart/form-data" id='submitForm'>
-				<p style="text-align: center;">	
-					<div id="editor" class="lead" placeholder="This is a basic example with a simple toolbar."></div>
-						<a class="btn btn-large btn-default jumbo" 
-							href="#!" onClick="$('#mySubmission').val($('#editor').cleanHtml(true));$('#submitForm').submit();">Submit</a>
-				</p>
+					<div id="editor" class="lead" data-placeholder="This is a basic example with a simple toolbar."></div>
+					<a class="btn btn-large btn-default jumbo" href="#!" onClick="$('#mySubmission').val($('#editor').cleanHtml(true));$('#submitForm').submit();">Submit</a>
 				<input type='hidden' name='formSubmission' id='mySubmission'/>
 			</form>
 		</div>

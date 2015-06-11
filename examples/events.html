@@ -52,16 +52,16 @@
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-unlink"></i></a>
-					<a class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn">
+					<span class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn">
 						<i class="fa fa-picture-o"></i> <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-					</a>
+					</span>
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
 					<a class="btn btn-default" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
 				</div>
 			</div>
-			<div id="editor" class="lead" placeholder="This is a basic example with no toolbars."></div>
+			<div id="editor" class="lead" data-placeholder="This is a basic example with no toolbars."></div>
 			<h2>Live Preview</h2>
 			<div id="editorPreview"></div>
 			<h2>Events fired:</h2>

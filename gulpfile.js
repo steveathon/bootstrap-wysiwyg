@@ -40,7 +40,14 @@ gulp.task('links', function(callback) {
 	var options = {
 		pageUrls: [
 			'index.html',
-			'examples/**/*.html'
+			'examples/basic.html',
+			'examples/clear-formatting.html',
+			'examples/events.html',
+			'examples/form-post.html',
+			'examples/formatblock-example.html',
+			'examples/html-editor.html',
+			'examples/multiple-editors.html',
+			'examples/simple-toolbar.html'
 		],
 		checkLinks: true,
 		summary: true
