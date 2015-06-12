@@ -1,5 +1,17 @@
 * Add change event callback
 
+1.0.3 - Bug fixes and updated content
+* General bug fixes and improvements
+* Added gulpfile.js to streamline 
+* Created example
+	- Multiple editors (on a single page)
+* Updated content
+	- Updated jquery.hotkeys
+	- Updated Bootstrap to version 3.3.4
+	- Updated Font Awesome to version 4.3.0
+	- Updated jQuery to version 2.1.4
+	- Updated Google Code Prettify to version 1.0.4
+
 1.0.2 - Merged some extras
 
 * Added support for placeholder attribute as requested in issue #143 and #136
