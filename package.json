@@ -1,0 +1,38 @@
+{
+  "name": "bootstrap-wysiwyg",
+  "version": "1.0.3-beta",
+  "description": "A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.",
+  "main": "gulpfile.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steveathon/bootstrap-wysiwyg.git"
+  },
+  "keywords": [
+    "css",
+    "js",
+    "responsive",
+    "front-end",
+    "web",
+    "wysiwyg",
+    "editor"
+  ],
+  "author": "Steve King <https://github.com/steveathon>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/steveathon/bootstrap-wysiwyg/issues"
+  },
+  "homepage": "https://github.com/steveathon/bootstrap-wysiwyg",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}
