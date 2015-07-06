@@ -7,7 +7,7 @@
 		<title>A tiny, opensource, Bootstrap WYSIWYG rich text editor</title>
 		<meta name="keywords" content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
 		<meta name="description" content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
-		<link href="external/google-code-prettify/prettify.css" rel="stylesheet" />
+		<link href="bower_components/google-code-prettify/src/prettify.css" rel="stylesheet" />
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" />
 		<link href="css/style.css" rel="stylesheet" />
@@ -37,9 +37,9 @@
 							class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-							<li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-							<li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+							<li><a data-edit="fontSize 5" class="fs-Five">Huge</a></li>
+							<li><a data-edit="fontSize 3" class="fs-Three">Normal</a></li>
+							<li><a data-edit="fontSize 1" class="fs-One">Small</a></li>
 						</ul>
 					</div>
 					<div class="btn-group">
@@ -63,24 +63,24 @@
 					<div class="btn-group">
 						<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
 						<div class="dropdown-menu input-append">
-							<input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+							<input placeholder="URL" type="text" data-edit="createLink" />
 							<button class="btn" type="button">Add</button>
 						</div>
 					</div>
 
 					<div class="btn-group">
 						<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-unlink"></i></a>
-						<a class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn"> <i class="fa fa-picture-o"></i>
-							<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" /></a>
+						<span class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn"> <i class="fa fa-picture-o"></i>
+							<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" /></span>
 					</div>
 					<div class="btn-group">
 						<a class="btn btn-default" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
 						<a class="btn btn-default" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
 					</div>
-					<input class="pull-right" type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" />
+					<input class="pull-right" type="text" data-edit="inserttext" id="voiceBtn" />
 				</div>
 
-				<div id="editor" class="lead" placeholder="Go ahead&hellip;"></div>
+				<div id="editor" class="lead" data-placeholder="Go ahead&hellip;"></div>
 			</div>
 
 			<div class="row">
@@ -166,9 +166,9 @@
 		</a>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="external/jquery.hotkeys.js"></script>
+		<script src="bower_components/jquery.hotkeys/jquery.hotkeys.js"></script>
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="external/google-code-prettify/prettify.js"></script>
+		<script src="bower_components/google-code-prettify/src/prettify.js"></script>
 		<script src="src/bootstrap-wysiwyg.js"></script>
 		<script>
 			$(function()

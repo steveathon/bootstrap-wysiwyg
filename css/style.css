@@ -27,7 +27,7 @@
     box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
 }
 
-#voiceBtn {
+.voiceBtn {
 	width: 20px;
 	color: transparent;
 	background-color: transparent;
@@ -53,6 +53,29 @@ div[data-role="editor-toolbar"] {
 .btn-toolbar {
 	padding: 10px 0px 10px 0px;
 }
+
+[contentEditable=true]:empty:not(:focus):before {
+	content:attr(data-placeholder)
+}
+
 .placeholderText {
 	color: #777;
+}
+
+/*
+	Font Sizes 
+	fs represents the font-size attribute; therefore,
+	fs-five would be the equivalent to font-size: 5;	
+*/
+
+.fs-One {
+	font-size: x-small;
+}
+
+.fs-Three {
+	font-size: medium;
+}
+
+.fs-Five {
+	font-size: x-large;
 }

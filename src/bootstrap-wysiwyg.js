@@ -84,7 +84,7 @@
 							command = commandArr[0];
 
 						// If the command has an argument and its value matches this button. == used for string/number comparison
-						if (commandArr.length > 1 && document.queryCommandEnabled(command) && document.queryCommandValue(command) == commandArr[1]) {
+						if (commandArr.length > 1 && document.queryCommandEnabled(command) && document.queryCommandValue(command) === commandArr[1]) {
 							$(this).addClass(options.activeToolbarClass);
 						// Else if the command has no arguments and it is active
 						} else if (commandArr.length === 1 && document.queryCommandEnabled(command) && document.queryCommandState(command)) {
@@ -103,10 +103,10 @@
 
 				var parts = commandWithArgs.split('-');
 
-				if ( parts.length == 1 ) {
+				if ( parts.length === 1 ) {
 					document.execCommand(command, 0, args);
 				}
-				else if ( parts[0] == 'format' && parts.length == 2) {
+				else if ( parts[0] === 'format' && parts.length === 2 ) {
 					document.execCommand('formatBlock', false, parts[1] );
 				}
 
@@ -165,7 +165,7 @@
 			},
 
 			// Adding Toggle HTML based on the work by @jd0000, but cleaned up a little to work in this context.
-            toggleHtmlEdit = function(a) {
+            toggleHtmlEdit = function() {
 				if ( $(editor).data("wysiwyg-html-mode") !== true ) {
 					var oContent = $(editor).html();
 					var editorPre = $( "<pre />" );
@@ -272,13 +272,13 @@
 		if ($(this).attr('placeholder') !== '') {
 			$(this).addClass('placeholderText');
 			$(this).html($(this).attr('placeholder'));
-			$(this).bind('focus',function(e) {
-				if ( $(this).attr('placeholder') !== '' && $(this).text() == $(this).attr('placeholder') ) {
+			$(this).bind('focus',function() {
+				if ( $(this).attr('placeholder') !== '' && $(this).text() === $(this).attr('placeholder') ) {
 					$(this).removeClass('placeholderText');
 					$(this).html('');
 				}
 			});
-			$(this).bind('blur',function(e) {
+			$(this).bind('blur',function() {
 				if ( $(this).attr('placeholder') !== '' && $(this).text() === '' ) {
 					$(this).addClass('placeholderText');
 					$(this).html($(this).attr('placeholder'));
