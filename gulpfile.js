@@ -9,7 +9,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var bootlint = require('gulp-bootlint');
 var html5lint = require('gulp-html5-lint');
-var validator = require('gulp-html');
+
 var checkPages = require('check-pages');
 
 // Default task
@@ -25,8 +25,6 @@ gulp.task('js', function() {
 gulp.task('html', function() {
 	return gulp.src(['*.html', 'examples/*.html'])
 	.pipe(html5lint());
-	//.pipe(validator())
-	//.pipe(gulp.dest('validation/'));
 });
 
 // Lint our Bootstrap files

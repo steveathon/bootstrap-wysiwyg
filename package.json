@@ -2,6 +2,15 @@
   "name": "bootstrap-wysiwyg",
   "version": "1.0.4",
   "description": "A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.",
+  "contributors": [{
+      "name" : "Steve King",
+      "url": "https://github.com/steveathon"
+    },
+    {
+      "name": "Tyler Hughes",
+      "url": "https://github.com/RandomlyKnighted"
+    }
+  ],
   "dependencies": {
   },
   "devDependencies": {
@@ -9,11 +18,19 @@
     "gulp": "^3.9.0",
     "gulp-bootlint": "^0.5.0",
     "gulp-concat": "^2.5.2",
-    "gulp-html": "^0.4.0",
     "gulp-html5-lint": "^1.0.1",
     "gulp-jshint": "^1.11.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0"
+    "gulp-uglify": "^1.2.0",
+    "grunt": "^0.4.5",
+    "grunt-check-pages": "^0.9.0",
+    "grunt-bootlint": "^0.9.1",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-htmllint": "^0.2.7",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-rename": "^0.0.3",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1"
   },
   "repository": {
     "type": "git",
@@ -28,8 +45,8 @@
     "wysiwyg",
     "editor"
   ],
-  "author": "",
   "license": "MIT",
+  "private": false,
   "bugs": {
     "url": "https://github.com/steveathon/bootstrap-wysiwyg/issues"
   },
