@@ -37,7 +37,7 @@ $('#editor').wysiwyg();
 
 Don't forget to style your editor div:
 
-```html
+```css
 #editor {overflow:scroll; max-height:300px}
 ```
 
