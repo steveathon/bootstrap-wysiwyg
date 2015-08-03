@@ -2,7 +2,7 @@
  * Provides full Bootstrap based, multi-instance WYSIWYG editor.
  *
  * "Name"    = 'bootstrap-wysiwyg'
- * "Author"  = 'Various, see LICENCE'
+ * "Author"  = 'Various, see LICENSE'
  * "Version" = '1.0.4'
  * "About"   = 'A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.'
  */
