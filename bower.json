@@ -18,10 +18,10 @@
   ],
   "ignore": [
     ".*",
-    "external/",
-    "index.css",
     "index.html",
-    "CONTRIBUTING"
+    "CHANGES",
+    "LICENSE",
+    "SUPPORTED"
   ],
   "dependencies": {
     "jquery": "~2.1.4",
