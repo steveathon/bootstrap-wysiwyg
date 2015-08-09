@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-wysiwyg",
   "description": "A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.",
-  "version": "1.0.3-beta",
+  "version": "1.0.3",
   "keywords": [
     "css",
     "js",
@@ -18,10 +18,10 @@
   ],
   "ignore": [
     ".*",
-    "external/",
-    "index.css",
     "index.html",
-    "CONTRIBUTING"
+    "CHANGES",
+    "LICENSE",
+    "SUPPORTED"
   ],
   "dependencies": {
     "jquery": "~2.1.4",
