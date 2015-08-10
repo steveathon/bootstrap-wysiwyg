@@ -16,16 +16,15 @@
 		<script src="../bower_components/google-code-prettify/src/prettify.js"></script>
 		<script src="../src/bootstrap-wysiwyg.js"></script>
 	</head>
-	
 	<body>
 		<div class="container">
 			<h1>Basic editor, no fancy bits.</h1>
 			<div id="editor" class="lead" data-placeholder="This is a basic example with no toolbars."></div>
 			<div id="editorPreview"></div>
 			<p style="text-align: center;">
-					<a class="btn btn-large btn-default jumbo"
-						href="#!" onClick="$('#editorPreview').html($('#editor').html());">Submit</a>
-				</p>
+				<a class="btn btn-large btn-default jumbo"
+				   href="#!" onClick="$('#editorPreview').html($('#editor').html());">Submit</a>
+			</p>
 		</div>
 		<script type='text/javascript'>$('#editor').wysiwyg();</script>
 	</body>

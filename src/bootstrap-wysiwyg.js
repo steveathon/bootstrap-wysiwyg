@@ -6,6 +6,7 @@
  * "Version" = '1.0.4'
  * "About"   = 'A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.'
  */
+
 (function ($) {
 	'use strict';
 	/** underscoreThrottle()

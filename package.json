@@ -23,7 +23,6 @@
     "grunt-contrib-rename": "^0.0.3",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-htmllint": "^0.2.7",
     "grunt-release": "^0.13.0",
     "gulp": "^3.9.0",
     "gulp-bootlint": "^0.5.0",
