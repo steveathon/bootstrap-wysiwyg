@@ -27,7 +27,7 @@
     "jquery": "~2.1.4",
     "jquery.hotkeys": "https://github.com/jeresig/jquery.hotkeys.git#master",
     "fontawesome": "~4.3.0",
-    "bootstrap": "~3.3.4",
+    "bootstrap": "~3.3.5",
     "google-code-prettify": "~1.0.4"
   }
 }
