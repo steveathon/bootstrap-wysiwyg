@@ -73,6 +73,12 @@
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="../bower_components/google-code-prettify/src/prettify.js"></script>
 		<script src="../src/bootstrap-wysiwyg.js"></script>
-		<script type='text/javascript'>$('#editor').wysiwyg();</script>
+		<script type='text/javascript'>
+			$('#editor').wysiwyg();
+			
+			$(".dropdown-menu > input").click(function (e) {
+        		e.stopPropagation();
+    		});
+		</script>
 	</body>
 </html>
