@@ -147,6 +147,10 @@
 		<script type='text/javascript'>
 			$('#first-editor').wysiwyg();
 			$('#second-editor').wysiwyg();
+			
+			$(".dropdown-menu > input").click(function (e) {
+        		e.stopPropagation();
+    		});
 		</script>
 	</body>
 </html>
