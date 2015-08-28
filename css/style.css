@@ -2,9 +2,14 @@
  * of the key things about the widget is that it allows you to do your own styling!
  */
 
+* {
+	box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
 #editor {
-	max-height: 250px;
-	height: 250px;
+	max-height: 100px;
+	height: 100px;
 	background-color: white;
 	border-collapse: separate; 
 	border: 1px solid rgb(204, 204, 204); 

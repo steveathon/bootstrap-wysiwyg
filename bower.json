@@ -1,0 +1,26 @@
+{
+  "name": "bootstrap-wysiwyg",
+  "description": "A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.",
+  "version": "1.0.3-rc",
+  "keywords": [
+    "css",
+    "js",
+    "responsive",
+    "front-end",
+    "web",
+    "wysiwyg",
+    "editor"
+  ],
+  "homepage": "https://github.com/steveathon/bootstrap-wysiwyg",
+  "private": true,
+  "ignore": [
+    ".*",
+    "external/",
+    "index.css",
+    "index.html",
+    "CONTRIBUTING"
+  ],
+  "dependencies": {
+    "jquery.hotkeys": "https://github.com/jeresig/jquery.hotkeys.git#master"
+  }
+}
