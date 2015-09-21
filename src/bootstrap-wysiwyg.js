@@ -12,25 +12,41 @@
 	/** underscoreThrottle()
 	 * 	From underscore http://underscorejs.org/docs/underscore.html
 	 */
-	var underscoreThrottle = function(func, wait) {
-		var context, args, timeout, result;
+	var underscoreThrottle = function(func, wait, options) {
+		var context, args, result;
+		var timeout = null;
 		var previous = 0;
+		if (!options) {
+			options = {};
+		}
 		var later = function() {
-			previous = new Date();
+			previous = options.leading === false ? 0 : $.now();
 			timeout = null;
 			result = func.apply(context, args);
+			if (!timeout) {
+				context = args = null;
+			}
 		};
 		return function() {
-			var now = new Date();
+			var now = $.now();
+			if (!previous && options.leading === false) {
+				previous = now;
+			}
 			var remaining = wait - (now - previous);
 			context = this;
 			args = arguments;
-			if (remaining <= 0) {
-				clearTimeout(timeout);
-				timeout = null;
+			if (remaining <= 0 || remaining > wait) {
+				if (timeout) {
+					clearTimeout(timeout);
+					timeout = null;
+				}
 				previous = now;
 				result = func.apply(context, args);
-			} else if (!timeout) {
+				if (!timeout) {
+					context = args = null;
+				}
+			}
+			else if (!timeout && options.trailing !== false) {
 				timeout = setTimeout(later, remaining);
 			}
 			return result;
@@ -74,13 +90,12 @@
 	};
 	$.fn.wysiwyg = function (userOptions) {
 		var editor = this,
-			wrapper = $(editor).parent(),
 			selectedRange,
 			options,
 			toolbarBtnSelector,
 			updateToolbar = function () {
 				if (options.activeToolbarClass) {
-					$(options.toolbarSelector,wrapper).find(toolbarBtnSelector).each(underscoreThrottle(function () {
+					$(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 						var commandArr = $(this).data(options.commandRole).split(' '),
 							command = commandArr[0];
 
@@ -94,7 +109,7 @@
 						} else {
 							$(this).removeClass(options.activeToolbarClass);
 						}
-					}, options.keypressTimeout));
+					});
 				}
 			},
 			execCommand = function (commandWithArgs, valueArg) {
@@ -105,10 +120,10 @@
 				var parts = commandWithArgs.split('-');
 
 				if ( parts.length === 1 ) {
-					document.execCommand(command, 0, args);
+					underscoreThrottle(document.execCommand(command, false, args), options.keypressTimeout);
 				}
 				else if ( parts[0] === 'format' && parts.length === 2 ) {
-					document.execCommand('formatBlock', false, parts[1] );
+					underscoreThrottle(document.execCommand('formatBlock', false, parts[1] ), options.keypressTimeout);
 				}
 
 				editor.trigger('change');
@@ -120,7 +135,7 @@
 						if (editor.attr('contenteditable') && editor.is(':visible')) {
 							e.preventDefault();
 							e.stopPropagation();
-							execCommand(command);
+							underscoreThrottle(execCommand(command), options.keypressTimeout);
 						}
 					}).keyup(hotkey, function (e) {
 						if (editor.attr('contenteditable') && editor.is(':visible')) {
@@ -191,7 +206,7 @@
 				$.each(files, function (idx, fileInfo) {
 					if (/^image\//.test(fileInfo.type)) {
 						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
-							execCommand('insertimage', dataUrl);
+							underscoreThrottle(execCommand('insertimage', dataUrl), options.keypressTimeout);
 							editor.trigger('image-inserted');
 						}).fail(function (e) {
 							options.fileUploadError("file-reader", e);
@@ -204,13 +219,13 @@
 			markSelection = function (input, color) {
 				restoreSelection();
 				if (document.queryCommandSupported('hiliteColor')) {
-					document.execCommand('hiliteColor', 0, color || 'transparent');
+					underscoreThrottle(document.execCommand('hiliteColor', false, color || 'transparent'), options.keypressTimeout);
 				}
 				saveSelection();
 				input.data(options.selectionMarker, color);
 			},
 			bindToolbar = function (toolbar, options) {
-				toolbar.find(toolbarBtnSelector, wrapper).click(function () {
+				toolbar.find(toolbarBtnSelector).click(function () {
 					restoreSelection();
 					editor.focus();
 
@@ -218,7 +233,7 @@
                         toggleHtmlEdit();
                     }
                     else {
-                    	execCommand($(this).data(options.commandRole));
+                    	underscoreThrottle(execCommand($(this).data(options.commandRole)), options.keypressTimeout);
                     }
 					saveSelection();
 				});
@@ -230,7 +245,7 @@
 					restoreSelection();
 					if (newValue) {
 						editor.focus();
-						execCommand($(this).data(options.commandRole), newValue);
+						underscoreThrottle(execCommand($(this).data(options.commandRole), newValue), options.keypressTimeout);
 					}
 					saveSelection();
 				}).on('focus', function () {
