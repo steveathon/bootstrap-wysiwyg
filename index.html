@@ -110,7 +110,7 @@
 <span class="nt">}</span>
 </pre></div>
 
-<p>If you want to use this for a mobile web site, make sure to read about <a href="https://github.com/mindmup/bootstrap-wysiwyg#styling-for-mobile-devices">how to style it</a> 
+<p>If you want to use this for a mobile web site, make sure to read about <a href="https://github.com/mindmup/bootstrap-wysiwyg#styling-for-mobile-devices">how to style it</a>
    to optimise mobile screen usage and experience (please note that this demo page isn't optimised for mobile access).</p>
 
 <p>Optionally, also create a toolbar (see the source of this page for an example):</p>
@@ -125,7 +125,7 @@
 <div class="highlight highlight-html"><pre>&lt;<span class="nt">a </span><span class="s">data-edit=</span><span class="na">"bold"&gt;</span> ... &lt;<span class="nt">/a&gt;<span>
 </pre></div>
 
-<p>execute more complex commands by adding an argument after a blank or providing an input with a data-edit command (the input value is used as an argument). 
+<p>execute more complex commands by adding an argument after a blank or providing an input with a data-edit command (the input value is used as an argument).
    In case of file inputs, the file contents are read in using the FileReader API and used as the command value.</p>
 
 <div class="highlight highlight-html"><pre>
@@ -204,11 +204,11 @@ input value as the command argument</p>
 <a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h2>
 
 <ul>
-<li>jQuery <a href="http://jquery.com/">http://jquery.com/</a>
+<li><a href="http://jquery.com/">jQuery</a>
 </li>
-<li>jQuery HotKeys <a href="https://github.com/jeresig/jquery.hotkeys">https://github.com/jeresig/jquery.hotkeys</a>
+<li><a href="https://github.com/jeresig/jquery.hotkeys">jQuery HotKeys</a>
 </li>
-<li>Bootstrap <a href="http://twitter.github.com/bootstrap/">http://twitter.github.com/bootstrap/</a>
+<li><a href="http://getbootstrap.com/">Bootstrap</a>
 </li>
 </ul><h2>
 <a name="thanks-to" class="anchor" href="#thanks-to"><span class="octicon octicon-link"></span></a>Thanks to</h2>
@@ -221,7 +221,7 @@ input value as the command argument</p>
 <a name="history" class="anchor" href="#history"><span class="octicon octicon-link"></span></a>History</h2>
 
 <p>The original version of this code (below) appeared to be no longer maintained. There
-were a number of outstanding changes which needed to be merged in and a few which 
+were a number of outstanding changes which needed to be merged in and a few which
 included performance and feature improvements. These have now been included in this
 master branch.</p>
 
@@ -285,28 +285,28 @@ SOFTWARE.</p>
       {
         function initToolbarBootstrapBindings()
         {
-            var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+            var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
             'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
             'Times New Roman', 'Verdana'],
             fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-      
+
             $.each(fonts, function (idx, fontName)
             {
                 fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
             });
-      
+
             $('a[title]').tooltip({container:'body'});
-    	
+
             $('.dropdown-menu input').click(function() {return false;})
 		                                 .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
                                      .keydown('esc', function () {this.value='';$(this).change();});
 
             $('[data-role=magic-overlay]').each(function ()
-            { 
-                var overlay = $(this), target = $(overlay.data('target')); 
+            {
+                var overlay = $(this), target = $(overlay.data('target'));
                 overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
             });
-      
+
             if ("onwebkitspeechchange"  in document.createElement("input"))
             {
                 var editorOffset = $('#editor').offset();
@@ -317,7 +317,7 @@ SOFTWARE.</p>
                 $('#voiceBtn').hide();
             }
         };
-        
+
 	       function showErrorAlert (reason, detail)
          {
             var msg='';
@@ -329,13 +329,13 @@ SOFTWARE.</p>
             {
                 console.log("error uploading file", reason, detail);
             }
-		
-            $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+
+            $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
               '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
          };
-         
-         initToolbarBootstrapBindings(); 
-          
+
+         initToolbarBootstrapBindings();
+
          $('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
          window.prettyPrint && prettyPrint();
       });
