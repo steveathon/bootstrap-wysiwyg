@@ -146,9 +146,9 @@ For the content attachment editor on MindMup, we apply the following rules to mo
 
 Dependencies
 ------------
-* jQuery http://jquery.com/
-* jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
-* Bootstrap http://twitter.github.com/bootstrap/
+* [jQuery](http://jquery.com/)
+* [jQuery HotKeys](https://github.com/jeresig/jquery.hotkeys)
+* [Bootstrap](http://twitter.github.com/bootstrap/)
 
 Thanks to
 ------------
