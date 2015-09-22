@@ -77,7 +77,7 @@ $('#editor').cleanHtml()
 Customising
 -----------
 You can assign commands to hotkeys and toolbar links. For a toolbar link, just put the execCommand command name into a data-edit attribute.
-For more info on execCommand, see http://www.quirksmode.org/dom/execCommand.html and https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
+For more info on execCommand, see the [QuirksMode](http://www.quirksmode.org/dom/execCommand.html) and [Mozilla Developer](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla) documentation.
 
 ```html
 <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
