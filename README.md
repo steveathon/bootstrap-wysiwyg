@@ -31,12 +31,53 @@ Features
 Basic Usage
 -----------
 
-See https://steveathon.github.com/bootstrap-wysiwyg
+```javascript
+$('#editor').wysiwyg();
+```
+
+Don't forget to style your editor div:
+
+```css
+#editor {overflow:scroll; max-height:300px}
+```
+
+If you want to use this for a mobile web site, make sure to read about [how to style it](https://github.com/mindmup/bootstrap-wysiwyg#styling-for-mobile-devices) to optimise mobile screen usage and experience (please note that this demo page isn't optimised for mobile access).
+
+Optionally, also create a toolbar (see the source of this page for an example):
+
+```html
+<div class="btn-toolbar" data-role="editor-toolbar"
+        data-target="#editor">
+  ...
+</div> 
+```
+
+In the toolbar, execute simple commands by adding a data-edit attribute to a link.
+
+```html
+<a data-edit="bold">...</a>
+```
+
+execute more complex commands by adding an argument after a blank or providing an input with a data-edit command (the input value is used as an argument). In case of file inputs, the file contents are read in using the FileReader API and used as the command value.
+
+```html
+<a data-edit="fontName Arial">...</a>
+...
+<input type="text" data-edit="createLink"/>
+...
+<input type="file" data-edit="insertImage" />
+```
+
+Use standard jQuery methods to access and set content and focus. You can also ask for cleaned up HTML content:
+
+```javascript
+$('#editor').cleanHtml()
+```
 
 Customising
 -----------
 You can assign commands to hotkeys and toolbar links. For a toolbar link, just put the execCommand command name into a data-edit attribute.
-For more info on execCommand, see http://www.quirksmode.org/dom/execCommand.html and https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
+For more info on execCommand, see the [QuirksMode](http://www.quirksmode.org/dom/execCommand.html) and [Mozilla Developer](https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla) documentation.
 
 ```html
 <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
@@ -105,9 +146,9 @@ For the content attachment editor on MindMup, we apply the following rules to mo
 
 Dependencies
 ------------
-* jQuery http://jquery.com/
-* jQuery HotKeys https://github.com/jeresig/jquery.hotkeys
-* Bootstrap http://twitter.github.com/bootstrap/
+* [jQuery](http://jquery.com/)
+* [jQuery HotKeys](https://github.com/jeresig/jquery.hotkeys)
+* [Bootstrap](http://twitter.github.com/bootstrap/)
 
 Thanks to
 ------------

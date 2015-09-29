@@ -62,6 +62,13 @@ div[data-role="editor-toolbar"] {
 	color: #777;
 }
 
+.imgUpload
+{
+	width: 0;
+	height: 0;
+	position:absolute
+}
+
 /*
 	Font Sizes 
 	fs represents the font-size attribute; therefore,
