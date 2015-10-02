@@ -12,6 +12,7 @@
 	/** underscoreThrottle()
 	 * 	From underscore http://underscorejs.org/docs/underscore.html
 	 */
+	var maxFileSize = 1000000; //Default value: 1MB 
 	var underscoreThrottle = function(func, wait, options) {
 		var context, args, result;
 		var timeout = null;
@@ -205,13 +206,18 @@
 				editor.focus();
 				$.each(files, function (idx, fileInfo) {
 					if (/^image\//.test(fileInfo.type)) {
-						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
-							underscoreThrottle(execCommand('insertimage', dataUrl), options.keypressTimeout);
-							editor.trigger('image-inserted');
-						}).fail(function (e) {
-							options.fileUploadError("file-reader", e);
-						});
-					} else {
+						if (fileInfo.size>maxFileSize){
+							options.fileUploadError("exceed-file-size", fileInfo.size);
+						}else{
+							$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
+								underscoreThrottle(execCommand('insertimage', dataUrl), options.keypressTimeout);
+								editor.trigger('image-inserted');
+							}).fail(function (e) {
+								options.fileUploadError("file-reader", e);
+							});
+						} 
+						
+					}else{
 						options.fileUploadError("unsupported-file-type", fileInfo.type);
 					}
 				});
@@ -343,6 +349,14 @@
 		selectionColor: 'darkgrey',
 		dragAndDropImages: true,
 		keypressTimeout: 200,
-		fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
+		fileUploadError: function (reason, detail) { 
+			console.log("File upload error", reason, detail); 
+			
+			if (reason=="exceed-file-size"){
+				alert("Image file cannot exceed 1MB");
+			}else if (reason=="unsupported-file-type"){
+				alert("Please upload image only");
+			}
+		}
 	};
 }(window.jQuery));
