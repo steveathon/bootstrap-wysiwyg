@@ -9,49 +9,7 @@
 
 (function ($) {
 	'use strict';
-	/** underscoreThrottle()
-	 * 	From underscore http://underscorejs.org/docs/underscore.html
-	 */
-	var underscoreThrottle = function(func, wait, options) {
-		var context, args, result;
-		var timeout = null;
-		var previous = 0;
-		if (!options) {
-			options = {};
-		}
-		var later = function() {
-			previous = options.leading === false ? 0 : $.now();
-			timeout = null;
-			result = func.apply(context, args);
-			if (!timeout) {
-				context = args = null;
-			}
-		};
-		return function() {
-			var now = $.now();
-			if (!previous && options.leading === false) {
-				previous = now;
-			}
-			var remaining = wait - (now - previous);
-			context = this;
-			args = arguments;
-			if (remaining <= 0 || remaining > wait) {
-				if (timeout) {
-					clearTimeout(timeout);
-					timeout = null;
-				}
-				previous = now;
-				result = func.apply(context, args);
-				if (!timeout) {
-					context = args = null;
-				}
-			}
-			else if (!timeout && options.trailing !== false) {
-				timeout = setTimeout(later, remaining);
-			}
-			return result;
-		};
-	};
+
 	var readFileIntoDataUrl = function (fileInfo) {
 		var loader = $.Deferred(),
 			fReader = new FileReader();
@@ -120,10 +78,10 @@
 				var parts = commandWithArgs.split('-');
 
 				if ( parts.length === 1 ) {
-					underscoreThrottle(document.execCommand(command, false, args), options.keypressTimeout);
+					document.execCommand(command, false, args);
 				}
 				else if ( parts[0] === 'format' && parts.length === 2 ) {
-					underscoreThrottle(document.execCommand('formatBlock', false, parts[1] ), options.keypressTimeout);
+					document.execCommand('formatBlock', false, parts[1] );
 				}
 
 				editor.trigger('change');
@@ -135,7 +93,7 @@
 						if (editor.attr('contenteditable') && editor.is(':visible')) {
 							e.preventDefault();
 							e.stopPropagation();
-							underscoreThrottle(execCommand(command), options.keypressTimeout);
+							execCommand(command);
 						}
 					}).keyup(hotkey, function (e) {
 						if (editor.attr('contenteditable') && editor.is(':visible')) {
@@ -206,7 +164,7 @@
 				$.each(files, function (idx, fileInfo) {
 					if (/^image\//.test(fileInfo.type)) {
 						$.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
-							underscoreThrottle(execCommand('insertimage', dataUrl), options.keypressTimeout);
+							execCommand('insertimage', dataUrl);
 							editor.trigger('image-inserted');
 						}).fail(function (e) {
 							options.fileUploadError("file-reader", e);
@@ -219,7 +177,7 @@
 			markSelection = function (input, color) {
 				restoreSelection();
 				if (document.queryCommandSupported('hiliteColor')) {
-					underscoreThrottle(document.execCommand('hiliteColor', false, color || 'transparent'), options.keypressTimeout);
+					document.execCommand('hiliteColor', false, color || 'transparent');
 				}
 				saveSelection();
 				input.data(options.selectionMarker, color);
@@ -233,7 +191,7 @@
                         toggleHtmlEdit();
                     }
                     else {
-                    	underscoreThrottle(execCommand($(this).data(options.commandRole)), options.keypressTimeout);
+                    	execCommand($(this).data(options.commandRole));
                     }
 					saveSelection();
 				});
@@ -245,7 +203,7 @@
 					restoreSelection();
 					if (newValue) {
 						editor.focus();
-						underscoreThrottle(execCommand($(this).data(options.commandRole), newValue), options.keypressTimeout);
+						execCommand($(this).data(options.commandRole), newValue);
 					}
 					saveSelection();
 				}).on('focus', function () {
