@@ -13,8 +13,7 @@
   ],
   "homepage": "https://github.com/steveathon/bootstrap-wysiwyg",
   "main": [
-    "bootstrap-wysiwyg.js",
-    "bootstrap-wysiwyg.min.js"
+    "js/bootstrap-wysiwyg.min.js"
   ],
   "ignore": [
     ".*",
@@ -23,6 +22,7 @@
     "LICENSE",
     "SUPPORTED"
   ],
+  "license": "MIT",
   "dependencies": {
     "jquery": "~2.1.4",
     "jquery.hotkeys": "https://github.com/jeresig/jquery.hotkeys.git#master",
