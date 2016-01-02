@@ -1,0 +1,5 @@
+{
+    "preset": "jquery",
+    "maximumLineLength": 175,    // Debatable: the jQuery preset sets this to 100, which prevents a lot of our if statements and function declarations from being on the same line,
+    "validateLineBreaks": "CRLF"
+}

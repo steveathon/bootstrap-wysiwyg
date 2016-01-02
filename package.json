@@ -23,6 +23,7 @@
     "grunt-contrib-rename": "^0.0.3",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-jscs": "^2.5.0",
     "grunt-release": "^0.13.0",
     "gulp": "^3.9.0",
     "gulp-bootlint": "^0.5.0",
@@ -30,6 +31,9 @@
     "gulp-jshint": "^1.11.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.2.0"
+  },
+  "scripts": {
+      "test": "grunt jscs"
   },
   "repository": {
     "type": "git",
