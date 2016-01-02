@@ -8,7 +8,7 @@
 		<link href="../bower_components/google-code-prettify/src/prettify.css" rel="stylesheet" />
 		<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
-		<link href="../css/style.css" rel="stylesheet" />
+		<link href="./css/style.css" rel="stylesheet" />
 	</head>
 
 	<body>
@@ -52,9 +52,9 @@
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-unlink"></i></a>
-					<span class="btn btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn"> <i class="fa fa-picture-o"></i>
-						<input class="imgUpload" type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-					</span>
+                    <a id="picBtn" class="btn btn-default" title="Insert picture (or just drag & drop)" onclick="$('#pictureBtn').click();"><i class="fa fa-picture-o"></i></a>
+
+                    <input id="pictureBtn" class="imgUpload" type="file" data-edit="insertImage" data-role="magic-overlay" />
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
