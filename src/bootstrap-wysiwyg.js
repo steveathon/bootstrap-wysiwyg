@@ -158,6 +158,8 @@
      Wysiwyg.prototype.bindHotkeys = function( editor, options, toolbarBtnSelector ) {
         var self = this;
         $.each( options.hotKeys, function( hotkey, command ) {
+            if(!command) return;
+            
             $( editor ).keydown( hotkey, function( e ) {
                 if ( editor.attr( "contenteditable" ) && $( editor ).is( ":visible" ) ) {
                     e.preventDefault();
