@@ -243,22 +243,24 @@
 		bindHotkeys(options.hotKeys);
 
 		// Support placeholder attribute on the DIV
-		if ($(this).attr('placeholder') !== '') {
+		var placeholder = $(this).attr('placeholder');
+
+		if (placeholder !== '') {
 			// Set iniitial state without trashing existing text.
-			if ( $(this).attr('placeholder') !== '' && $(this).text() === '' ) {
+			if ( placeholder !== '' && $(this).text() === '' ) {
 				$(this).addClass('placeholderText');
-				$(this).html($(this).attr('placeholder'));
+				$(this).html(placeholder);
 			}
 			$(this).bind('focus',function() {
-				if ( $(this).attr('placeholder') !== '' && $(this).text() === $(this).attr('placeholder') ) {
+				if (placeholder !== '' && $(this).text() === placeholder ) {
 					$(this).removeClass('placeholderText');
 					$(this).html('');
 				}
 			});
 			$(this).bind('blur',function() {
-				if ( $(this).attr('placeholder') !== '' && $(this).text() === '' ) {
+				if (placeholder !== '' && $(this).text() === '' ) {
 					$(this).addClass('placeholderText');
-					$(this).html($(this).attr('placeholder'));
+					$(this).html(placeholder);
 				}
 			});
 		}
