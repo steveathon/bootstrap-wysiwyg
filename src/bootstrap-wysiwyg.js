@@ -244,8 +244,11 @@
 
 		// Support placeholder attribute on the DIV
 		if ($(this).attr('placeholder') !== '') {
-			$(this).addClass('placeholderText');
-			$(this).html($(this).attr('placeholder'));
+			// Set iniitial state without trashing existing text.
+			if ( $(this).attr('placeholder') !== '' && $(this).text() === '' ) {
+				$(this).addClass('placeholderText');
+				$(this).html($(this).attr('placeholder'));
+			}
 			$(this).bind('focus',function() {
 				if ( $(this).attr('placeholder') !== '' && $(this).text() === $(this).attr('placeholder') ) {
 					$(this).removeClass('placeholderText');
