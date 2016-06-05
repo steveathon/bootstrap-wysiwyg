@@ -8,17 +8,17 @@
 		<meta name="keywords" content="opensource rich wysiwyg text editor jquery bootstrap execCommand html5" />
 		<meta name="description" content="This tiny jQuery Bootstrap WYSIWYG plugin turns any DIV into a HTML5 rich text editor" />
 		<link href="bower_components/google-code-prettify/src/prettify.css" rel="stylesheet" />
-		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" />
-		<link href="css/style.css" rel="stylesheet" />
-		
+		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="examples/css/style.css" rel="stylesheet" />
+
 	</head>
 	<body>
 		<div class="container">
 			<div class="jumbotron">
 				<div class="pull-right"></div>
 				<h1>
-					bootstrap-wysiwyg <br /><small>tiny WYSIWYG rich text
+					bootstrap-wysiwyg <br /><small>A tiny WYSIWYG rich text
 						editor for Bootstrap</small>
 				</h1>
 				<hr />
@@ -164,9 +164,9 @@
 				alt="Fork me on GitHub">
 		</a>
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/jquery.hotkeys/jquery.hotkeys.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="bower_components/google-code-prettify/src/prettify.js"></script>
 		<script src="src/bootstrap-wysiwyg.js"></script>
 		<script>
@@ -174,11 +174,11 @@
 			{
 		    	function initToolbarBootstrapBindings()
 		    	{
-		      		var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+		      		var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
 		            	'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
 		            	'Times New Roman', 'Verdana'],
 		            	fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-		      
+
 		      		$.each(fonts, function (idx, fontName)
 		      		{
 		          		fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
@@ -196,12 +196,12 @@
 		        			});
 
 		    		$('[data-role=magic-overlay]').each(function ()
-		      		{ 
-		       			var overlay = $(this), target = $(overlay.data('target')); 
+		      		{
+		       			var overlay = $(this), target = $(overlay.data('target'));
 		        		overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
 		      		});
-		      
-		      		if ("onwebkitspeechchange"  in document.createElement("input")) 
+
+		      		if ("onwebkitspeechchange"  in document.createElement("input"))
 		      		{
 		        		var editorOffset = $('#editor').offset();
 		        		//$('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
@@ -225,19 +225,16 @@
 					console.log("error uploading file", reason, detail);
 				}
 
-				$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+				$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
 					'<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
 			};
 
-		    initToolbarBootstrapBindings();  
+		    initToolbarBootstrapBindings();
 
 			$('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
 
 		    window.prettyPrint && prettyPrint();
 		  });
 		</script>
-
-
-		
 	</body>
 </html>
