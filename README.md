@@ -1,6 +1,6 @@
 bootstrap-wysiwyg
 =================
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/steveathon/bootstrap-wysiwyg)
+[![GitHub release](https://img.shields.io/github/release/steveathon/bootstrap-wysiwyg.svg?maxAge=2592000)](https://github.com/steveathon/bootstrap-wysiwyg)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/steveathon/bootstrap-wysiwyg)
 
 A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.
