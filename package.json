@@ -12,6 +12,7 @@
       "url": "https://github.com/RandomlyKnighted"
     }
   ],
+  "main": "js/bootstrap-wysiwyg.min.js",
   "dependencies": {},
   "devDependencies": {
     "check-pages": "^0.9.0",
