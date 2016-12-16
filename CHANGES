@@ -1,3 +1,14 @@
+2.0.1
+* Added main attribute for WebPack support
+
+2.0-dev
+* Changed library to be OOP
+* Add tests
+* Cleaned up the codebase
+* Added new examples
+* Cleaned up old examples
+* Kill hotkey issues with empty commands
+
 * Add change event callback
 
 1.0.4 - Bug fixes
