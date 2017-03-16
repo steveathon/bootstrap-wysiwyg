@@ -74,6 +74,22 @@ Use standard jQuery methods to access and set content and focus. You can also as
 $('#editor').cleanHtml()
 ```
 
+Multiple Editors on the Same Page
+-----------
+You can initialize and use multiple instances of the editor on the same page, however, each editor specified in HTML must have a unique `data-role` specified.
+
+For example:
+```html
+<div class="btn-toolbar editorToolbar" data-role="editor-toolbar_editor1" data-target...
+```
+
+Then initialize the editor in Javascript with the unique value assigned to the toolbar:
+```javascript
+$('#editor').wysiwyg({
+        toolbarSelector: '[data-role=editor-toolbar_editor1]'
+    });
+```
+
 Customising
 -----------
 You can assign commands to hotkeys and toolbar links. For a toolbar link, just put the execCommand command name into a data-edit attribute.
