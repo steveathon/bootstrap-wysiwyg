@@ -328,6 +328,11 @@
 
      $.fn.wysiwyg = function( userOptions ) {
         var wysiwyg = new Wysiwyg( this, userOptions );
+        return this;
+     };
+    
+     $.fn.cleanHtml = function() {
+        return Wysiwyg.prototype.cleanHtml.apply(this);
      };
 
 } )( window, window.jQuery );
