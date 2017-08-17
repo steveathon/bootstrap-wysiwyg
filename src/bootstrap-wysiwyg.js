@@ -274,10 +274,12 @@
             self.saveSelection(  );
         } );
 
-        toolbar.find( "[data-toggle=dropdown]" ).click( this.restoreSelection(  ) );
+        toolbar.find( "[data-toggle=dropdown]" ).on('click', (function () {
+            self.markSelection(options.selectionColor, options);
+        }));
         
         toolbar.on( "hide.bs.dropdown", function () {
-            self.markSelection( null, false, options );
+            self.markSelection( false, options );
         });
 
         toolbar.find( "input[type=text][data-" + options.commandRole + "]" ).on( "webkitspeechchange change", function() {
@@ -291,9 +293,7 @@
             self.saveSelection(  );
         } ).on( "blur", function() {
             var input = $( this );
-            if ( input.data( options.selectionMarker ) ) {
-                self.markSelection( input, false, options );
-            }
+            self.markSelection( false, options );
         } );
         toolbar.find( "input[type=file][data-" + options.commandRole + "]" ).change( function() {
             self.restoreSelection(  );
