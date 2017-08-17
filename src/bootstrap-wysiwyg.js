@@ -35,7 +35,7 @@
             commandRole: "edit",
             activeToolbarClass: "btn-info",
             selectionMarker: "edit-focus-marker",
-            selectionColor: "red",
+            selectionColor: "darkgrey",
             dragAndDropImages: true,
             keypressTimeout: 200,
             fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
@@ -213,26 +213,6 @@
         }
     };
 
-    Wysiwyg.prototype.restoreSelection2 = function (inputSel) {
-        var selection;
-        if (window.getSelection || document.createRange) {
-            selection = window.getSelection();
-            if (this.selectedRange) {
-                try {
-                    selection.removeAllRanges();
-                }
-                catch (ex) {
-                    //try adding value here for edge when there is no selection
-                    document.body.createTextRange().select();
-                    document.selection.empty();
-                }
-                selection.addRange(inputSel);
-            }
-        } else if (document.selection && inputSel) {
-            inputSel.select();
-        }
-    };
-
     // Adding Toggle HTML based on the work by @jd0000, but cleaned up a little to work in this context.
     Wysiwyg.prototype.toggleHtmlEdit = function (editor) {
         if (editor.data("wysiwyg-html-mode") !== true) {
@@ -299,7 +279,7 @@
             self.markSelection(null, options.selectionColor, options);
         }));
         
-        $(".dropdown").on("hide.bs.dropdown", function () {
+        toolbar.on("hide.bs.dropdown", function () {
             self.markSelection(null, false, options);
         });
 
