@@ -259,6 +259,21 @@
         this.saveSelection(  );
      };
 
+     //Move selection to a particular element
+     function selectElementContents(element) {
+        if (window.getSelection && document.createRange) {
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        } else if (document.selection && document.body.createTextRange) {
+            var textRange = document.body.createTextRange();
+            textRange.moveToElementText(element);
+            textRange.select();
+        }
+    }
+
      Wysiwyg.prototype.bindToolbar = function( editor, toolbar, options, toolbarBtnSelector ) {
         var self = this;
         toolbar.find( toolbarBtnSelector ).click( function() {
@@ -286,6 +301,14 @@
             var newValue = this.value;  // Ugly but prevents fake double-calls due to selection restoration
             this.value = "";
             self.restoreSelection(  );
+            
+            var text = window.getSelection();
+            if (text.toString().trim() === '' && newValue) {
+                //create selection if there is no selection
+                self.editor.append('<span>' + newValue + '</span>');
+                selectElementContents($('span:last', self.editor)[0]);
+            }
+
             if ( newValue ) {
                 editor.focus();
                 self.execCommand( $( this ).data( options.commandRole ), newValue, editor, options, toolbarBtnSelector );
