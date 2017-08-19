@@ -251,14 +251,28 @@
         } );
      };
 
-     Wysiwyg.prototype.markSelection = function( input, color, options ) {
+     Wysiwyg.prototype.markSelection = function( color, options ) {
         this.restoreSelection(  );
         if ( document.queryCommandSupported( "hiliteColor" ) ) {
             document.execCommand( "hiliteColor", false, color || "transparent" );
         }
         this.saveSelection(  );
-        input.data( options.selectionMarker, color );
      };
+
+     //Move selection to a particular element
+     function selectElementContents(element) {
+        if (window.getSelection && document.createRange) {
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        } else if (document.selection && document.body.createTextRange) {
+            var textRange = document.body.createTextRange();
+            textRange.moveToElementText(element);
+            textRange.select();
+        }
+    }
 
      Wysiwyg.prototype.bindToolbar = function( editor, toolbar, options, toolbarBtnSelector ) {
         var self = this;
@@ -275,28 +289,34 @@
             self.saveSelection(  );
         } );
 
-        toolbar.find( "[data-toggle=dropdown]" ).click( this.restoreSelection(  ) );
+        toolbar.find( "[data-toggle=dropdown]" ).on('click', (function () {
+            self.markSelection(options.selectionColor, options);
+        }));
+        
+        toolbar.on( "hide.bs.dropdown", function () {
+            self.markSelection( false, options );
+        });
 
         toolbar.find( "input[type=text][data-" + options.commandRole + "]" ).on( "webkitspeechchange change", function() {
             var newValue = this.value;  // Ugly but prevents fake double-calls due to selection restoration
             this.value = "";
             self.restoreSelection(  );
+            
+            var text = window.getSelection();
+            if (text.toString().trim() === '' && newValue) {
+                //create selection if there is no selection
+                self.editor.append('<span>' + newValue + '</span>');
+                selectElementContents($('span:last', self.editor)[0]);
+            }
+
             if ( newValue ) {
                 editor.focus();
                 self.execCommand( $( this ).data( options.commandRole ), newValue, editor, options, toolbarBtnSelector );
             }
             self.saveSelection(  );
-        } ).on( "focus", function() {
-            var input = $( this );
-            if ( !input.data( options.selectionMarker ) ) {
-                self.markSelection( input, options.selectionColor, options );
-                input.focus();
-            }
         } ).on( "blur", function() {
             var input = $( this );
-            if ( input.data( options.selectionMarker ) ) {
-                self.markSelection( input, false, options );
-            }
+            self.markSelection( false, options );
         } );
         toolbar.find( "input[type=file][data-" + options.commandRole + "]" ).change( function() {
             self.restoreSelection(  );
