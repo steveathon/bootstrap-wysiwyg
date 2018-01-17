@@ -238,7 +238,7 @@
         var self = this;
         editor.focus();
         $.each( files, function( idx, fileInfo ) {
-            if ( /^image\//.test( fileInfo.type ) ) {
+            if ( /^image\//.test( fileInfo.type ) || /.+\.(bmp|gif|jpg|jpeg|png)$/.test(fileInfo.name.toLowerCase()) ) {
                 $.when( self.readFileIntoDataUrl( fileInfo ) ).done( function( dataUrl ) {
                     self.execCommand( "insertimage", dataUrl, editor, options, toolbarBtnSelector );
                     editor.trigger( "image-inserted" );
