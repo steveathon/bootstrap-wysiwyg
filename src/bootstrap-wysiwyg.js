@@ -59,6 +59,10 @@
             }.bind( this ) );
 
         $( window ).bind( "touchend", function( e ) {
+            
+            if(!this.getCurrentRange)
+                return;
+            
             var isInside = ( editor.is( e.target ) || editor.has( e.target ).length > 0 ),
             currentRange = this.getCurrentRange(),
             clear = currentRange && ( currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset );
