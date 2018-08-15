@@ -1,7 +1,7 @@
 {
-  "name": "bootstrap-wysiwyg",
+  "name": "floriansegginger-bootstrap-wysiwyg",
   "description": "A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand.",
-  "version": "1.0.4",
+  "version": "2.1.0",
   "keywords": [
     "css",
     "js",
@@ -11,7 +11,7 @@
     "wysiwyg",
     "editor"
   ],
-  "homepage": "https://github.com/steveathon/bootstrap-wysiwyg",
+  "homepage": "https://github.com/floriansegginger/bootstrap-wysiwyg",
   "main": [
     "js/bootstrap-wysiwyg.min.js"
   ],
