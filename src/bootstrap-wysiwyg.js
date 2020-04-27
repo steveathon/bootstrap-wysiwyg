@@ -58,18 +58,19 @@
                 this.updateToolbar( editor, toolbarBtnSelector, options );
             }.bind( this ) );
 
+        var self = this;
         $( window ).bind( "touchend", function( e ) {
             
-            if(!this.getCurrentRange)
+            if(!self.getCurrentRange)
                 return;
             
             var isInside = ( editor.is( e.target ) || editor.has( e.target ).length > 0 ),
-            currentRange = this.getCurrentRange(),
+            currentRange = self.getCurrentRange(),
             clear = currentRange && ( currentRange.startContainer === currentRange.endContainer && currentRange.startOffset === currentRange.endOffset );
 
             if ( !clear || isInside ) {
-                this.saveSelection();
-                this.updateToolbar( editor, toolbarBtnSelector, options );
+                self.saveSelection();
+                self.updateToolbar( editor, toolbarBtnSelector, options );
             }
         } );
      }
