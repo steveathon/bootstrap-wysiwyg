@@ -1,0 +1,23 @@
+{
+  "name": "bootstrap-wysiwyg",
+  "version": "1.0.0",
+  "description": "Tiny bootstrap-compatible WISWYG rich text editor, based on browser execCommand, built originally for MindMup.",
+  "main": "bootstrap-wysiwyg.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drc-devs/bootstrap-wysiwyg.git"
+  },
+  "keywords": [
+    "wysiwyg",
+    "bootstrap"
+  ],
+  "author": "Flexion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drc-devs/bootstrap-wysiwyg/issues"
+  },
+  "homepage": "https://github.com/drc-devs/bootstrap-wysiwyg#readme"
+}
